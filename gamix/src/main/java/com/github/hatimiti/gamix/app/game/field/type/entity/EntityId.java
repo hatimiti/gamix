@@ -1,9 +1,9 @@
 package com.github.hatimiti.gamix.app.game.field.type.entity;
 
-import com.github.hatimiti.gamix.base.type.Type;
+import com.github.hatimiti.gamix.base.type.BaseType;
 
 
-public final class EntityId extends Type<String> {
+public final class EntityId extends BaseType<String> {
 
 	public static final EntityId NONE = new EntityId("None");
 	public static final EntityId INIT = new EntityId("Initializing");

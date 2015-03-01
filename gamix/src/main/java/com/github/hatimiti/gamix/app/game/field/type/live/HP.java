@@ -1,9 +1,9 @@
 package com.github.hatimiti.gamix.app.game.field.type.live;
 
-import com.github.hatimiti.gamix.base.type.Type;
+import com.github.hatimiti.gamix.base.type.BaseType;
 
 public class HP
-		extends Type<Integer>
+		extends BaseType<Integer>
 		implements Comparable<HP> {
 
 	public static final HP ZERO = new HP(0);

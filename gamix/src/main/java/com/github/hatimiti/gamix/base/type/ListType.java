@@ -8,8 +8,8 @@ import java.util.ListIterator;
 import java.util.Objects;
 import java.util.function.Predicate;
 
-public class ListType<O>
-		extends Type<List<O>>
+public abstract class ListType<O>
+		extends BaseType<List<O>>
 		implements List<O> {
 
 	protected final List<O> list = new ArrayList<>();
