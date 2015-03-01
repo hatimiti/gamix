@@ -2,7 +2,7 @@ package com.github.hatimiti.gamix.base;
 
 import com.github.hatimiti.gamix.app.support.GameSceneState;
 import com.github.hatimiti.gamix.app.util.ImageFactory;
-import com.github.hatimiti.gamix.base.twl.state.BasicTWLGameState;
+import com.github.hatimiti.gamix.base.gui.twl.BasicTWLGameState;
 import com.github.hatimiti.gamix.base.util.MIDIPlayer;
 import com.sun.javafx.font.FontFactory;
 
