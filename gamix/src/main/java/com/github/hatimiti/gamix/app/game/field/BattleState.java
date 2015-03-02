@@ -20,14 +20,9 @@ import com.github.hatimiti.gamix.app.game.field.entity.move.auto.AutoApproachMov
 import com.github.hatimiti.gamix.app.game.field.entity.move.auto.AutoStopMover;
 import com.github.hatimiti.gamix.app.game.field.entity.move.character.AutoCharacter;
 import com.github.hatimiti.gamix.app.game.field.entity.move.character.Player;
-import com.github.hatimiti.gamix.app.game.field.entity.move.label.DamageLabel;
 import com.github.hatimiti.gamix.app.game.field.entity.support.collision.CollisionHandler;
 import com.github.hatimiti.gamix.app.game.field.entity.support.status.AbilityDefineListener;
 import com.github.hatimiti.gamix.app.game.field.entity.support.status.AbilityParameter;
-import com.github.hatimiti.gamix.app.game.field.gui.twl.HPBar;
-import com.github.hatimiti.gamix.app.game.field.gui.twl.StatusButton;
-import com.github.hatimiti.gamix.app.game.field.gui.twl.TextFrame;
-import com.github.hatimiti.gamix.app.game.field.gui.twl.ability.AbilityDialog;
 import com.github.hatimiti.gamix.app.game.field.network.client.EntityClient;
 import com.github.hatimiti.gamix.app.game.field.network.client.EntityClient.EntityUpdateListener;
 import com.github.hatimiti.gamix.app.game.field.network.exchange.json.entity.ExchangeEntityClientJson;
@@ -35,10 +30,7 @@ import com.github.hatimiti.gamix.app.game.field.type.collection.EntityList;
 import com.github.hatimiti.gamix.app.support.GameSceneState;
 import com.github.hatimiti.gamix.app.util.ConstProperty;
 import com.github.hatimiti.gamix.base.BaseGameState;
-import com.github.hatimiti.gamix.base.gui.swing.ChatDialog;
 import com.github.hatimiti.gamix.base.gui.twl.RootPane;
-
-import de.matthiasmann.twl.Button;
 
 
 public class BattleState
@@ -53,18 +45,10 @@ public class BattleState
 	protected BaseMap map;
 	protected MapTilePoint nowPoint;
 
-	protected ChatDialog chatDialog;
-
-	protected Button statusButton;
-	protected TextFrame textFrame;
-	protected AbilityDialog abilityDialog;
-
-	protected HPBar playerHPBar;
-	protected HPBar targetHPBar;
-
 	protected CollisionHandler collisionHandler;
 
 	protected BattleInputHelper inputHelper;
+	protected BattleGUIManager guiManager;
 
 	public BattleState() {
 		super(GameSceneState.BATTLE);
@@ -76,10 +60,10 @@ public class BattleState
 			final StateBasedGame game) throws SlickException {
 
 		this.inputHelper = new BattleInputHelper(this);
+		this.guiManager = new BattleGUIManager(this);
 
 		this.entityContainer = EntityContainer.getInstance();
 		this.entityContainer.clearEntities();
-		this.textFrame = new TextFrame();
 
 		this.map = new FirstTownMap();
 		this.nowPoint = new MapTilePoint(0, 0);
@@ -90,23 +74,13 @@ public class BattleState
 		AutoCharacter target = new AutoCharacter(33, new AutoStopMover(), new Point(300, 450));
 		target.addDamageListener(this);
 
-		this.playerHPBar = new HPBar();
-		this.playerHPBar.update(this.player.getStatus());
-		this.targetHPBar = new HPBar();
-
 		this.entityContainer.addTo(getNowTile(), this.map.getTileIn(this.nowPoint));
 		this.entityContainer.addTo(getNowTile(), this.player);
 		this.entityContainer.addTo(getNowTile(), target);
 
 		this.collisionHandler = new CollisionHandler();
 
-		this.chatDialog = new ChatDialog();
-		this.abilityDialog = new AbilityDialog();
-		this.abilityDialog.addListener(this);
-
-		this.statusButton = new StatusButton(() ->
-				this.textFrame.setVisible(!this.textFrame.isVisible()));
-		
+		this.guiManager.init(gc, game);
 	}
 
 	@Override
@@ -116,10 +90,7 @@ public class BattleState
 
 		super.enter(gc, game);
 
-		this.chatDialog.start(new InetSocketAddress(
-				ConstProperty.getInstance().getString("network.server.ip"),
-				ConstProperty.getInstance().getInt("network.server.port.chat")),
-				ConstProperty.getInstance().getInt("network.update.interval.chat"));
+		this.guiManager.enter(gc, game);
 
 		new Thread(new EntityClient(
 			new InetSocketAddress(
@@ -157,8 +128,7 @@ public class BattleState
 			final Graphics g) throws SlickException {
 
 		this.entityContainer.getEntityListIn(getNowTile()).draw(g);
-		this.playerHPBar.draw(g);
-		this.targetHPBar.draw(g);
+		this.guiManager.render(gc, game, g);
 	}
 
 	@Override
@@ -167,7 +137,7 @@ public class BattleState
 			final StateBasedGame game,
 			final int paramInt) throws SlickException {
 
-		setChatDialogVisible(gc);
+		this.guiManager.update(gc, game, paramInt);
 		this.inputHelper.input(gc);
 		moveMapTile();
 
@@ -198,49 +168,28 @@ public class BattleState
 		return this.map.getTileIn(this.nowPoint);
 	}
 
-	protected void setChatDialogVisible(final GameContainer gc) {
-		this.chatDialog.setAlwaysOnTop(gc.hasFocus()
-				? this.chatDialog.isVisible() : false);
-	}
-
 	@Override
 	protected RootPane createRootPane() {
-		RootPane rp = super.createRootPane();
-		rp.setTheme("gameui");
-		rp.add(this.textFrame);
-		rp.add(this.playerHPBar);
-		rp.add(this.targetHPBar);
-		rp.add(this.statusButton);
-		rp.add(this.abilityDialog);
-		return rp;
+		return this.guiManager.createRootPane(super.createRootPane());
 	}
 
 	@Override
 	protected void layoutRootPane() {
-		this.textFrame.setSize(200, 150);
-		this.textFrame.setPosition(400, 20);
-		this.textFrame.setVisible(false);
-
-		this.playerHPBar.setPosition(30, 30);
-		this.targetHPBar.setPosition(350, 30);
-		this.statusButton.setPosition(670, 20);
+		this.guiManager.layoutRootPane();
 	}
 
 	@Override
 	public void notifyDamage(final DamageEvent event) {
 
 		if (event.getTo() instanceof Player) {
-			this.playerHPBar.update(((Player) event.getTo()).getStatus());
+			this.guiManager.updatePlayerHPBar(event);
 		} else {
 			if (!(event.getTo() instanceof AutoCharacter)) {
 				return;
 			}
 			AutoCharacter c = (AutoCharacter) event.getTo();
 			this.target = c;
-			this.targetHPBar.update(c.getStatus());
-
-			DamageLabel dl = new DamageLabel(event.getDamage(), event.getPoint());
-			this.entityContainer.addTo(getNowTile(), dl);
+			this.guiManager.updateTargetHPBar(event);
 		}
 	}
 
