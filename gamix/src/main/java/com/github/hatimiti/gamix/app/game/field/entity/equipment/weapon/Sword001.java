@@ -5,12 +5,12 @@ import org.newdawn.slick.geom.Point;
 import org.newdawn.slick.geom.Rectangle;
 import org.newdawn.slick.geom.Shape;
 
-import com.github.hatimiti.gamix.app.game.field.entity.move.character.BaseCharacter;
+import com.github.hatimiti.gamix.app.game.field.entity.character.Character;
 import com.github.hatimiti.gamix.app.game.field.entity.support.direction.FacingDirection;
 
-public class Sword001 extends BaseWeapon {
+public class Sword001 extends Weapon {
 
-	public Sword001(BaseCharacter owner)
+	public Sword001(Character owner)
 			throws SlickException {
 		super(owner);
 	}

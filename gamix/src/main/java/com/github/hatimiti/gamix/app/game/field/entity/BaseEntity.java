@@ -63,29 +63,29 @@ public abstract class BaseEntity
 	}
 	
 	public void position(float x, float y) {
-		this.shape.setX(x);
-		this.shape.setY(y);
+		getShape().setX(x);
+		getShape().setY(y);
 	}
 
-	public float getX() {
-		return this.shape.getX();
+	public int getX() {
+		return (int) getShape().getX();
 	}
 
-	public float getY() {
-		return this.shape.getY();
+	public int getY() {
+		return (int) getShape().getY();
 	}
 
-	public float getCenterX() {
-		return this.shape.getCenterX();
+	public int getCenterX() {
+		return (int) getShape().getCenterX();
 	}
 
-	public float getCenterY() {
-		return this.shape.getCenterY();
+	public int getCenterY() {
+		return (int) getShape().getCenterY();
 	}
 
 	@Override
 	public Shape[] getCollisionShapes() {
-		return new Shape[] { this.shape };
+		return new Shape[] { getShape() };
 	}
 
 	/*

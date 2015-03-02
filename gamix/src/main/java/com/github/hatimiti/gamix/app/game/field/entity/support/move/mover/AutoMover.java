@@ -1,7 +1,7 @@
-package com.github.hatimiti.gamix.app.game.field.entity.move.auto;
+package com.github.hatimiti.gamix.app.game.field.entity.support.move.mover;
 
 import com.github.hatimiti.gamix.app.game.field.entity.EntityContainer;
-import com.github.hatimiti.gamix.app.game.field.entity.move.character.AutoCharacter;
+import com.github.hatimiti.gamix.app.game.field.entity.character.AutoCharacter;
 
 /**
  * 自動移動の動作定義(Strategyパターン)

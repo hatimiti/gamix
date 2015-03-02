@@ -1,4 +1,4 @@
-package com.github.hatimiti.gamix.app.game.field.entity.move.support;
+package com.github.hatimiti.gamix.app.game.field.entity.support.move;
 
 import org.newdawn.slick.geom.Shape;
 
@@ -10,7 +10,7 @@ import com.github.hatimiti.gamix.app.game.field.entity.support.direction.FacingD
  * 基本的な動作を実装したMovable
  * 画面上を移動することができる機能が追加される.
  */
-public class StandardMovableImpl implements Movable {
+public class StandardMovable implements Movable {
 
 	protected BaseEntity origin;
 	
@@ -21,7 +21,7 @@ public class StandardMovableImpl implements Movable {
 	
 	protected int reboundDelay;
 
-	public StandardMovableImpl(
+	public StandardMovable(
 			BaseEntity entity) {
 		this.origin = entity;
 		this.movementState = MovementState.STOP;

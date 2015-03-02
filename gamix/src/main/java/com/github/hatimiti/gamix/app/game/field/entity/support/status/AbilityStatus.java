@@ -51,7 +51,7 @@ public class AbilityStatus {
 				o.moveSpeed);
 	}
 
-	public AbilityStatus create(AbilityParameter ap) {
+	public AbilityStatus of(AbilityParameter ap) {
 		return new AbilityStatus(
 				ap.getPhysicalAttack(),
 				this.physicalDefense,

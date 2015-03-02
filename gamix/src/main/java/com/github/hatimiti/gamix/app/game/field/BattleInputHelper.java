@@ -5,9 +5,9 @@ import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.geom.Point;
 
-import com.github.hatimiti.gamix.app.game.field.entity.equipment.weapon.BaseWeapon;
 import com.github.hatimiti.gamix.app.game.field.entity.equipment.weapon.Sword001;
-import com.github.hatimiti.gamix.app.game.field.entity.move.magic.Magic;
+import com.github.hatimiti.gamix.app.game.field.entity.equipment.weapon.Weapon;
+import com.github.hatimiti.gamix.app.game.field.entity.magic.Magic;
 import com.github.hatimiti.gamix.app.game.field.entity.support.direction.FacingDirection;
 import com.github.hatimiti.gamix.app.support.InputHelpable;
 
@@ -99,7 +99,7 @@ class BattleInputHelper implements InputHelpable {
 
 	protected void equipWeapon() throws SlickException {
 		// 武器装備
-		BaseWeapon weapon = new Sword001(this.state.player);
+		Weapon weapon = new Sword001(this.state.player);
 		this.state.player.equipWeapon(weapon);
 		this.state.entityContainer.addTo(this.state.getNowTile(), weapon);
 	}
@@ -112,5 +112,5 @@ class BattleInputHelper implements InputHelpable {
 		magic.faceTo(this.state.player.getDirection());
 		magic.move();
 	}
-
+	
 }

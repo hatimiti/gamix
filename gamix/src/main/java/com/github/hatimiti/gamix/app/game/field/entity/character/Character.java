@@ -1,4 +1,4 @@
-package com.github.hatimiti.gamix.app.game.field.entity.move.character;
+package com.github.hatimiti.gamix.app.game.field.entity.character;
 
 import static com.github.hatimiti.gamix.app.game.field.entity.support.direction.FacingDirection.*;
 
@@ -11,28 +11,28 @@ import com.github.hatimiti.gamix.app.game.field.damage.DamageCalculator;
 import com.github.hatimiti.gamix.app.game.field.damage.DamageEvent;
 import com.github.hatimiti.gamix.app.game.field.entity.BaseEntity;
 import com.github.hatimiti.gamix.app.game.field.entity.equipment.EquipmentWearable;
-import com.github.hatimiti.gamix.app.game.field.entity.equipment.weapon.BaseWeapon;
 import com.github.hatimiti.gamix.app.game.field.entity.equipment.weapon.EmptyWeapon;
+import com.github.hatimiti.gamix.app.game.field.entity.equipment.weapon.Weapon;
+import com.github.hatimiti.gamix.app.game.field.entity.magic.Magic;
 import com.github.hatimiti.gamix.app.game.field.entity.map.MapTile;
 import com.github.hatimiti.gamix.app.game.field.entity.map.shape.BackWall;
 import com.github.hatimiti.gamix.app.game.field.entity.map.shape.FrontWall;
 import com.github.hatimiti.gamix.app.game.field.entity.map.shape.LeftWall;
 import com.github.hatimiti.gamix.app.game.field.entity.map.shape.RightWall;
-import com.github.hatimiti.gamix.app.game.field.entity.move.magic.Magic;
-import com.github.hatimiti.gamix.app.game.field.entity.move.support.Movable;
-import com.github.hatimiti.gamix.app.game.field.entity.move.support.StandardMovableImpl;
 import com.github.hatimiti.gamix.app.game.field.entity.support.attack.AttackState;
 import com.github.hatimiti.gamix.app.game.field.entity.support.attack.Attackable;
 import com.github.hatimiti.gamix.app.game.field.entity.support.collision.CollisionEvent;
 import com.github.hatimiti.gamix.app.game.field.entity.support.direction.FacingDirection;
 import com.github.hatimiti.gamix.app.game.field.entity.support.direction.MoveDirectionAnimation;
+import com.github.hatimiti.gamix.app.game.field.entity.support.move.Movable;
+import com.github.hatimiti.gamix.app.game.field.entity.support.move.StandardMovable;
 import com.github.hatimiti.gamix.app.game.field.entity.support.status.AbilityParameter;
 import com.github.hatimiti.gamix.app.game.field.entity.support.status.AbilityStatus;
 import com.github.hatimiti.gamix.app.game.field.entity.support.status.LiveStatus;
 import com.github.hatimiti.gamix.app.game.field.entity.support.status.Statusable;
 import com.github.hatimiti.gamix.app.game.field.type.live.HP;
 
-public abstract class BaseCharacter
+public abstract class Character
 		extends BaseEntity
 		implements Attackable, EquipmentWearable, Statusable, Movable {
 
@@ -41,20 +41,20 @@ public abstract class BaseCharacter
 	protected MoveDirectionAnimation moveImage;
 
 	protected AttackState attackState;
-	protected BaseWeapon weapon;
+	protected Weapon weapon;
 
 	protected LiveStatus liveStatus;
 	protected AbilityStatus abilityStatus;
 
 	protected boolean existsInGame;
 	
-	private Movable movable = new StandardMovableImpl(this);
+	private Movable movable = new StandardMovable(this);
 
 	/*
 	 * constructor
 	 */
 
-	public BaseCharacter(
+	public Character(
 			final int characterNumber,
 			final Point defaultPoint) throws SlickException {
 
@@ -110,56 +110,59 @@ public abstract class BaseCharacter
 	@Override
 	public void onCollision(final CollisionEvent event) {
 
-		FacingDirection fd = NONE;
 		float rebound = this.getSpeed() * 2;
 
 		if (event.getTarget() instanceof MapTile) {
-			fd = collisionMapTile(event);
-			faceTo(fd);
-			rebound();
-			
-			stop();
-
-		} else if (event.getTarget() instanceof BaseWeapon) {
-
-			BaseCharacter owner = ((BaseWeapon) event.getTarget()).getOwner();
-
-			if (owner == this) {
-				return;
-			}
-
-			BaseWeapon weapon = (BaseWeapon) event.getTarget();
-
-			fd = collision(event);
-
-			if (!isNotNormalStatus()) {
-				int damage = new DamageCalculator()
-					.attack(weapon.getAttack())
-					.defence(this.getDefence())
-					.self(owner.getAbilityStatus())
-					.target(this.getAbilityStatus())
-					.calcDamage();
-				this.liveStatus.damage(damage);
-				DamageEvent de = new DamageEvent(
-						weapon, this, damage, event.getCollitionPoint());
-				this.damageListeners.notifyDamage(de);
-			}
+			collisionWithMap(event);
+		} else if (event.getTarget() instanceof Weapon) {
+			collisionWithWeapon(event);
 		} else if (event.getTarget() instanceof Magic) {
-			if (event.getSelf() instanceof Player) {
-				return;
-			} else {
-				doCollision(event, rebound);
-			}
+			collisionWithMagic(event, rebound);
 		} else {
-
 			doCollision(event, rebound);
 		}
 
 	}
 
+	private void collisionWithMagic(final CollisionEvent event, float rebound) {
+		
+		if (event.getSelf() instanceof Player) {
+			return;
+		}
+		
+		doCollision(event, rebound);
+	}
+
+	private void collisionWithMap(final CollisionEvent event) {
+		faceTo(faceByMapTile(event));
+		rebound();
+		stop();
+	}
+
+	private void collisionWithWeapon(final CollisionEvent event) {
+		
+		Weapon weapon = (Weapon) event.getTarget();
+		Character owner = weapon.getOwner();
+
+		if (owner == this || isNotNormalStatus()) {
+			// 自分自身の武器との衝突、または通常ステータスで無い場合は無視
+			return;
+		}
+
+		int amount = new DamageCalculator()
+			.attack(weapon.getAttack())
+			.defence(this.getDefence())
+			.self(owner.getAbilityStatus())
+			.target(this.getAbilityStatus())
+			.calcDamage();
+		
+		this.liveStatus.damage(amount);
+		this.damageListeners.notifyDamage(
+				new DamageEvent(weapon, this, amount, event.getCollitionPoint()));
+	}
+
 	private void doCollision(final CollisionEvent event, float rebound) {
-		this.direction = collision(event);
-		faceTo(this.direction);
+		faceTo(faceBy(event));
 		move();
 	}
 
@@ -169,7 +172,7 @@ public abstract class BaseCharacter
 	}
 
 	@Override
-	public void equipWeapon(final BaseWeapon weapon) {
+	public void equipWeapon(final Weapon weapon) {
 		unequipWeapon();
 		this.weapon = weapon;
 	}
@@ -185,8 +188,7 @@ public abstract class BaseCharacter
 	}
 
 	public void levelUp(final AbilityParameter ap) {
-		AbilityStatus as = this.abilityStatus.create(ap);
-		this.abilityStatus = as;
+		this.abilityStatus = this.abilityStatus.of(ap);
 	}
 
 	/*
@@ -198,7 +200,7 @@ public abstract class BaseCharacter
 	}
 
 	@Override
-	public BaseWeapon getWeapon() {
+	public Weapon getWeapon() {
 		return this.weapon;
 	}
 
@@ -257,46 +259,42 @@ public abstract class BaseCharacter
 		case DOWN_RIGHT:
 			return RIGHT;
 		default:
-			return target == null || target.getX() < this.getX()
-				? LEFT : RIGHT;
+			return target.getX() < this.getX() ? LEFT : RIGHT;
 		}
 	}
 
-	protected FacingDirection collisionMapTile(final CollisionEvent event) {
+	protected FacingDirection faceByMapTile(final CollisionEvent event) {
 		if (event.getTargetShape() instanceof BackWall) {
-			return FacingDirection.DOWN;
+			return DOWN;
 		} else if (event.getTargetShape() instanceof RightWall) {
-			return FacingDirection.LEFT;
+			return LEFT;
 		} else if (event.getTargetShape() instanceof FrontWall) {
-			return FacingDirection.UP;
+			return UP;
 		} else if (event.getTargetShape() instanceof LeftWall) {
-			return FacingDirection.RIGHT;
+			return RIGHT;
 		}
 		return null;
 	}
 
-	protected FacingDirection collision(final CollisionEvent event) {
-		float px = event.getCollitionPoint().getX();
-		float sx = this.getShape().getCenterX();
-		int dx = 0x0000;
+	protected FacingDirection faceBy(final CollisionEvent event) {
+		return FacingDirection.getBy(
+				faceXBy(event).getValue() | faceYBy(event).getValue());
+	}
 
-		if (px < sx) {
-			dx = FacingDirection.RIGHT.getValue();
-		} else if (sx < px) {
-			dx = FacingDirection.LEFT.getValue();
-		}
-
-		float py = event.getCollitionPoint().getY();
-		float sy = this.getShape().getCenterY();
-		int dy = 0x0000;
-
-		if (py < sy) {
-			dy = FacingDirection.DOWN.getValue();
-		} else if (sy < py) {
-			dy = FacingDirection.UP.getValue();
-		}
-		FacingDirection fd = FacingDirection.getBy(dx | dy);
-		return fd;
+	private FacingDirection faceXBy(final CollisionEvent event) {
+		int cx = event.getCenterX();
+		int sx = this.getCenterX();
+		return (cx < sx) ? RIGHT
+			: (sx < cx) ? LEFT
+			: NONE;
+	}
+	
+	private FacingDirection faceYBy(final CollisionEvent event) {
+		int cy = event.getCenterY();
+		int sy = this.getCenterY();
+		return (cy < sy) ? DOWN
+			: (sy < cy) ? UP
+			: NONE;
 	}
 
 	/*

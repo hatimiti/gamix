@@ -6,13 +6,13 @@ import org.newdawn.slick.geom.Shape;
 
 import com.github.hatimiti.gamix.app.game.field.entity.BaseEntity;
 import com.github.hatimiti.gamix.app.game.field.entity.EntityContainer;
+import com.github.hatimiti.gamix.app.game.field.entity.character.Character;
 import com.github.hatimiti.gamix.app.game.field.entity.equipment.BaseEquipment;
-import com.github.hatimiti.gamix.app.game.field.entity.move.character.BaseCharacter;
 import com.github.hatimiti.gamix.app.game.field.entity.support.attack.AttackDirectionAnimation;
 import com.github.hatimiti.gamix.app.game.field.entity.support.attack.AttackState;
 import com.github.hatimiti.gamix.app.game.field.entity.support.attack.Attackable;
 
-public abstract class BaseWeapon
+public abstract class Weapon
 		extends BaseEquipment
 		implements Attackable {
 
@@ -22,8 +22,8 @@ public abstract class BaseWeapon
 	protected int nowDelay;
 	protected AttackState attackState;
 
-	public BaseWeapon(
-			BaseCharacter owner) {
+	public Weapon(
+			Character owner) {
 
 		super(owner);
 		this.attackImage = new AttackDirectionAnimation(this, 32, 32);

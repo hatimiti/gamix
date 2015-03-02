@@ -1,4 +1,4 @@
-package com.github.hatimiti.gamix.app.game.field.entity.move.label;
+package com.github.hatimiti.gamix.app.game.field.entity.label;
 
 import org.newdawn.slick.Color;
 import org.newdawn.slick.Graphics;
@@ -7,9 +7,9 @@ import org.newdawn.slick.geom.Rectangle;
 
 import com.github.hatimiti.gamix.app.game.field.entity.BaseEntity;
 import com.github.hatimiti.gamix.app.game.field.entity.EntityContainer;
-import com.github.hatimiti.gamix.app.game.field.entity.move.support.Movable;
-import com.github.hatimiti.gamix.app.game.field.entity.move.support.StandardMovableImpl;
 import com.github.hatimiti.gamix.app.game.field.entity.support.collision.CollisionEvent;
+import com.github.hatimiti.gamix.app.game.field.entity.support.move.Movable;
+import com.github.hatimiti.gamix.app.game.field.entity.support.move.StandardMovable;
 
 
 public class DamageLabel
@@ -20,7 +20,7 @@ public class DamageLabel
 	protected int motion;
 	protected boolean existsInGame;
 	
-	protected Movable movable = new StandardMovableImpl(this);
+	protected Movable movable = new StandardMovable(this);
 
 	public DamageLabel(int damage, Point point) {
 		super(new Rectangle(point.getX(), point.getY() - 25, 0, 0));

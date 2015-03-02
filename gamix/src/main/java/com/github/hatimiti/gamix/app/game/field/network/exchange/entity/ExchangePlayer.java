@@ -11,9 +11,9 @@ public class ExchangePlayer
 		extends BaseExchangeEntity {
 
 	/** x */
-	public float x;
+	public int x;
 	/** y */
-	public float y;
+	public int y;
 	/** direction */
 	public int d;
 

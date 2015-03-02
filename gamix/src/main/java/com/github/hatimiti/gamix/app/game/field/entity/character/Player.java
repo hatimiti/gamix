@@ -1,4 +1,4 @@
-package com.github.hatimiti.gamix.app.game.field.entity.move.character;
+package com.github.hatimiti.gamix.app.game.field.entity.character;
 
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.geom.Point;
@@ -20,7 +20,7 @@ import com.github.hatimiti.gamix.app.game.field.type.ability.Vitality;
  * @author hatimiti
  *
  */
-public class Player extends BaseCharacter {
+public class Player extends Character {
 
 	protected AbilityParameter abilityParameter;
 

@@ -5,7 +5,7 @@ import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SpriteSheet;
 import org.newdawn.slick.geom.Point;
 
-import com.github.hatimiti.gamix.app.game.field.entity.equipment.weapon.BaseWeapon;
+import com.github.hatimiti.gamix.app.game.field.entity.equipment.weapon.Weapon;
 import com.github.hatimiti.gamix.app.game.field.entity.equipment.weapon.EmptyWeapon;
 import com.github.hatimiti.gamix.app.game.field.entity.support.direction.BaseDirectionAnimation;
 import com.github.hatimiti.gamix.app.game.field.entity.support.direction.FacingDirection;
@@ -27,7 +27,7 @@ public class AttackDirectionAnimation
 	protected SpriteSheet weaponSpriteSheet;
 	protected SpriteSheet effectSpriteSheet;
 
-	protected BaseWeapon weapon;
+	protected Weapon weapon;
 
 	/**
 	 *
@@ -38,7 +38,7 @@ public class AttackDirectionAnimation
 	 * @param reboundDelay 武器速度
 	 */
 	public AttackDirectionAnimation(
-			BaseWeapon weapon, int w, int h) {
+			Weapon weapon, int w, int h) {
 
 		super(ImageFactory.getInstance().getCharacterImage(weapon.getOwner().getCharacterNumber()), w, h);
 		this.weapon = weapon;

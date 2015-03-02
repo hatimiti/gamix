@@ -4,11 +4,11 @@ import org.newdawn.slick.geom.Point;
 import org.newdawn.slick.geom.Rectangle;
 import org.newdawn.slick.geom.Shape;
 
-import com.github.hatimiti.gamix.app.game.field.entity.move.character.BaseCharacter;
+import com.github.hatimiti.gamix.app.game.field.entity.character.Character;
 
-public class EmptyWeapon extends BaseWeapon {
+public class EmptyWeapon extends Weapon {
 
-	public EmptyWeapon(BaseCharacter owner) {
+	public EmptyWeapon(Character owner) {
 		super(owner);
 	}
 

@@ -1,4 +1,4 @@
-package com.github.hatimiti.gamix.app.game.field.entity.move.support;
+package com.github.hatimiti.gamix.app.game.field.entity.support.move;
 
 import org.newdawn.slick.util.pathfinding.Mover;
 

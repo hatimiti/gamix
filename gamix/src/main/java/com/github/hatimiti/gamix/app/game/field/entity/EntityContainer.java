@@ -6,9 +6,9 @@ import java.util.Map;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.geom.Point;
 
+import com.github.hatimiti.gamix.app.game.field.entity.character.OnlinePlayer;
+import com.github.hatimiti.gamix.app.game.field.entity.character.Player;
 import com.github.hatimiti.gamix.app.game.field.entity.map.MapTile;
-import com.github.hatimiti.gamix.app.game.field.entity.move.character.OnlinePlayer;
-import com.github.hatimiti.gamix.app.game.field.entity.move.character.Player;
 import com.github.hatimiti.gamix.app.game.field.network.exchange.entity.ExchangePlayer;
 import com.github.hatimiti.gamix.app.game.field.type.collection.EntityList;
 import com.github.hatimiti.gamix.app.game.field.type.entity.EntityId;

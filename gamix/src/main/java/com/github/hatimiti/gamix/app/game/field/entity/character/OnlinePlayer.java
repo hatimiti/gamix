@@ -1,4 +1,4 @@
-package com.github.hatimiti.gamix.app.game.field.entity.move.character;
+package com.github.hatimiti.gamix.app.game.field.entity.character;
 
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.geom.Point;
@@ -11,7 +11,7 @@ import com.github.hatimiti.gamix.app.game.field.entity.EntityContainer;
  *
  */
 public class OnlinePlayer
-		extends BaseCharacter {
+		extends Character {
 
 	public OnlinePlayer(
 			int characterNumber,

@@ -12,12 +12,12 @@ import com.github.hatimiti.gamix.base.type.ListType;
 public final class EntityList extends ListType<BaseEntity> {
 
 	public void draw(final Graphics g) {
-		getVal().stream()
+		getVal().parallelStream()
 			.forEach(v -> v.draw(g));
 	}
 
 	public void update(final EntityContainer entityContainer) {
-		getVal().stream()
+		getVal().parallelStream()
 			.forEach(v -> v.update(entityContainer));
 	}
 

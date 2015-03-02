@@ -8,9 +8,9 @@ import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.StateBasedGame;
 
 import com.github.hatimiti.gamix.app.game.field.damage.DamageEvent;
-import com.github.hatimiti.gamix.app.game.field.entity.move.character.AutoCharacter;
-import com.github.hatimiti.gamix.app.game.field.entity.move.character.Player;
-import com.github.hatimiti.gamix.app.game.field.entity.move.label.DamageLabel;
+import com.github.hatimiti.gamix.app.game.field.entity.character.AutoCharacter;
+import com.github.hatimiti.gamix.app.game.field.entity.character.Player;
+import com.github.hatimiti.gamix.app.game.field.entity.label.DamageLabel;
 import com.github.hatimiti.gamix.app.game.field.gui.twl.HPBar;
 import com.github.hatimiti.gamix.app.game.field.gui.twl.StatusButton;
 import com.github.hatimiti.gamix.app.game.field.gui.twl.TextFrame;
@@ -36,7 +36,6 @@ class BattleGUIManager {
 
 	BattleGUIManager(final BattleState state) {
 		this.state = state;
-
 	}
 
 	void init(

@@ -1,4 +1,4 @@
-package com.github.hatimiti.gamix.app.game.field.entity.move.magic;
+package com.github.hatimiti.gamix.app.game.field.entity.magic;
 
 import org.newdawn.slick.Color;
 import org.newdawn.slick.Graphics;
@@ -8,9 +8,9 @@ import org.newdawn.slick.geom.Point;
 
 import com.github.hatimiti.gamix.app.game.field.entity.BaseEntity;
 import com.github.hatimiti.gamix.app.game.field.entity.EntityContainer;
-import com.github.hatimiti.gamix.app.game.field.entity.move.support.Movable;
-import com.github.hatimiti.gamix.app.game.field.entity.move.support.StandardMovableImpl;
 import com.github.hatimiti.gamix.app.game.field.entity.support.collision.CollisionEvent;
+import com.github.hatimiti.gamix.app.game.field.entity.support.move.Movable;
+import com.github.hatimiti.gamix.app.game.field.entity.support.move.StandardMovable;
 
 public class Magic
 		extends BaseEntity
@@ -21,7 +21,7 @@ public class Magic
 	public Magic(Point defaultPoint) throws SlickException {
 		super(new Ellipse(
 				defaultPoint.getX(), defaultPoint.getY(), 10, 10));
-		setupMovable(new StandardMovableImpl(this));
+		setupMovable(new StandardMovable(this));
 	}
 
 	@Override

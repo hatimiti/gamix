@@ -1,13 +1,13 @@
-package com.github.hatimiti.gamix.app.game.field.entity.move.character;
+package com.github.hatimiti.gamix.app.game.field.entity.character;
 
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.geom.Point;
 
 import com.github.hatimiti.gamix.app.game.field.entity.EntityContainer;
-import com.github.hatimiti.gamix.app.game.field.entity.move.auto.AutoMover;
+import com.github.hatimiti.gamix.app.game.field.entity.support.move.mover.AutoMover;
 
 public class AutoCharacter
-		extends BaseCharacter {
+		extends Character {
 
 	protected AutoMover autoMover;
 

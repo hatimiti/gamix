@@ -14,7 +14,7 @@ import java.net.InetSocketAddress;
 
 import net.arnx.jsonic.JSON;
 
-import com.github.hatimiti.gamix.app.game.field.entity.move.character.Player;
+import com.github.hatimiti.gamix.app.game.field.entity.character.Player;
 import com.github.hatimiti.gamix.app.game.field.network.exchange.json.entity.ExchangeEntityClientJson;
 import com.github.hatimiti.gamix.app.game.field.network.handler.EntityClientHandler;
 import com.github.hatimiti.gamix.app.game.field.type.entity.EntityId;

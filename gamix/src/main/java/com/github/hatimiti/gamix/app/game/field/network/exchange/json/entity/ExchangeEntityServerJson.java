@@ -5,8 +5,8 @@ import java.util.List;
 
 import com.github.hatimiti.gamix.app.game.field.entity.BaseEntity;
 import com.github.hatimiti.gamix.app.game.field.entity.EntityContainer;
+import com.github.hatimiti.gamix.app.game.field.entity.character.OnlinePlayer;
 import com.github.hatimiti.gamix.app.game.field.entity.map.MapTile;
-import com.github.hatimiti.gamix.app.game.field.entity.move.character.OnlinePlayer;
 import com.github.hatimiti.gamix.app.game.field.network.exchange.entity.ExchangeMap;
 import com.github.hatimiti.gamix.app.game.field.network.exchange.entity.ExchangePlayer;
 import com.github.hatimiti.gamix.app.game.field.type.entity.EntityId;

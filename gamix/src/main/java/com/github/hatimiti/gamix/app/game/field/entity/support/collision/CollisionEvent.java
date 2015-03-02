@@ -94,6 +94,14 @@ public class CollisionEvent {
 		return this.point;
 	}
 
+	public int getCenterX() {
+		return (int) getCollitionPoint().getCenterX();
+	}
+	
+	public int getCenterY() {
+		return (int) getCollitionPoint().getCenterY();
+	}
+
 	public CollisionVector getVector() {
 		return vector;
 	}
