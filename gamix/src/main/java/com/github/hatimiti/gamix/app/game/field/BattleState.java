@@ -8,8 +8,6 @@ import org.newdawn.slick.SlickException;
 import org.newdawn.slick.geom.Point;
 import org.newdawn.slick.state.StateBasedGame;
 
-import com.github.hatimiti.gamix.app.game.field.damage.DamageEvent;
-import com.github.hatimiti.gamix.app.game.field.damage.DamageListener;
 import com.github.hatimiti.gamix.app.game.field.entity.EmptyEntity;
 import com.github.hatimiti.gamix.app.game.field.entity.Entity;
 import com.github.hatimiti.gamix.app.game.field.entity.EntityContainer;
@@ -35,7 +33,7 @@ import com.github.hatimiti.gamix.base.gui.twl.RootPane;
 
 public class BattleState
 		extends BaseGameState
-		implements DamageListener, AbilityDefineListener {
+		implements AbilityDefineListener {
 
 	EntityContainer entityContainer;
 
@@ -67,10 +65,10 @@ public class BattleState
 		this.nowPoint = new MapTilePoint(0, 0);
 
 		this.player = new Player(101, new Point(300, 500));
-		this.player.addDamageListener(this);
+		this.player.addDamageListener(guiManager);
 
 		AutoCharacter target = new AutoCharacter(33, new AutoStopMover(), new Point(300, 450));
-		target.addDamageListener(this);
+		target.addDamageListener(guiManager);
 
 		this.entityContainer.addTo(getNowTile(), this.map.getTileIn(this.nowPoint));
 		this.entityContainer.addTo(getNowTile(), this.player);
@@ -152,7 +150,7 @@ public class BattleState
 			this.entityContainer.addTo(getNowTile(), this.map.getTileIn(this.nowPoint));
 			this.entityContainer.addTo(getNowTile(), this.player);
 			AutoCharacter ac = new AutoCharacter(111, new AutoApproachMover(), new Point(300, 450));
-			ac.addDamageListener(this);
+			ac.addDamageListener(guiManager);
 			this.entityContainer.addTo(getNowTile(), ac);
 			this.player.setPoint(new Point(650, 400));
 		}
@@ -170,15 +168,6 @@ public class BattleState
 	@Override
 	protected void layoutRootPane() {
 		this.guiManager.layoutRootPane();
-	}
-
-	@Override
-	public void notifyDamage(final DamageEvent event) {
-		if (event.getTo() instanceof Player) {
-			this.guiManager.updatePlayerHPBar(event);
-		} else {
-			this.guiManager.updateTargetHPBar(event);
-		}
 	}
 
 	@Override

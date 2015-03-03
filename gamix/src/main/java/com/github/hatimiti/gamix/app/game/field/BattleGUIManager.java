@@ -8,6 +8,7 @@ import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.StateBasedGame;
 
 import com.github.hatimiti.gamix.app.game.field.damage.DamageEvent;
+import com.github.hatimiti.gamix.app.game.field.damage.DamageListener;
 import com.github.hatimiti.gamix.app.game.field.entity.character.AutoCharacter;
 import com.github.hatimiti.gamix.app.game.field.entity.character.Player;
 import com.github.hatimiti.gamix.app.game.field.entity.label.DamageLabel;
@@ -21,7 +22,7 @@ import com.github.hatimiti.gamix.base.gui.twl.RootPane;
 
 import de.matthiasmann.twl.Button;
 
-class BattleGUIManager {
+class BattleGUIManager implements DamageListener {
 
 	ChatDialog chatDialog;
 
@@ -29,8 +30,8 @@ class BattleGUIManager {
 	TextFrame textFrame;
 	AbilityDialog abilityDialog;
 
-	HPBar playerHPBar;
-	HPBar targetHPBar;
+	private HPBar playerHPBar;
+	private HPBar targetHPBar;
 
 	private final BattleState state;
 
@@ -120,6 +121,15 @@ class BattleGUIManager {
 		this.targetHPBar.update(c.getStatus());
 		DamageLabel dl = new DamageLabel(event.getDamage(), event.getPoint());
 		this.state.entityContainer.addTo(this.state.getNowTile(), dl);
+	}
+
+	@Override
+	public void notifyDamage(final DamageEvent event) {
+		if (event.getTo() instanceof Player) {
+			this.updatePlayerHPBar(event);
+		} else {
+			this.updateTargetHPBar(event);
+		}
 	}
 
 }
