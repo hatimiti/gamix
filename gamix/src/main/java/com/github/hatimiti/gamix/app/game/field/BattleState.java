@@ -10,7 +10,8 @@ import org.newdawn.slick.state.StateBasedGame;
 
 import com.github.hatimiti.gamix.app.game.field.damage.DamageEvent;
 import com.github.hatimiti.gamix.app.game.field.damage.DamageListener;
-import com.github.hatimiti.gamix.app.game.field.entity.BaseEntity;
+import com.github.hatimiti.gamix.app.game.field.entity.EmptyEntity;
+import com.github.hatimiti.gamix.app.game.field.entity.Entity;
 import com.github.hatimiti.gamix.app.game.field.entity.EntityContainer;
 import com.github.hatimiti.gamix.app.game.field.entity.character.AutoCharacter;
 import com.github.hatimiti.gamix.app.game.field.entity.character.Player;
@@ -37,18 +38,18 @@ public class BattleState
 		extends BaseGameState
 		implements DamageListener, AbilityDefineListener {
 
-	protected EntityContainer entityContainer;
+	EntityContainer entityContainer;
 
-	protected Player player;
-	protected BaseEntity target;
+	Player player;
+	Entity target = new EmptyEntity();
 
-	protected BaseMap map;
-	protected MapTilePoint nowPoint;
+	BaseMap map;
+	MapTilePoint nowPoint;
 
-	protected CollisionHandler collisionHandler;
+	CollisionHandler collisionHandler;
 
-	protected BattleInputHelper inputHelper;
-	protected BattleGUIManager guiManager;
+	BattleInputHelper inputHelper;
+	BattleGUIManager guiManager;
 
 	public BattleState() {
 		super(GameSceneState.BATTLE);

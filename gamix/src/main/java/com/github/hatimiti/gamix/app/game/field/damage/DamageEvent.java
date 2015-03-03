@@ -2,13 +2,13 @@ package com.github.hatimiti.gamix.app.game.field.damage;
 
 import org.newdawn.slick.geom.Point;
 
-import com.github.hatimiti.gamix.app.game.field.entity.BaseEntity;
+import com.github.hatimiti.gamix.app.game.field.entity.Entity;
 
 
 public class DamageEvent {
 
-	protected BaseEntity from;
-	protected BaseEntity to;
+	protected Entity from;
+	protected Entity to;
 	protected int damage;
 	protected Point point;
 
@@ -17,8 +17,8 @@ public class DamageEvent {
 	 */
 
 	public DamageEvent(
-			final BaseEntity from,
-			final BaseEntity to,
+			final Entity from,
+			final Entity to,
 			final int damage,
 			final Point point) {
 		this.from = from;
@@ -31,11 +31,11 @@ public class DamageEvent {
 	 * getter
 	 */
 
-	public BaseEntity getFrom() {
+	public Entity getFrom() {
 		return from;
 	}
 
-	public BaseEntity getTo() {
+	public Entity getTo() {
 		return to;
 	}
 

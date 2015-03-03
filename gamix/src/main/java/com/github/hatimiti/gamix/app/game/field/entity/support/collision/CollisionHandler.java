@@ -9,7 +9,7 @@ import org.newdawn.slick.geom.Line;
 import org.newdawn.slick.geom.Point;
 import org.newdawn.slick.geom.Shape;
 
-import com.github.hatimiti.gamix.app.game.field.entity.BaseEntity;
+import com.github.hatimiti.gamix.app.game.field.entity.Entity;
 import com.github.hatimiti.gamix.app.game.field.type.collection.EntityList;
 import com.github.hatimiti.gamix.base.util._Collections;
 
@@ -17,7 +17,7 @@ import com.github.hatimiti.gamix.base.util._Collections;
 public class CollisionHandler {
 
 	/** 前回判定で衝突したエンティティリスト */
-	protected Set<BaseEntity> preCollisionEntities = new HashSet<>();
+	protected Set<Entity> preCollisionEntities = new HashSet<>();
 
 	public void clear() {
 		this.preCollisionEntities.clear();
@@ -27,8 +27,8 @@ public class CollisionHandler {
 
 		Set<CollisionEvent> collision = new HashSet<>();
 
-		for (BaseEntity origin : entities) {
-			for (BaseEntity target : entities) {
+		for (Entity origin : entities) {
+			for (Entity target : entities) {
 				if (origin.equals(target)) {
 					continue;
 				}
@@ -44,7 +44,7 @@ public class CollisionHandler {
 			}
 		}
 
-		Set<BaseEntity> nowCollisionEntities = new HashSet<>();
+		Set<Entity> nowCollisionEntities = new HashSet<>();
 
 		for (CollisionEvent event : collision) {
 			event.getSelf().onCollision(event);
@@ -53,7 +53,7 @@ public class CollisionHandler {
 			nowCollisionEntities.add(event.getTarget());
 		}
 
-		List<BaseEntity> freeEntities = this.preCollisionEntities.parallelStream()
+		List<Entity> freeEntities = this.preCollisionEntities.parallelStream()
 			.filter(p -> _Collections.contains(nowCollisionEntities, p))
 			.collect(Collectors.toList());
 		
@@ -63,7 +63,7 @@ public class CollisionHandler {
 		this.preCollisionEntities = nowCollisionEntities;
 	}
 	
-	protected CollisionJudge isCollisioning(final BaseEntity a, final BaseEntity b) {
+	protected CollisionJudge isCollisioning(final Entity a, final Entity b) {
 		for (Shape as : a.getCollisionShapes()) {
 			for (Shape bs : b.getCollisionShapes()) {
 				if (as.intersects(bs)) {

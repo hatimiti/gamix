@@ -23,7 +23,7 @@ public class EntityContainer {
 		this.containerMap = new HashMap<>();
 	}
 
-	public boolean addTo(final MapTile tile, final BaseEntity entity) {
+	public boolean addTo(final MapTile tile, final Entity entity) {
 		if (entity instanceof Player) {
 			this.player = (Player) entity;
 		}

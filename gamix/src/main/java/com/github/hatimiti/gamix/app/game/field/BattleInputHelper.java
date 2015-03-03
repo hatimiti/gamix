@@ -78,33 +78,33 @@ class BattleInputHelper implements InputHelpable {
 		}
 	}
 
-	protected void viewAbilityDialog() {
+	private void viewAbilityDialog() {
 		// アビリティダイアログ表示／非表示
-		if (this.state.abilityDialog.isVisible()) {
-			this.state.abilityDialog.hide();
+		if (this.state.guiManager.abilityDialog.isVisible()) {
+			this.state.guiManager.abilityDialog.hide();
 		} else {
-			this.state.abilityDialog.show(this.state.player.getAbilityParameter());
+			this.state.guiManager.abilityDialog.show(this.state.player.getAbilityParameter());
 		}
 	}
 
-	protected void viewChatDialog() {
+	private void viewChatDialog() {
 		// チャットウィンドウ表示／非表示
-		this.state.chatDialog.setVisible(!this.state.chatDialog.isVisible());
+		this.state.guiManager.chatDialog.setVisible(!this.state.guiManager.chatDialog.isVisible());
 	}
 
-	protected void attack() {
+	private void attack() {
 		// 攻撃
 		this.state.player.attack(this.state.target);
 	}
 
-	protected void equipWeapon() throws SlickException {
+	private void equipWeapon() throws SlickException {
 		// 武器装備
 		Weapon weapon = new Sword001(this.state.player);
 		this.state.player.equipWeapon(weapon);
 		this.state.entityContainer.addTo(this.state.getNowTile(), weapon);
 	}
 
-	protected void invokeMagic() throws SlickException {
+	private void invokeMagic() throws SlickException {
 		// 魔法
 		Magic magic = new Magic(
 				new Point(this.state.player.getCenterX(), this.state.player.getCenterY()));
@@ -112,5 +112,5 @@ class BattleInputHelper implements InputHelpable {
 		magic.faceTo(this.state.player.getDirection());
 		magic.move();
 	}
-	
+
 }

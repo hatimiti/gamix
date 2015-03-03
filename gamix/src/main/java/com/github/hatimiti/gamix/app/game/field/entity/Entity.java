@@ -14,7 +14,7 @@ import com.github.hatimiti.gamix.app.game.field.entity.support.direction.FacingD
 import com.github.hatimiti.gamix.app.game.field.type.collection.DamageListenerList;
 import com.github.hatimiti.gamix.app.game.field.type.entity.EntityId;
 
-public abstract class BaseEntity
+public abstract class Entity
 		implements Serializable, CollisionListener {
 
 	protected EntityId entityId = new EntityId(RandomStringUtils.randomAlphanumeric(10));//EntityId.NONE;
@@ -28,7 +28,7 @@ public abstract class BaseEntity
 	 * constructor
 	 */
 
-	public BaseEntity(final Shape shape) {
+	public Entity(final Shape shape) {
 		this.shape = shape;
 		this.direction = FacingDirection.DOWN;
 		this.collisionShapes = new ArrayList<>();

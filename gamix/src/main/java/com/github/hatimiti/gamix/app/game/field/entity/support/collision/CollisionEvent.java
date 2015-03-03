@@ -6,15 +6,15 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.newdawn.slick.geom.Point;
 import org.newdawn.slick.geom.Shape;
 
-import com.github.hatimiti.gamix.app.game.field.entity.BaseEntity;
+import com.github.hatimiti.gamix.app.game.field.entity.Entity;
 
 
 public class CollisionEvent {
 
 	/** 衝突(自) */
-	protected BaseEntity self;
+	protected Entity self;
 	/** 衝突(至) */
-	protected BaseEntity target;
+	protected Entity target;
 
 	/** Shape(自) */
 	protected Shape selfShape;
@@ -28,8 +28,8 @@ public class CollisionEvent {
 	protected CollisionVector vector;
 
 	public CollisionEvent(
-			final BaseEntity self,
-			final BaseEntity target,
+			final Entity self,
+			final Entity target,
 			final Shape selfShape,
 			final Shape targetShape,
 			final Point point) {
@@ -74,11 +74,11 @@ public class CollisionEvent {
 
 	}
 
-	public BaseEntity getSelf() {
+	public Entity getSelf() {
 		return this.self;
 	}
 
-	public BaseEntity getTarget() {
+	public Entity getTarget() {
 		return this.target;
 	}
 

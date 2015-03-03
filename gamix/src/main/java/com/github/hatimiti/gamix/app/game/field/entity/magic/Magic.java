@@ -6,14 +6,14 @@ import org.newdawn.slick.SlickException;
 import org.newdawn.slick.geom.Ellipse;
 import org.newdawn.slick.geom.Point;
 
-import com.github.hatimiti.gamix.app.game.field.entity.BaseEntity;
+import com.github.hatimiti.gamix.app.game.field.entity.Entity;
 import com.github.hatimiti.gamix.app.game.field.entity.EntityContainer;
 import com.github.hatimiti.gamix.app.game.field.entity.support.collision.CollisionEvent;
 import com.github.hatimiti.gamix.app.game.field.entity.support.move.Movable;
 import com.github.hatimiti.gamix.app.game.field.entity.support.move.StandardMovable;
 
 public class Magic
-		extends BaseEntity
+		extends Entity
 		implements Movable {
 
 	private Movable movable;

@@ -9,7 +9,7 @@ import org.newdawn.slick.geom.Rectangle;
 
 import com.github.hatimiti.gamix.app.game.field.damage.DamageCalculator;
 import com.github.hatimiti.gamix.app.game.field.damage.DamageEvent;
-import com.github.hatimiti.gamix.app.game.field.entity.BaseEntity;
+import com.github.hatimiti.gamix.app.game.field.entity.Entity;
 import com.github.hatimiti.gamix.app.game.field.entity.equipment.EquipmentWearable;
 import com.github.hatimiti.gamix.app.game.field.entity.equipment.weapon.EmptyWeapon;
 import com.github.hatimiti.gamix.app.game.field.entity.equipment.weapon.Weapon;
@@ -33,7 +33,7 @@ import com.github.hatimiti.gamix.app.game.field.entity.support.status.Statusable
 import com.github.hatimiti.gamix.app.game.field.type.live.HP;
 
 public abstract class Character
-		extends BaseEntity
+		extends Entity
 		implements Attackable, EquipmentWearable, Statusable, Movable {
 
 	protected int characterNumber;
@@ -82,7 +82,7 @@ public abstract class Character
 	 */
 
 	@Override
-	public void attack(final BaseEntity target) {
+	public void attack(final Entity target) {
 		if (isAttacking()) {
 			return;
 		}
@@ -247,7 +247,7 @@ public abstract class Character
 	 * protected
 	 */
 
-	protected FacingDirection getAttackDirection(final BaseEntity target) {
+	protected FacingDirection getAttackDirection(final Entity target) {
 
 		switch (this.direction) {
 		case LEFT:

@@ -2,7 +2,7 @@ package com.github.hatimiti.gamix.app.game.field.entity.support.move;
 
 import org.newdawn.slick.geom.Shape;
 
-import com.github.hatimiti.gamix.app.game.field.entity.BaseEntity;
+import com.github.hatimiti.gamix.app.game.field.entity.Entity;
 import com.github.hatimiti.gamix.app.game.field.entity.support.direction.FacingDirection;
 
 
@@ -12,7 +12,7 @@ import com.github.hatimiti.gamix.app.game.field.entity.support.direction.FacingD
  */
 public class StandardMovable implements Movable {
 
-	protected BaseEntity origin;
+	protected Entity origin;
 	
 	protected MovementState movementState;
 	protected int dx;
@@ -22,7 +22,7 @@ public class StandardMovable implements Movable {
 	protected int reboundDelay;
 
 	public StandardMovable(
-			BaseEntity entity) {
+			Entity entity) {
 		this.origin = entity;
 		this.movementState = MovementState.STOP;
 	}

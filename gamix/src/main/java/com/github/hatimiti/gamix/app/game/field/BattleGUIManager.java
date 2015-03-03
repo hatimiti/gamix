@@ -23,14 +23,14 @@ import de.matthiasmann.twl.Button;
 
 class BattleGUIManager {
 
-	protected ChatDialog chatDialog;
+	ChatDialog chatDialog;
 
-	protected Button statusButton;
-	protected TextFrame textFrame;
-	protected AbilityDialog abilityDialog;
+	Button statusButton;
+	TextFrame textFrame;
+	AbilityDialog abilityDialog;
 
-	protected HPBar playerHPBar;
-	protected HPBar targetHPBar;
+	HPBar playerHPBar;
+	HPBar targetHPBar;
 
 	private final BattleState state;
 

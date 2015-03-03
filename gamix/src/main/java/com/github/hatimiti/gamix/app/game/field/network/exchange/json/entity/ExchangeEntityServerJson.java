@@ -3,7 +3,7 @@ package com.github.hatimiti.gamix.app.game.field.network.exchange.json.entity;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.github.hatimiti.gamix.app.game.field.entity.BaseEntity;
+import com.github.hatimiti.gamix.app.game.field.entity.Entity;
 import com.github.hatimiti.gamix.app.game.field.entity.EntityContainer;
 import com.github.hatimiti.gamix.app.game.field.entity.character.OnlinePlayer;
 import com.github.hatimiti.gamix.app.game.field.entity.map.MapTile;
@@ -46,7 +46,7 @@ public class ExchangeEntityServerJson
 		this.p = client.p;
 		this.m = client.m;
 
-		for (BaseEntity entity : container.getEntityListIn(tile)) {
+		for (Entity entity : container.getEntityListIn(tile)) {
 
 			if (!(entity instanceof OnlinePlayer)) {
 				continue;

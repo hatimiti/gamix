@@ -10,7 +10,7 @@ import org.newdawn.slick.SlickException;
 import org.newdawn.slick.geom.Rectangle;
 import org.newdawn.slick.geom.Shape;
 
-import com.github.hatimiti.gamix.app.game.field.entity.BaseEntity;
+import com.github.hatimiti.gamix.app.game.field.entity.Entity;
 import com.github.hatimiti.gamix.app.game.field.entity.EntityContainer;
 import com.github.hatimiti.gamix.app.game.field.entity.map.shape.BackWall;
 import com.github.hatimiti.gamix.app.game.field.entity.map.shape.FrontWall;
@@ -20,7 +20,7 @@ import com.github.hatimiti.gamix.app.game.field.entity.map.support.MapId;
 import com.github.hatimiti.gamix.app.game.field.entity.support.collision.CollisionEvent;
 
 public class MapTile
-		extends BaseEntity {
+		extends Entity {
 
 	protected Image image;
 

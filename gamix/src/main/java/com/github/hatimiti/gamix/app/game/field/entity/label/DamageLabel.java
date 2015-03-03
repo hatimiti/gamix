@@ -5,7 +5,7 @@ import org.newdawn.slick.Graphics;
 import org.newdawn.slick.geom.Point;
 import org.newdawn.slick.geom.Rectangle;
 
-import com.github.hatimiti.gamix.app.game.field.entity.BaseEntity;
+import com.github.hatimiti.gamix.app.game.field.entity.Entity;
 import com.github.hatimiti.gamix.app.game.field.entity.EntityContainer;
 import com.github.hatimiti.gamix.app.game.field.entity.support.collision.CollisionEvent;
 import com.github.hatimiti.gamix.app.game.field.entity.support.move.Movable;
@@ -13,7 +13,7 @@ import com.github.hatimiti.gamix.app.game.field.entity.support.move.StandardMova
 
 
 public class DamageLabel
-		extends BaseEntity
+		extends Entity
 		implements Movable {
 
 	protected int damage;
