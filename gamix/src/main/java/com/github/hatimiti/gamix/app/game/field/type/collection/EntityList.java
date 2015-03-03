@@ -12,18 +12,18 @@ import com.github.hatimiti.gamix.base.type.ListType;
 public final class EntityList extends ListType<Entity> {
 
 	public void draw(final Graphics g) {
-		getVal().stream()
+		this.stream()
 			.forEach(v -> v.draw(g));
 	}
 
 	public void update(final EntityContainer entityContainer) {
-		getVal().stream()
+		this.parallelStream()
 			.forEach(v -> v.update(entityContainer));
 	}
 
 	public boolean updatePlayer(final ExchangePlayer player) {
 
-		for (Entity e : getVal()) {
+		for (Entity e : this) {
 			if (e.getEntityId() == null
 					|| !e.getEntityId().equals(new EntityId(player.eid))) {
 				continue;
