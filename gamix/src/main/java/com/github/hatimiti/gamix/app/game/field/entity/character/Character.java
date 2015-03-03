@@ -82,14 +82,14 @@ public abstract class Character
 	 */
 
 	@Override
-	public void attack(final Entity target) {
+	public void attack() {
 		if (isAttacking()) {
 			return;
 		}
 		this.stop();
-		this.direction = getAttackDirection(target);
+		this.direction = getAttackDirection();
 		this.attackState = AttackState.ATTACK;
-		this.weapon.attack(target);
+		this.weapon.attack();
 	}
 
 	@Override
@@ -247,7 +247,7 @@ public abstract class Character
 	 * protected
 	 */
 
-	protected FacingDirection getAttackDirection(final Entity target) {
+	protected FacingDirection getAttackDirection() {
 
 		switch (this.direction) {
 		case LEFT:
@@ -259,7 +259,8 @@ public abstract class Character
 		case DOWN_RIGHT:
 			return RIGHT;
 		default:
-			return target.getX() < this.getX() ? LEFT : RIGHT;
+			// TODO 上下を向いている場合はどちらに攻撃するか
+			return LEFT;
 		}
 	}
 

@@ -19,7 +19,6 @@ import com.github.hatimiti.gamix.app.game.field.entity.map.BaseMap;
 import com.github.hatimiti.gamix.app.game.field.entity.map.MapTile;
 import com.github.hatimiti.gamix.app.game.field.entity.map.MapTilePoint;
 import com.github.hatimiti.gamix.app.game.field.entity.map.town.FirstTownMap;
-import com.github.hatimiti.gamix.app.game.field.entity.support.collision.CollisionHandler;
 import com.github.hatimiti.gamix.app.game.field.entity.support.move.mover.AutoApproachMover;
 import com.github.hatimiti.gamix.app.game.field.entity.support.move.mover.AutoStopMover;
 import com.github.hatimiti.gamix.app.game.field.entity.support.status.AbilityDefineListener;
@@ -45,8 +44,6 @@ public class BattleState
 
 	BaseMap map;
 	MapTilePoint nowPoint;
-
-	CollisionHandler collisionHandler;
 
 	BattleInputHelper inputHelper;
 	BattleGUIManager guiManager;
@@ -78,8 +75,6 @@ public class BattleState
 		this.entityContainer.addTo(getNowTile(), this.map.getTileIn(this.nowPoint));
 		this.entityContainer.addTo(getNowTile(), this.player);
 		this.entityContainer.addTo(getNowTile(), target);
-
-		this.collisionHandler = new CollisionHandler();
 
 		this.guiManager.init(gc, game);
 	}
@@ -140,13 +135,12 @@ public class BattleState
 
 		this.guiManager.update(gc, game, paramInt);
 		this.inputHelper.input(gc);
+		
 		moveMapTile();
 
-		EntityList entities = this.entityContainer.getEntityListIn(getNowTile());
-
-		entities.removeNonExsitsEntites();
+		EntityList entities
+			= this.entityContainer.getEntityListIn(getNowTile());
 		entities.update(this.entityContainer);
-		this.collisionHandler.judgeCollision(entities);
 	}
 
 	protected void moveMapTile() throws SlickException {
@@ -160,7 +154,6 @@ public class BattleState
 			AutoCharacter ac = new AutoCharacter(111, new AutoApproachMover(), new Point(300, 450));
 			ac.addDamageListener(this);
 			this.entityContainer.addTo(getNowTile(), ac);
-			this.collisionHandler.clear();
 			this.player.setPoint(new Point(650, 400));
 		}
 	}
@@ -181,15 +174,9 @@ public class BattleState
 
 	@Override
 	public void notifyDamage(final DamageEvent event) {
-
 		if (event.getTo() instanceof Player) {
 			this.guiManager.updatePlayerHPBar(event);
 		} else {
-			if (!(event.getTo() instanceof AutoCharacter)) {
-				return;
-			}
-			AutoCharacter c = (AutoCharacter) event.getTo();
-			this.target = c;
 			this.guiManager.updateTargetHPBar(event);
 		}
 	}

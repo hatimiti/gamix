@@ -94,7 +94,7 @@ class BattleInputHelper implements InputHelpable {
 
 	private void attack() {
 		// 攻撃
-		this.state.player.attack(this.state.target);
+		this.state.player.attack();
 	}
 
 	private void equipWeapon() throws SlickException {

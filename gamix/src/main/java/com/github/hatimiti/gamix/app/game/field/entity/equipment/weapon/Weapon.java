@@ -4,7 +4,6 @@ import org.newdawn.slick.Graphics;
 import org.newdawn.slick.geom.Point;
 import org.newdawn.slick.geom.Shape;
 
-import com.github.hatimiti.gamix.app.game.field.entity.Entity;
 import com.github.hatimiti.gamix.app.game.field.entity.EntityContainer;
 import com.github.hatimiti.gamix.app.game.field.entity.character.Character;
 import com.github.hatimiti.gamix.app.game.field.entity.equipment.BaseEquipment;
@@ -86,7 +85,7 @@ public abstract class Weapon
 	}
 
 	@Override
-	public void attack(Entity target) {
+	public void attack() {
 		this.nowDelay = 0;
 		this.nowMotion = 0;
 		this.attackState = AttackState.ATTACK;

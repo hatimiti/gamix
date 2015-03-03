@@ -1,7 +1,5 @@
 package com.github.hatimiti.gamix.app.game.field.entity.support.attack;
 
-import com.github.hatimiti.gamix.app.game.field.entity.Entity;
-
 /**
  *
  * @author hatimiti
@@ -9,7 +7,7 @@ import com.github.hatimiti.gamix.app.game.field.entity.Entity;
  */
 public interface Attackable {
 
-	public void attack(Entity target);
+	public void attack();
 	public AttackState getAttackState();
 	public boolean isAttacking();
 
