@@ -9,6 +9,7 @@ import org.newdawn.slick.util.ResourceLoader;
 import com.github.hatimiti.gamix.app.game.field.BattleState;
 import com.github.hatimiti.gamix.app.game.load.LoadState;
 import com.github.hatimiti.gamix.app.game.menu.MenuState;
+import com.github.hatimiti.gamix.app.game.server.ServerState;
 import com.github.hatimiti.gamix.app.support.GameSceneState;
 import com.github.hatimiti.gamix.base.gui.twl.TWLStateBasedGame;
 
@@ -26,7 +27,7 @@ public class GamePanel extends TWLStateBasedGame {
 		this.addState(new LoadState());
 		this.addState(new MenuState());
 		this.addState(new BattleState());
-//		this.addState(new ServerState());
+		this.addState(new ServerState());
 	}
 
 	@Override
