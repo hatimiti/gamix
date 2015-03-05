@@ -16,14 +16,14 @@ import com.github.hatimiti.gamix.app.game.field.entity.map.support.MapId;
 import com.github.hatimiti.gamix.app.game.field.network.exchange.json.entity.ExchangeEntityClientJson;
 import com.github.hatimiti.gamix.app.game.field.network.exchange.json.entity.ExchangeEntityServerJson;
 import com.github.hatimiti.gamix.app.game.field.type.entity.EntityId;
-import com.github.hatimiti.gamix.base.network.JsonDatagramHandler;
+import com.github.hatimiti.gamix.base.network.JsonHandler;
 
 /**
  * @author hatimiti
  *
  */
 public class EntityServerHandler
-		extends JsonDatagramHandler<ExchangeEntityClientJson> {
+		extends JsonHandler<ExchangeEntityClientJson, DatagramPacket> {
 
 	protected EntityContainer container;
 
@@ -80,6 +80,11 @@ public class EntityServerHandler
 	@Override
 	protected Class<ExchangeEntityClientJson> getExchangeClass() {
 		return ExchangeEntityClientJson.class;
+	}
+
+	@Override
+	protected String getContent(DatagramPacket packet) {
+		return packet.content().toString(CharsetUtil.UTF_8);
 	}
 
 }

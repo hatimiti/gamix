@@ -2,6 +2,7 @@ package com.github.hatimiti.gamix.app.game.field.network.handler;
 
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.socket.DatagramPacket;
+import io.netty.util.CharsetUtil;
 
 import org.newdawn.slick.SlickException;
 
@@ -12,14 +13,14 @@ import com.github.hatimiti.gamix.app.game.field.entity.map.support.MapId;
 import com.github.hatimiti.gamix.app.game.field.network.exchange.entity.ExchangePlayer;
 import com.github.hatimiti.gamix.app.game.field.network.exchange.json.entity.ExchangeEntityServerJson;
 import com.github.hatimiti.gamix.app.game.field.type.entity.EntityId;
-import com.github.hatimiti.gamix.base.network.JsonDatagramHandler;
+import com.github.hatimiti.gamix.base.network.JsonHandler;
 
 /**
  * @author hatimiti
  *
  */
 public class EntityClientHandler
-		extends JsonDatagramHandler<ExchangeEntityServerJson> {
+		extends JsonHandler<ExchangeEntityServerJson, DatagramPacket> {
 
 	public EntityClientHandler() {
 	}
@@ -66,6 +67,11 @@ public class EntityClientHandler
 	@Override
 	protected Class<ExchangeEntityServerJson> getExchangeClass() {
 		return ExchangeEntityServerJson.class;
+	}
+
+	@Override
+	protected String getContent(DatagramPacket packet) {
+		return packet.content().toString(CharsetUtil.UTF_8);
 	}
 
 }

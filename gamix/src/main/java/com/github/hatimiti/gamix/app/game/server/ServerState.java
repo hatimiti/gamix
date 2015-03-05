@@ -6,11 +6,11 @@ import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.StateBasedGame;
 
 import com.github.hatimiti.gamix.app.game.field.entity.EntityContainer;
-import com.github.hatimiti.gamix.app.game.field.network.server.ChatServer;
 import com.github.hatimiti.gamix.app.game.field.network.server.EntityServer;
 import com.github.hatimiti.gamix.app.support.GameSceneState;
 import com.github.hatimiti.gamix.app.util.ConstProperty;
 import com.github.hatimiti.gamix.base.BaseGameState;
+import com.github.hatimiti.gamix.base.network.chat.ChatServer;
 
 
 public class ServerState extends BaseGameState {

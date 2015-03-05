@@ -25,17 +25,17 @@ public class NettyServerSample {
 	static final int PORT = 9090;
 
 	public static void main(String[] args) throws Exception {
-//		SelfSignedCertificate ssc = new SelfSignedCertificate();
-//		SslContext sslCtx = SslContext.newServerContext(ssc.certificate(), ssc.privateKey());
+		//		SelfSignedCertificate ssc = new SelfSignedCertificate();
+		//		SslContext sslCtx = SslContext.newServerContext(ssc.certificate(), ssc.privateKey());
 
 		EventLoopGroup bossGroup = new NioEventLoopGroup(1);
 		EventLoopGroup workerGroup = new NioEventLoopGroup();
 		try {
 			ServerBootstrap b = new ServerBootstrap();
 			b.group(bossGroup, workerGroup)
-				.channel(NioServerSocketChannel.class)
-				.handler(new LoggingHandler(LogLevel.INFO))
-				.childHandler(new SecureChatServerInitializer());
+			.channel(NioServerSocketChannel.class)
+			.handler(new LoggingHandler(LogLevel.INFO))
+			.childHandler(new SecureChatServerInitializer());
 
 			b.bind(PORT).sync().channel().closeFuture().sync();
 		} finally {
@@ -69,6 +69,10 @@ class SecureChatServerInitializer extends ChannelInitializer<SocketChannel> {
 class SecureChatServerHandler extends SimpleChannelInboundHandler<String> {
 
 	static final ChannelGroup channels = new DefaultChannelGroup(GlobalEventExecutor.INSTANCE);
+
+	public void channelActive(final ChannelHandlerContext ctx) {
+		channels.add(ctx.channel());
+	}
 
 	@Override
 	public void messageReceived(ChannelHandlerContext ctx, String msg) throws Exception {

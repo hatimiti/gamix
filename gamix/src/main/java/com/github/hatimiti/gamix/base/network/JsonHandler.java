@@ -2,8 +2,6 @@ package com.github.hatimiti.gamix.base.network;
 
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
-import io.netty.channel.socket.DatagramPacket;
-import io.netty.util.CharsetUtil;
 import net.arnx.jsonic.JSON;
 import net.arnx.jsonic.JSONException;
 
@@ -14,14 +12,15 @@ import com.github.hatimiti.gamix.base.util.Strings;
  * @author hatimiti
  *
  */
-public abstract class JsonDatagramHandler<J extends BaseExchangeJson>
-		extends SimpleChannelInboundHandler<DatagramPacket> {
+public abstract class JsonHandler<J extends BaseExchangeJson, P>
+		extends SimpleChannelInboundHandler<P> {
 
-	public void messageReceived(
+	@Override
+	public final void messageReceived(
 			final ChannelHandlerContext ctx,
-			final DatagramPacket packet) {
+			final P packet) {
 
-		String content = packet.content().toString(CharsetUtil.UTF_8);
+		String content = getContent(packet);
 
 		if (Strings.isNullOrEmpty(content)) {
 			return;
@@ -41,6 +40,7 @@ public abstract class JsonDatagramHandler<J extends BaseExchangeJson>
 		execute(jsonEntity, ctx, packet);
 	}
 
-	protected abstract void execute(J json, ChannelHandlerContext ctx, DatagramPacket packet);
+	protected abstract void execute(J json, ChannelHandlerContext ctx, P packet);
 	protected abstract Class<J> getExchangeClass();
+	protected abstract String getContent(P packet);
 }

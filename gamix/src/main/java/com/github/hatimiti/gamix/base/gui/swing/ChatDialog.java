@@ -1,16 +1,6 @@
 package com.github.hatimiti.gamix.base.gui.swing;
 
 
-import io.netty.bootstrap.Bootstrap;
-import io.netty.buffer.Unpooled;
-import io.netty.channel.Channel;
-import io.netty.channel.ChannelOption;
-import io.netty.channel.EventLoopGroup;
-import io.netty.channel.nio.NioEventLoopGroup;
-import io.netty.channel.socket.DatagramPacket;
-import io.netty.channel.socket.nio.NioDatagramChannel;
-import io.netty.util.CharsetUtil;
-
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
@@ -33,12 +23,10 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import javax.swing.JTextPane;
 
-import net.arnx.jsonic.JSON;
-
+import com.github.hatimiti.gamix.app.util.ConstProperty;
 import com.github.hatimiti.gamix.base.gui.swing.support.WindowAdapter;
 import com.github.hatimiti.gamix.base.gui.swing.support.WindowMouseDraggableListener;
-import com.github.hatimiti.gamix.base.network.exchange.json.chat.ExchangeChatMessageJson;
-import com.github.hatimiti.gamix.base.network.handler.ChatMessageClientHandler;
+import com.github.hatimiti.gamix.base.network.chat.ChatClient;
 import com.github.hatimiti.gamix.base.util.Strings;
 
 public class ChatDialog extends JDialog {
@@ -48,7 +36,6 @@ public class ChatDialog extends JDialog {
 	private final ChatPanel panel;
 	private final ChatTextArea textArea;
 	private final ChatTextField textField;
-	private ChatClient chatReceiver;
 
 	private BufferedImage image;
 
@@ -94,13 +81,6 @@ public class ChatDialog extends JDialog {
 		g2D.drawImage(this.image, af, this);
 	}
 
-	public void start(
-			final InetSocketAddress serverInetAddress,
-			final int updateInterval) {
-		this.chatReceiver = new ChatClient(serverInetAddress, updateInterval, this);
-		this.chatReceiver.start();
-	}
-
 	protected void initDialog() {
 		setBounds(300, 300, 800, 200);
 		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
@@ -115,6 +95,10 @@ public class ChatDialog extends JDialog {
 	@Override
 	public void setVisible(final boolean isVisible) {
 		if (isVisible) {
+			new Thread(new ChatClient(new InetSocketAddress(
+					ConstProperty.getInstance().getString("network.server.ip"),
+					ConstProperty.getInstance().getInt("network.server.port.chat")))).start();
+			// false のときCHATクローズ処理が必要
 		}
 		super.setVisible(isVisible);
 	}
@@ -279,68 +263,6 @@ public class ChatDialog extends JDialog {
 
 		@Override
 		public void keyReleased(final KeyEvent e) {
-		}
-	}
-
-	private static class ChatClient implements Runnable {
-
-		private final InetSocketAddress serverAddress;
-		private final int updateInterval;
-		private final ChatDialog chatDialog;
-
-		public ChatClient(
-				final InetSocketAddress serverAddress,
-				final int updateInterval,
-				final ChatDialog chatDialog) {
-
-			this.chatDialog = chatDialog;
-			this.updateInterval = updateInterval;
-			this.serverAddress = serverAddress;
-		}
-
-		public void start() {
-			new Thread(this).start();
-		}
-
-		@Override
-		public void run() {
-
-			while (true) {
-
-				try {
-					Thread.sleep(this.updateInterval);
-				} catch (InterruptedException e1) {
-				}
-
-				EventLoopGroup group = new NioEventLoopGroup();
-				try {
-					Bootstrap b = new Bootstrap();
-					b.group(group)
-						.channel(NioDatagramChannel.class)
-						.option(ChannelOption.SO_BROADCAST, false)
-						.handler(new ChatMessageClientHandler(this.chatDialog));
-
-					Channel ch = b.bind(0).sync().channel();
-
-					ExchangeChatMessageJson json = new ExchangeChatMessageJson();
-					json.message = this.chatDialog.extractEstablishedText();
-
-					ch.write(new DatagramPacket(
-							Unpooled.copiedBuffer(JSON.encode(json), CharsetUtil.UTF_8),
-							this.serverAddress)).sync();
-
-					ch.closeFuture().await(this.updateInterval);
-//					if (!ch.closeFuture().await(5000)) {
-//						System.err.println("QOTM request timed out.");
-//					}
-
-				} catch (InterruptedException e) {
-					throw new RuntimeException(e);
-				} finally {
-					group.shutdownGracefully();
-				}
-			}
-
 		}
 	}
 
