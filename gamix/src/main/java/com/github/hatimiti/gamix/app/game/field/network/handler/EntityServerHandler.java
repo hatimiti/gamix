@@ -82,9 +82,4 @@ public class EntityServerHandler
 		return ExchangeEntityClientJson.class;
 	}
 
-	@Override
-	protected void channelRead0(ChannelHandlerContext ctx, DatagramPacket msg)
-			throws Exception {
-		
-	}
 }

@@ -47,11 +47,4 @@ public class ChatMessageServerHandler
 		return ExchangeChatMessageJson.class;
 	}
 
-	@Override
-	protected void channelRead0(ChannelHandlerContext ctx, DatagramPacket msg)
-			throws Exception {
-		// TODO 自動生成されたメソッド・スタブ
-		
-	}
-
 }

@@ -65,10 +65,10 @@ public class BattleState
 		this.nowPoint = new MapTilePoint(0, 0);
 
 		this.player = new Player(101, new Point(300, 500));
-		this.player.addDamageListener(guiManager);
+		this.player.addDamageListener(this.guiManager);
 
 		AutoCharacter target = new AutoCharacter(33, new AutoStopMover(), new Point(300, 450));
-		target.addDamageListener(guiManager);
+		target.addDamageListener(this.guiManager);
 
 		this.entityContainer.addTo(getNowTile(), this.map.getTileIn(this.nowPoint));
 		this.entityContainer.addTo(getNowTile(), this.player);
@@ -133,7 +133,7 @@ public class BattleState
 
 		this.guiManager.update(gc, game, paramInt);
 		this.inputHelper.input(gc);
-		
+
 		moveMapTile();
 
 		EntityList entities
@@ -150,7 +150,7 @@ public class BattleState
 			this.entityContainer.addTo(getNowTile(), this.map.getTileIn(this.nowPoint));
 			this.entityContainer.addTo(getNowTile(), this.player);
 			AutoCharacter ac = new AutoCharacter(111, new AutoApproachMover(), new Point(300, 450));
-			ac.addDamageListener(guiManager);
+			ac.addDamageListener(this.guiManager);
 			this.entityContainer.addTo(getNowTile(), ac);
 			this.player.setPoint(new Point(650, 400));
 		}
