@@ -69,11 +69,12 @@ check << {
 	outDir.mkdirs()
 	ant.taskdef(name: 'cpd', classname: 'net.sourceforge.pmd.cpd.CPDTask',
 		classpath: configurations.pmd.asPath)
-	ant.cpd(minimumTokenCount: '30', format: 'xml',
+	ant.cpd(minimumTokenCount: '50', format: 'xml',
 		outputFile: new File(outDir, 'cpd.xml'))
 	{
 		fileset(dir: 'src/main/java') {
 			include(name: '**/*.java')
+			exclude(name: '**/*Sample.java')
 		}
 	}
 }

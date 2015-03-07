@@ -126,24 +126,22 @@ public class LiveStatus implements Liveable {
 		if (!isNearlyDead()) {
 			return;
 		}
-		if (5 <= ++this.nowDelay) {
-			this.nowDelay = 0;
-			if (3 <= ++this.nowMotion) {
-				this.nowMotion = 0;
-				this.liveState = LiveState.DEAD;
-			}
-		}
+		motion(5, 3, LiveState.DEAD);
 	}
 
 	protected void updateDamaging() {
 		if (!isDamaging()) {
 			return;
 		}
-		if (8 <= ++this.nowDelay) {
+		motion(8, 3, LiveState.NORMAL);
+	}
+	
+	private void motion(int deley1, int deley2, LiveState state) {
+		if (deley1 <= ++this.nowDelay) {
 			this.nowDelay = 0;
-			if (3 <= ++this.nowMotion) {
+			if (deley2 <= ++this.nowMotion) {
 				this.nowMotion = 0;
-				this.liveState = LiveState.NORMAL;
+				this.liveState = state;
 			}
 		}
 	}
