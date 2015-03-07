@@ -89,7 +89,8 @@ class BattleInputHelper implements InputHelpable {
 
 	private void viewChatDialog() {
 		// チャットウィンドウ表示／非表示
-		this.state.guiManager.chatDialog.setVisible(!this.state.guiManager.chatDialog.isVisible());
+		this.state.guiManager.chatDialog.setVisible(
+				!this.state.guiManager.chatDialog.isVisible());
 	}
 
 	private void attack() {

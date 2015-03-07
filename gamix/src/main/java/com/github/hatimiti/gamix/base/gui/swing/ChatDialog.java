@@ -23,36 +23,37 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import javax.swing.JTextPane;
 
-import com.github.hatimiti.gamix.app.util.ConstProperty;
 import com.github.hatimiti.gamix.base.gui.swing.support.WindowAdapter;
 import com.github.hatimiti.gamix.base.gui.swing.support.WindowMouseDraggableListener;
 import com.github.hatimiti.gamix.base.network.chat.ChatClient;
+import com.github.hatimiti.gamix.base.network.chat.ChatMessageSender;
 import com.github.hatimiti.gamix.base.util.Strings;
 
-public class ChatDialog extends JDialog {
+public class ChatDialog extends JDialog
+		implements ChatMessageSender {
 
 	protected static final Color BACK_GROUND_COLOR = new Color(0x00000000, true);//Color.WHITE;
 
-	private final ChatPanel panel;
-	private final ChatTextArea textArea;
-	private final ChatTextField textField;
+	private ChatPanel panel;
+	private ChatClient client;
+	private InetSocketAddress serverAddress;
 
 	private BufferedImage image;
 
-	public ChatDialog() {
+	public ChatDialog(InetSocketAddress serverAddress) {
+		
 		initDialog();
-		this.textArea = new ChatTextArea();
-		this.textField = new ChatTextField();
-		this.panel = new ChatPanel(this.textArea, this.textField);
+		this.panel = new ChatPanel();
+		this.serverAddress = serverAddress;
 
 		this.addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowActivated(final WindowEvent e) {
-				ChatDialog.this.textArea.requestFocus(false);
-				ChatDialog.this.textField.requestFocusInWindow();
+				ChatDialog.this.panel.textArea.requestFocus(false);
+				ChatDialog.this.panel.textField.requestFocusInWindow();
 			}
 		});
-
+		
 		try {
 			this.image = ImageIO.read(getClass().getResource("/syber1.png"));
 		} catch (IOException e1) {
@@ -62,7 +63,7 @@ public class ChatDialog extends JDialog {
 		getContentPane().add(this.panel);
 		setVisible(false);
 	}
-
+	
 	@Override
 	public void paint(final Graphics g) {
 		Graphics2D g2D = (Graphics2D) g;
@@ -94,37 +95,19 @@ public class ChatDialog extends JDialog {
 
 	@Override
 	public void setVisible(final boolean isVisible) {
-		if (isVisible) {
-			new Thread(new ChatClient(new InetSocketAddress(
-					ConstProperty.getInstance().getString("network.server.ip"),
-					ConstProperty.getInstance().getInt("network.server.port.chat")))).start();
-			// false のときCHATクローズ処理が必要
+		if (!this.isVisible() && isVisible) {
+			this.client = new ChatClient(serverAddress, this);
+			client.start();
 		}
 		super.setVisible(isVisible);
 	}
 
 	/**
-	 * チャットテキストエリアにメッセージを設定する
-	 */
-	public synchronized void setText(final String message) {
-		this.textArea.setText(message);
-	}
-
-	/**
 	 * チャットダイアログでエンターキーで確定した文字列を取得する。
 	 */
-	public String getEstablishedText() {
-		return this.textField.getEstablishedString();
-	}
-
-	/**
-	 * チャットダイアログでエンターキーで確定した文字列を取得する。
-	 * 抽出後、保持している文字列はクリアする。
-	 */
-	private synchronized String extractEstablishedText() {
-		String text = this.textField.getEstablishedString();
-		this.textField.setEstablishedString("");
-		return text;
+	@Override
+	public String notifyMessage() {
+		return this.panel.textField.establish();
 	}
 
 	/**
@@ -134,7 +117,16 @@ public class ChatDialog extends JDialog {
 	 */
 	protected class ChatPanel extends JPanel {
 
-		public ChatPanel(final ChatTextArea ta, final ChatTextField tf) {
+		private final ChatTextArea textArea;
+		private final ChatTextField textField;
+		
+		public ChatPanel() {
+			this.textArea = new ChatTextArea();
+			this.textField = new ChatTextField();
+			init();
+		}
+		
+		protected void init() {
 
 			setBackground(BACK_GROUND_COLOR);
 			setForeground(BACK_GROUND_COLOR);
@@ -152,19 +144,19 @@ public class ChatDialog extends JDialog {
 			GroupLayout.SequentialGroup hGroup = layout.createSequentialGroup();
 
 			hGroup.addGroup(layout.createParallelGroup()
-					.addComponent(ta).addComponent(tf));
+					.addComponent(textArea).addComponent(textField));
 			// レイアウト・マネージャに登録
 			layout.setHorizontalGroup(hGroup);
 
 			// 垂直方向のグループ
 			GroupLayout.SequentialGroup vGroup = layout.createSequentialGroup();
-			vGroup.addGroup(layout.createParallelGroup().addComponent(ta));
-			vGroup.addGroup(layout.createParallelGroup().addComponent(tf));
+			vGroup.addGroup(layout.createParallelGroup().addComponent(textArea));
+			vGroup.addGroup(layout.createParallelGroup().addComponent(textField));
 
 			// レイアウト・マネージャに登録
 			layout.setVerticalGroup(vGroup);
 		}
-
+		
 	}
 
 	/**
@@ -180,7 +172,7 @@ public class ChatDialog extends JDialog {
 			super(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
 
 			this.textPane = new JTextPane();
-//						this.textPane.setBounds(50, 50, 300, 100);
+//			this.textPane.setBounds(50, 50, 300, 100);
 			this.textPane.setPreferredSize(new Dimension(300, 100));
 			this.textPane.setMinimumSize(new Dimension(300, 100));
 			this.textPane.setMaximumSize(new Dimension(300, 100));
@@ -191,8 +183,8 @@ public class ChatDialog extends JDialog {
 
 		public void setText(final String text) {
 			this.textPane.setText(text);
-			int position = this.textPane.getDocument().getLength();
-			this.textPane.setCaretPosition(position);
+			this.textPane.setCaretPosition(
+					this.textPane.getDocument().getLength());
 		}
 	}
 
@@ -203,67 +195,53 @@ public class ChatDialog extends JDialog {
 	 */
 	protected class ChatTextField extends JTextField {
 
-		protected String establishedString = "";
-
 		public ChatTextField() {
+			init();
+			
+			/*
+			 * エンターキー押下時の文字列確定用リスナ
+			 */
+			this.addKeyListener(new KeyListener() {
+				@Override
+				public void keyPressed(KeyEvent e) {
+					if (!hasPusshedEnterKey(e)) {
+						return;
+					}
+					
+					ChatDialog.this.client.startThread();
+					
+					if (Strings.isNullOrEmpty(getText())) {
+						ChatDialog.this.setVisible(false);
+						return;
+					}
+				}
+				
+				private boolean hasPusshedEnterKey(KeyEvent e) {
+					return KeyEvent.VK_ENTER == e.getKeyCode();
+				}
+				
+				@Override
+				public void keyTyped(KeyEvent e) {
+				}
+				@Override
+				public void keyReleased(KeyEvent e) {
+				}
+			});
+		}
+
+		private void init() {
 			setColumns(50);
 			setPreferredSize(new Dimension(500, 20));
 			setMinimumSize(new Dimension(500, 20));
 			setMaximumSize(new Dimension(500, 20));
-			new ToEstablishKeyListener(this);
 		}
 
-		public String getEstablishedString() {
-			return this.establishedString;
-		}
-
-		public void setEstablishedString(final String establishedString) {
-			this.establishedString = establishedString;
-		}
-
-		public void establishString() {
-			this.establishedString = this.getText();
+		public String establish() {
+			String establishedText = this.getText();
 			this.setText("");
+			return establishedText;
 		}
-
-	}
-
-	/**
-	 * エンターキー押下時の文字列確定用リスナ
-	 * @author hatimiti
-	 *
-	 */
-	protected class ToEstablishKeyListener implements KeyListener {
-
-		protected ChatTextField textField;
-
-		public ToEstablishKeyListener(final ChatTextField textField) {
-			this.textField = textField;
-			this.textField.addKeyListener(this);
-		}
-
-		@Override
-		public void keyTyped(final KeyEvent e) {
-		}
-
-		@Override
-		public void keyPressed(final KeyEvent e) {
-
-			if (KeyEvent.VK_ENTER != e.getKeyCode()) {
-				return;
-			}
-
-			if (Strings.isNullOrEmpty(this.textField.getText())) {
-				ChatDialog.this.setVisible(false);
-				return;
-			}
-
-			this.textField.establishString();
-		}
-
-		@Override
-		public void keyReleased(final KeyEvent e) {
-		}
+		
 	}
 
 }

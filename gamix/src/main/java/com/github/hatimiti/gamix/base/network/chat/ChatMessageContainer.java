@@ -9,7 +9,7 @@ public class ChatMessageContainer {
 
 	protected Map<String, SimpleContainer> simples = new HashMap<>();
 	
-	public ChatMessageContainer getInstance(ChatMessageType type) {
+	public static ChatMessageContainer getInstance(ChatMessageType type) {
 		ChatMessageContainer c = containerMap.get(type);
 		if (c == null) {
 			c = new ChatMessageContainer();

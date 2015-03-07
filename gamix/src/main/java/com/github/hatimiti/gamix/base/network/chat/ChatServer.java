@@ -18,7 +18,7 @@ public class ChatServer implements Runnable {
 
 	@Override
 	public void run() {
-		System.out.println("ChatサーバーUDP開始");
+		System.out.println("ChatサーバーTCP開始");
 		EventLoopGroup bossGroup = new NioEventLoopGroup(1);
 		EventLoopGroup workerGroup = new NioEventLoopGroup();
 		try {
@@ -36,6 +36,6 @@ public class ChatServer implements Runnable {
 			bossGroup.shutdownGracefully();
 			workerGroup.shutdownGracefully();
 		}
-		System.out.println("ChatサーバーUDP終了");
+		System.out.println("ChatサーバーTCP終了");
 	}
 }

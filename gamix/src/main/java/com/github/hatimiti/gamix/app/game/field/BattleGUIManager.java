@@ -1,5 +1,7 @@
 package com.github.hatimiti.gamix.app.game.field;
 
+import java.net.InetSocketAddress;
+
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
@@ -14,6 +16,7 @@ import com.github.hatimiti.gamix.app.game.field.gui.twl.HPBar;
 import com.github.hatimiti.gamix.app.game.field.gui.twl.StatusButton;
 import com.github.hatimiti.gamix.app.game.field.gui.twl.TextFrame;
 import com.github.hatimiti.gamix.app.game.field.gui.twl.ability.AbilityDialog;
+import com.github.hatimiti.gamix.app.util.ConstProperty;
 import com.github.hatimiti.gamix.base.gui.swing.ChatDialog;
 import com.github.hatimiti.gamix.base.gui.twl.RootPane;
 
@@ -44,7 +47,9 @@ class BattleGUIManager implements DamageListener {
 		this.playerHPBar.update(this.state.player.getStatus());
 		this.targetHPBar = new HPBar();
 
-		this.chatDialog = new ChatDialog();
+		this.chatDialog = new ChatDialog(new InetSocketAddress(
+				ConstProperty.getInstance().getString("network.server.ip"),
+				ConstProperty.getInstance().getInt("network.server.port.chat")));
 		this.abilityDialog = new AbilityDialog();
 		this.abilityDialog.addListener(this.state);
 

@@ -3,7 +3,7 @@ package com.github.hatimiti.gamix.base.gui.swing.support;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 
-public class WindowAdapter implements WindowListener {
+public abstract class WindowAdapter implements WindowListener {
 	@Override
 	public void windowActivated(final WindowEvent e) {
 	}

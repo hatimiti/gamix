@@ -1,9 +1,11 @@
 package com.github.hatimiti.gamix.base.network.chat;
 
+import io.netty.channel.Channel;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.group.ChannelGroup;
 import io.netty.channel.group.DefaultChannelGroup;
 import io.netty.util.concurrent.GlobalEventExecutor;
+import lombok.val;
 
 import com.github.hatimiti.gamix.base.network.JsonHandler;
 import com.github.hatimiti.gamix.base.network.exchange.json.chat.ExchangeChatMessageJson;
@@ -20,28 +22,24 @@ class ChatServerHandler
 		channels.add(ctx.channel());
 	}
 	
-//	@Override
-//	public void messageReceived(ChannelHandlerContext ctx, String msg) throws Exception {
-//		// Send the received message to all channels but the current one.
-//		System.out.println("recieved message is [" + msg + "]");
-//		for (Channel c: channels) {
-//			if (c != ctx.channel()) {
-//				c.writeAndFlush("[" + ctx.channel().remoteAddress() + "] " + msg + '\n');
-//			} else {
-//				c.writeAndFlush("[you] " + msg + '\n');
-//			}
-//		}
-//
-//		// Close the connection if the client has sent 'bye'.
-//		if ("bye".equals(msg.toLowerCase())) {
-//			ctx.close();
-//		}
-//	}
-
 	@Override
 	protected void execute(ExchangeChatMessageJson json,
 			ChannelHandlerContext ctx, String packet) {
-		// TODO 自動生成されたメソッド・スタブ
+		
+		System.out.println("packet=" + packet);
+		
+		val container = ChatMessageContainer.getInstance(ChatMessageType.PUBLIC);
+//		container.addMessageTo(key, message);
+		
+		for (Channel c: channels) {
+			if (c != ctx.channel()) {
+				// Sends message to other members
+				c.writeAndFlush("[" + ctx.channel().remoteAddress() + "] " + packet + '\n');
+			} else {
+				// Sends message to myself
+				c.writeAndFlush("[you] " + packet + '\n');
+			}
+		}
 		
 	}
 

@@ -21,7 +21,7 @@ import java.io.InputStreamReader;
 
 public class NettyClientSample {
 	static final String HOST = "127.0.0.1";
-	static final int PORT = 9090;
+	static final int PORT = 28080;
 
 	public static void main(String[] args) throws Exception {
 
