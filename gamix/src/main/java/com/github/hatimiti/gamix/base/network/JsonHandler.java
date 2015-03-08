@@ -5,6 +5,8 @@ import io.netty.channel.SimpleChannelInboundHandler;
 import net.arnx.jsonic.JSON;
 import net.arnx.jsonic.JSONException;
 
+import org.slf4j.Logger;
+
 import com.github.hatimiti.gamix.base.network.exchange.BaseExchangeJson;
 import com.github.hatimiti.gamix.base.util._Util;
 
@@ -15,6 +17,8 @@ import com.github.hatimiti.gamix.base.util._Util;
 public abstract class JsonHandler<J extends BaseExchangeJson, P>
 		extends SimpleChannelInboundHandler<P> {
 
+	protected static final Logger LOG = _Util.getLogger();
+	
 	@Override
 	public final void messageReceived(
 			final ChannelHandlerContext ctx,
@@ -30,7 +34,7 @@ public abstract class JsonHandler<J extends BaseExchangeJson, P>
 		try {
 			jsonEntity = JSON.decode(content, getExchangeClass());
 		} catch (JSONException e) {
-			e.printStackTrace();
+			LOG.warn("", e);
 			return;
 		}
 		if (jsonEntity == null || !jsonEntity.valid()) {

@@ -7,9 +7,15 @@ import io.netty.channel.socket.nio.NioServerSocketChannel;
 import io.netty.handler.logging.LogLevel;
 import io.netty.handler.logging.LoggingHandler;
 
+import org.slf4j.Logger;
+
+import com.github.hatimiti.gamix.base.util._Util;
+
 
 public class ChatServer implements Runnable {
 
+	protected static final Logger LOG = _Util.getLogger();
+	
 	private final int port;
 
 	public ChatServer(final int port) {
@@ -18,7 +24,7 @@ public class ChatServer implements Runnable {
 
 	@Override
 	public void run() {
-		System.out.println("ChatサーバーTCP開始");
+		LOG.info("Starting the server of chat. listening port {}.", this.port);
 		EventLoopGroup bossGroup = new NioEventLoopGroup(1);
 		EventLoopGroup workerGroup = new NioEventLoopGroup();
 		try {
@@ -36,6 +42,6 @@ public class ChatServer implements Runnable {
 			bossGroup.shutdownGracefully();
 			workerGroup.shutdownGracefully();
 		}
-		System.out.println("ChatサーバーTCP終了");
+		LOG.info("Stop the server of chat.");
 	}
 }
