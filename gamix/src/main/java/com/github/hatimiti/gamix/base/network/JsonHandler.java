@@ -6,7 +6,7 @@ import net.arnx.jsonic.JSON;
 import net.arnx.jsonic.JSONException;
 
 import com.github.hatimiti.gamix.base.network.exchange.BaseExchangeJson;
-import com.github.hatimiti.gamix.base.util.Strings;
+import com.github.hatimiti.gamix.base.util._Util;
 
 /**
  * @author hatimiti
@@ -22,7 +22,7 @@ public abstract class JsonHandler<J extends BaseExchangeJson, P>
 
 		String content = getContent(packet);
 
-		if (Strings.isNullOrEmpty(content)) {
+		if (_Util.isNullOrEmpty(content)) {
 			return;
 		}
 

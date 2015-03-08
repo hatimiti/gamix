@@ -14,7 +14,6 @@ import net.arnx.jsonic.JSON;
 import org.slf4j.Logger;
 
 import com.github.hatimiti.gamix.base.network.exchange.json.chat.ExchangeChatMessageJson;
-import com.github.hatimiti.gamix.base.util.Strings;
 import com.github.hatimiti.gamix.base.util._Util;
 
 
@@ -67,7 +66,7 @@ public class ChatClient implements Runnable {
 					message = this.messageSender.notifyMessage();
 				}
 				
-				if (Strings.isNullOrEmpty(message)) {
+				if (_Util.isNullOrEmpty(message)) {
 					ch.closeFuture().sync();
 					return;
 				}

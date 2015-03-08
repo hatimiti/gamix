@@ -27,7 +27,7 @@ import com.github.hatimiti.gamix.base.gui.swing.support.WindowAdapter;
 import com.github.hatimiti.gamix.base.gui.swing.support.WindowMouseDraggableListener;
 import com.github.hatimiti.gamix.base.network.chat.ChatClient;
 import com.github.hatimiti.gamix.base.network.chat.ChatMessageSender;
-import com.github.hatimiti.gamix.base.util.Strings;
+import com.github.hatimiti.gamix.base.util._Util;
 
 public class ChatDialog extends JDialog
 		implements ChatMessageSender {
@@ -210,7 +210,7 @@ public class ChatDialog extends JDialog
 					
 					ChatDialog.this.client.resume();
 					
-					if (Strings.isNullOrEmpty(getText())) {
+					if (_Util.isNullOrEmpty(getText())) {
 						ChatDialog.this.setVisible(false);
 						return;
 					}

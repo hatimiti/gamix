@@ -11,7 +11,7 @@ import org.newdawn.slick.geom.Shape;
 
 import com.github.hatimiti.gamix.app.game.field.entity.Entity;
 import com.github.hatimiti.gamix.app.game.field.type.collection.EntityList;
-import com.github.hatimiti.gamix.base.util._Collections;
+import com.github.hatimiti.gamix.base.util._Util;
 
 
 public class CollisionHandler {
@@ -54,7 +54,7 @@ public class CollisionHandler {
 		}
 
 		List<Entity> freeEntities = this.preCollisionEntities.parallelStream()
-			.filter(p -> _Collections.contains(nowCollisionEntities, p))
+			.filter(p -> _Util.contains(nowCollisionEntities, p))
 			.collect(Collectors.toList());
 		
 		freeEntities.parallelStream()
