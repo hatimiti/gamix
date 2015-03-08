@@ -11,13 +11,17 @@ import java.net.InetSocketAddress;
 
 import net.arnx.jsonic.JSON;
 
+import org.slf4j.Logger;
+
 import com.github.hatimiti.gamix.base.network.exchange.json.chat.ExchangeChatMessageJson;
 import com.github.hatimiti.gamix.base.util.Strings;
+import com.github.hatimiti.gamix.base.util._Util;
 
 
-public class ChatClient
-		implements Runnable {
+public class ChatClient implements Runnable {
 
+	private static final Logger LOG = _Util.getLogger();
+	
 	private InetSocketAddress serverAddress;
 	private ChatMessageSender messageSender;
 
@@ -33,6 +37,10 @@ public class ChatClient
 		new Thread(this).start();
 	}
 
+	public synchronized void resume() {
+		notify();
+	}
+	
 	@Override
 	public void run() {
 
@@ -43,8 +51,14 @@ public class ChatClient
 				.channel(NioSocketChannel.class)
 				.handler(new ChatClientInitializer());
 
-			Channel ch = b.connect(this.serverAddress).sync().channel();
-			
+			Channel ch = null;
+			try {
+				ch = b.connect(this.serverAddress).sync().channel();
+			} catch (Exception e) {
+				LOG.warn("Can't connect to server: " + e.getMessage());
+				return;
+			}
+				
 			for (;;) {
 			
 				String message = null;
@@ -61,7 +75,7 @@ public class ChatClient
 				ExchangeChatMessageJson json = new ExchangeChatMessageJson();
 				json.message = message;
 				
-				// Sends the received line to the server.
+				// Sends the received message to the server.
 				ChannelFuture lastWriteFuture = ch.writeAndFlush(JSON.encode(json) + "\r\n");
 	
 				if (lastWriteFuture != null) {
@@ -70,16 +84,10 @@ public class ChatClient
 			}
 			
 		} catch (InterruptedException e) {
-			System.out.println("tetetet");
-			// TODO 自動生成された catch ブロック
-			e.printStackTrace();
+			LOG.warn("Cause Unknown: ", e);
 		} finally {
 			group.shutdownGracefully();
 		}
-	}
-
-	public synchronized void startThread() {
-		notify();
 	}
 
 }

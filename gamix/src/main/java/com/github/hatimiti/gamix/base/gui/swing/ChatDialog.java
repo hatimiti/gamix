@@ -208,7 +208,7 @@ public class ChatDialog extends JDialog
 						return;
 					}
 					
-					ChatDialog.this.client.startThread();
+					ChatDialog.this.client.resume();
 					
 					if (Strings.isNullOrEmpty(getText())) {
 						ChatDialog.this.setVisible(false);
