@@ -8,7 +8,7 @@ public class ChatMessageContainer {
 	private static Map<ChatMessageType, ChatMessageContainer> containerMap = new HashMap<>();
 
 	protected Map<String, SimpleContainer> simples = new HashMap<>();
-	
+
 	public static ChatMessageContainer getInstance(ChatMessageType type) {
 		ChatMessageContainer c = containerMap.get(type);
 		if (c == null) {
@@ -17,7 +17,7 @@ public class ChatMessageContainer {
 		}
 		return c;
 	}
-	
+
 	public synchronized void addMessageTo(String key, String message) {
 		SimpleContainer sc = this.simples.get(key);
 		if (sc == null) {
@@ -27,7 +27,7 @@ public class ChatMessageContainer {
 		sc.add(message);
 	}
 
-	public synchronized String getMessageOf(int key) {
+	public synchronized String getMessageOf(String key) {
 		SimpleContainer sc = this.simples.get(key);
 		if (sc == null) {
 			return "";

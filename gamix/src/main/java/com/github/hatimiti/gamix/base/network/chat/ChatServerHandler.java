@@ -5,7 +5,7 @@ import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.group.ChannelGroup;
 import io.netty.channel.group.DefaultChannelGroup;
 import io.netty.util.concurrent.GlobalEventExecutor;
-import lombok.val;
+import net.arnx.jsonic.JSON;
 
 import com.github.hatimiti.gamix.base.network.JsonHandler;
 import com.github.hatimiti.gamix.base.network.exchange.json.chat.ExchangeChatMessageJson;
@@ -16,31 +16,35 @@ class ChatServerHandler
 	/** 接続中のクライアント */
 	private static final ChannelGroup channels
 		= new DefaultChannelGroup(GlobalEventExecutor.INSTANCE);
-	
+
 	@Override
 	public void channelActive(final ChannelHandlerContext ctx) {
 		channels.add(ctx.channel());
 	}
-	
+
 	@Override
 	protected void execute(ExchangeChatMessageJson json,
 			ChannelHandlerContext ctx, String packet) {
-		
+
 		System.out.println("packet=" + packet);
-		
-		val container = ChatMessageContainer.getInstance(ChatMessageType.PUBLIC);
-//		container.addMessageTo(key, message);
-		
+
+		ChatMessageContainer container = ChatMessageContainer.getInstance(ChatMessageType.PUBLIC);
+		container.addMessageTo("1", getContent(packet));
+
+		ExchangeChatMessageJson response = new ExchangeChatMessageJson();
+		response.message = container.getMessageOf("1");
+
 		for (Channel c: channels) {
-			if (c != ctx.channel()) {
-				// Sends message to other members
-				c.writeAndFlush("[" + ctx.channel().remoteAddress() + "] " + packet + '\n');
-			} else {
-				// Sends message to myself
-				c.writeAndFlush("[you] " + packet + '\n');
-			}
+//			if (c != ctx.channel()) {
+//				// Sends message to other members
+//				c.writeAndFlush("[" + ctx.channel().remoteAddress() + "] " + packet + '\n');
+//			} else {
+//				// Sends message to myself
+//				c.writeAndFlush("[you] " + packet + '\n');
+//			}
+			c.writeAndFlush(JSON.encode(response) + "\r\n");
 		}
-		
+
 	}
 
 	@Override
@@ -52,7 +56,7 @@ class ChatServerHandler
 	protected String getContent(String packet) {
 		return packet;
 	}
-	
+
 	@Override
 	public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) {
 		cause.printStackTrace();
