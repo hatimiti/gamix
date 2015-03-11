@@ -7,11 +7,16 @@ import io.netty.channel.group.DefaultChannelGroup;
 import io.netty.util.concurrent.GlobalEventExecutor;
 import net.arnx.jsonic.JSON;
 
+import org.slf4j.Logger;
+
 import com.github.hatimiti.gamix.base.network.JsonHandler;
 import com.github.hatimiti.gamix.base.network.exchange.json.chat.ExchangeChatMessageJson;
+import com.github.hatimiti.gamix.base.util._Util;
 
 class ChatServerHandler
 		extends JsonHandler<ExchangeChatMessageJson, String> {
+
+	private static final Logger LOG = _Util.getLogger();
 
 	/** 接続中のクライアント */
 	private static final ChannelGroup channels
@@ -24,15 +29,17 @@ class ChatServerHandler
 
 	@Override
 	protected void execute(ExchangeChatMessageJson json,
-			ChannelHandlerContext ctx, String packet) {
+			ChannelHandlerContext ctx) {
 
-		System.out.println("packet=" + packet);
+		LOG.debug("packet = {}", json);
+
+		String respondedMessage = json.message;
 
 		ChatMessageContainer container = ChatMessageContainer.getInstance(ChatMessageType.PUBLIC);
-		container.addMessageTo("1", getContent(packet));
+		container.addMessageTo("1", respondedMessage);
 
 		ExchangeChatMessageJson response = new ExchangeChatMessageJson();
-		response.message = container.getMessageOf("1");
+		response.message = respondedMessage;
 
 		for (Channel c: channels) {
 //			if (c != ctx.channel()) {

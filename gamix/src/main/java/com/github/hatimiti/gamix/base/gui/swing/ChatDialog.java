@@ -26,7 +26,9 @@ import javax.swing.JTextPane;
 import com.github.hatimiti.gamix.base.gui.swing.support.WindowAdapter;
 import com.github.hatimiti.gamix.base.gui.swing.support.WindowMouseDraggableListener;
 import com.github.hatimiti.gamix.base.network.chat.ChatClient;
+import com.github.hatimiti.gamix.base.network.chat.ChatMessageContainer;
 import com.github.hatimiti.gamix.base.network.chat.ChatMessageSender;
+import com.github.hatimiti.gamix.base.network.chat.ChatMessageType;
 import com.github.hatimiti.gamix.base.util._Util;
 
 public class ChatDialog extends JDialog
@@ -41,7 +43,7 @@ public class ChatDialog extends JDialog
 	private BufferedImage image;
 
 	public ChatDialog(InetSocketAddress serverAddress) {
-		
+
 		initDialog();
 		this.panel = new ChatPanel();
 		this.serverAddress = serverAddress;
@@ -53,7 +55,7 @@ public class ChatDialog extends JDialog
 				ChatDialog.this.panel.textField.requestFocusInWindow();
 			}
 		});
-		
+
 		try {
 			this.image = ImageIO.read(getClass().getResource("/syber1.png"));
 		} catch (IOException e1) {
@@ -63,7 +65,7 @@ public class ChatDialog extends JDialog
 		getContentPane().add(this.panel);
 		setVisible(false);
 	}
-	
+
 	@Override
 	public void paint(final Graphics g) {
 		Graphics2D g2D = (Graphics2D) g;
@@ -96,8 +98,8 @@ public class ChatDialog extends JDialog
 	@Override
 	public void setVisible(final boolean isVisible) {
 		if (!this.isVisible() && isVisible) {
-			this.client = new ChatClient(serverAddress, this);
-			client.start();
+			this.client = new ChatClient(this.serverAddress, this);
+			this.client.start();
 		}
 		super.setVisible(isVisible);
 	}
@@ -106,8 +108,14 @@ public class ChatDialog extends JDialog
 	 * チャットダイアログでエンターキーで確定した文字列を取得する。
 	 */
 	@Override
-	public String notifyMessage() {
+	public String sendMessage() {
 		return this.panel.textField.establish();
+	}
+
+	@Override
+	public void receiveMessage(String message) {
+		ChatMessageContainer cc = ChatMessageContainer.getInstance(ChatMessageType.PUBLIC);
+		this.panel.textArea.updateMessagesBy(cc.getMessageOf("1"));
 	}
 
 	/**
@@ -119,13 +127,13 @@ public class ChatDialog extends JDialog
 
 		private final ChatTextArea textArea;
 		private final ChatTextField textField;
-		
+
 		public ChatPanel() {
 			this.textArea = new ChatTextArea();
 			this.textField = new ChatTextField();
 			init();
 		}
-		
+
 		protected void init() {
 
 			setBackground(BACK_GROUND_COLOR);
@@ -156,7 +164,7 @@ public class ChatDialog extends JDialog
 			// レイアウト・マネージャに登録
 			layout.setVerticalGroup(vGroup);
 		}
-		
+
 	}
 
 	/**
@@ -181,7 +189,7 @@ public class ChatDialog extends JDialog
 			setViewportView(this.textPane);
 		}
 
-		public void setText(final String text) {
+		public void updateMessagesBy(final String text) {
 			this.textPane.setText(text);
 			this.textPane.setCaretPosition(
 					this.textPane.getDocument().getLength());
@@ -197,7 +205,7 @@ public class ChatDialog extends JDialog
 
 		public ChatTextField() {
 			init();
-			
+
 			/*
 			 * エンターキー押下時の文字列確定用リスナ
 			 */
@@ -207,19 +215,19 @@ public class ChatDialog extends JDialog
 					if (!hasPusshedEnterKey(e)) {
 						return;
 					}
-					
+
 					ChatDialog.this.client.resume();
-					
+
 					if (_Util.isNullOrEmpty(getText())) {
 						ChatDialog.this.setVisible(false);
 						return;
 					}
 				}
-				
+
 				private boolean hasPusshedEnterKey(KeyEvent e) {
 					return KeyEvent.VK_ENTER == e.getKeyCode();
 				}
-				
+
 				@Override
 				public void keyTyped(KeyEvent e) {
 				}
@@ -241,7 +249,7 @@ public class ChatDialog extends JDialog
 			this.setText("");
 			return establishedText;
 		}
-		
+
 	}
 
 }

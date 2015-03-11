@@ -12,15 +12,24 @@ import com.github.hatimiti.gamix.base.network.exchange.json.chat.ExchangeChatMes
 class ChatClientHandler
 		extends JsonHandler<ExchangeChatMessageJson, String> {
 
+	private ChatMessageSender sender;
+
+	ChatClientHandler(ChatMessageSender sender) {
+		this.sender = sender;
+	}
+
 	@Override
 	protected void execute(
 			final ExchangeChatMessageJson json,
-			final ChannelHandlerContext ctx,
-			final String packet) {
+			final ChannelHandlerContext ctx) {
 
-		// TODO メッセージをコンテナに設定
+		ChatMessageContainer cc = ChatMessageContainer.getInstance(ChatMessageType.PUBLIC);
+		cc.addMessageTo("1", json.message);
+
+		this.sender.receiveMessage(json.message);
 	}
 
+	@Override
 	public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) {
 		cause.printStackTrace();
 		ctx.close();

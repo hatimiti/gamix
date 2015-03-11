@@ -20,7 +20,7 @@ import com.github.hatimiti.gamix.base.util._Util;
 public class ChatClient implements Runnable {
 
 	private static final Logger LOG = _Util.getLogger();
-	
+
 	private InetSocketAddress serverAddress;
 	private ChatMessageSender messageSender;
 
@@ -39,7 +39,7 @@ public class ChatClient implements Runnable {
 	public synchronized void resume() {
 		notify();
 	}
-	
+
 	@Override
 	public void run() {
 
@@ -48,7 +48,7 @@ public class ChatClient implements Runnable {
 			Bootstrap b = new Bootstrap();
 			b.group(group)
 				.channel(NioSocketChannel.class)
-				.handler(new ChatClientInitializer());
+				.handler(new ChatClientInitializer(this.messageSender));
 
 			Channel ch = null;
 			try {
@@ -57,31 +57,31 @@ public class ChatClient implements Runnable {
 				LOG.warn("Can't connect to server: " + e.getMessage());
 				return;
 			}
-				
+
 			for (;;) {
-			
+
 				String message = null;
 				synchronized (this) {
 					wait();
-					message = this.messageSender.notifyMessage();
+					message = this.messageSender.sendMessage();
 				}
-				
+
 				if (_Util.isNullOrEmpty(message)) {
 					ch.closeFuture().sync();
 					return;
 				}
-					
+
 				ExchangeChatMessageJson json = new ExchangeChatMessageJson();
 				json.message = message;
-				
+
 				// Sends the received message to the server.
 				ChannelFuture lastWriteFuture = ch.writeAndFlush(JSON.encode(json) + "\r\n");
-	
+
 				if (lastWriteFuture != null) {
 					lastWriteFuture.sync();
 				}
 			}
-			
+
 		} catch (InterruptedException e) {
 			LOG.warn("Cause Unknown: ", e);
 		} finally {

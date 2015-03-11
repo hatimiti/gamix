@@ -5,6 +5,7 @@
 		xsi:noNamespaceSchemaLocation="./logback.xsd">
 
 	<logger name="org.thymeleaf" level="ERROR" />
+	<logger name="io.netty.buffer" level="INFO" />
 
 	<appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
 		<prudent>true</prudent>
@@ -23,7 +24,7 @@
 		</encoder>
 	</appender>
 
-	<root level="info">
+	<root level="debug">
 		<appender-ref ref="FILE" />
 		<appender-ref ref="STDOUT" />
 	</root>

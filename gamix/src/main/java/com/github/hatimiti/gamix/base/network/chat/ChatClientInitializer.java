@@ -14,6 +14,12 @@ import io.netty.handler.codec.string.StringEncoder;
  */
 class ChatClientInitializer extends ChannelInitializer<SocketChannel> {
 
+	private ChatMessageSender sender;
+
+	ChatClientInitializer(ChatMessageSender sender) {
+		this.sender = sender;
+	}
+
 	@Override
 	public void initChannel(SocketChannel ch) throws Exception {
 		ChannelPipeline pipeline = ch.pipeline();
@@ -24,6 +30,6 @@ class ChatClientInitializer extends ChannelInitializer<SocketChannel> {
 		pipeline.addLast(new StringEncoder());
 
 		// and then business logic.
-		pipeline.addLast(new ChatClientHandler());
+		pipeline.addLast(new ChatClientHandler(this.sender));
 	}
 }

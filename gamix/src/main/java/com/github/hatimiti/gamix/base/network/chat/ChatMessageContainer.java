@@ -48,6 +48,7 @@ public class ChatMessageContainer {
 			this.messages.append(message).append(System.lineSeparator());
 		}
 
+		@Override
 		public String toString() {
 			return this.messages.toString();
 		}

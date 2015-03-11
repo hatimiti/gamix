@@ -1,13 +1,12 @@
 package com.github.hatimiti.gamix.app.game.field.network.handler;
 
-import io.netty.buffer.Unpooled;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.socket.DatagramPacket;
 import io.netty.util.CharsetUtil;
-import net.arnx.jsonic.JSON;
 
 import org.apache.commons.lang3.RandomStringUtils;
 import org.newdawn.slick.SlickException;
+import org.slf4j.Logger;
 
 import com.github.hatimiti.gamix.app.game.field.entity.EntityContainer;
 import com.github.hatimiti.gamix.app.game.field.entity.map.MapTile;
@@ -17,6 +16,7 @@ import com.github.hatimiti.gamix.app.game.field.network.exchange.json.entity.Exc
 import com.github.hatimiti.gamix.app.game.field.network.exchange.json.entity.ExchangeEntityServerJson;
 import com.github.hatimiti.gamix.app.game.field.type.entity.EntityId;
 import com.github.hatimiti.gamix.base.network.JsonHandler;
+import com.github.hatimiti.gamix.base.util._Util;
 
 /**
  * @author hatimiti
@@ -24,6 +24,8 @@ import com.github.hatimiti.gamix.base.network.JsonHandler;
  */
 public class EntityServerHandler
 		extends JsonHandler<ExchangeEntityClientJson, DatagramPacket> {
+
+	private static final Logger LOG = _Util.getLogger();
 
 	protected EntityContainer container;
 
@@ -34,10 +36,9 @@ public class EntityServerHandler
 	@Override
 	protected void execute(
 			final ExchangeEntityClientJson clientJson,
-			final ChannelHandlerContext ctx,
-			final DatagramPacket packet) {
+			final ChannelHandlerContext ctx) {
 
-		System.out.println("clientJson = " + clientJson);
+		LOG.debug("clientJson = {}", clientJson);
 
 		MapTile tile;
 		try {
@@ -72,9 +73,9 @@ public class EntityServerHandler
 
 		System.out.println("serverJson = " + serverJson);
 
-		ctx.write(new DatagramPacket(
-				Unpooled.copiedBuffer(JSON.encode(serverJson), CharsetUtil.UTF_8),
-				packet.sender()));
+//		ctx.write(new DatagramPacket(
+//				Unpooled.copiedBuffer(JSON.encode(serverJson), CharsetUtil.UTF_8),
+//				packet.sender()));
 	}
 
 	@Override

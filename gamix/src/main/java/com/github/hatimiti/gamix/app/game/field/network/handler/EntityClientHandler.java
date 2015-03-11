@@ -5,6 +5,7 @@ import io.netty.channel.socket.DatagramPacket;
 import io.netty.util.CharsetUtil;
 
 import org.newdawn.slick.SlickException;
+import org.slf4j.Logger;
 
 import com.github.hatimiti.gamix.app.game.field.entity.EntityContainer;
 import com.github.hatimiti.gamix.app.game.field.entity.map.MapTile;
@@ -14,6 +15,7 @@ import com.github.hatimiti.gamix.app.game.field.network.exchange.entity.Exchange
 import com.github.hatimiti.gamix.app.game.field.network.exchange.json.entity.ExchangeEntityServerJson;
 import com.github.hatimiti.gamix.app.game.field.type.entity.EntityId;
 import com.github.hatimiti.gamix.base.network.JsonHandler;
+import com.github.hatimiti.gamix.base.util._Util;
 
 /**
  * @author hatimiti
@@ -22,16 +24,17 @@ import com.github.hatimiti.gamix.base.network.JsonHandler;
 public class EntityClientHandler
 		extends JsonHandler<ExchangeEntityServerJson, DatagramPacket> {
 
+	private static final Logger LOG = _Util.getLogger();
+
 	public EntityClientHandler() {
 	}
 
 	@Override
 	protected void execute(
 			final ExchangeEntityServerJson json,
-			final ChannelHandlerContext ctx,
-			final DatagramPacket packet) {
+			final ChannelHandlerContext ctx) {
 
-		System.out.println("json = " + json);
+		LOG.debug("json = {}", json);
 
 		MapTile tile;
 
