@@ -23,6 +23,7 @@ public class ChatClient implements Runnable {
 
 	private InetSocketAddress serverAddress;
 	private ChatMessageSender messageSender;
+	private boolean isStarted;
 
 	public ChatClient(
 			final InetSocketAddress serverAddress,
@@ -33,11 +34,17 @@ public class ChatClient implements Runnable {
 	}
 
 	public void start() {
+		this.isStarted = true;
 		new Thread(this).start();
 	}
 
 	public synchronized void resume() {
 		notify();
+	}
+	
+	public void stop() {
+		this.isStarted = false;
+		resume();
 	}
 
 	@Override
@@ -62,12 +69,16 @@ public class ChatClient implements Runnable {
 
 				String message = null;
 				synchronized (this) {
-					wait();
-					message = this.messageSender.sendMessage();
+					if (this.isStarted) {
+						wait();
+					}
+					message = this.messageSender.send();
+					LOG.info("input message is {}.", message);
 				}
 
-				if (_Util.isNullOrEmpty(message)) {
-					ch.closeFuture().sync();
+				if (_Util.isNullOrEmpty(message) || !this.isStarted) {
+					ch.closeFuture();
+					LOG.info("Closed connection to server.");
 					return;
 				}
 

@@ -100,6 +100,9 @@ public class ChatDialog extends JDialog
 		if (!this.isVisible() && isVisible) {
 			this.client = new ChatClient(this.serverAddress, this);
 			this.client.start();
+		} else if (this.isVisible() && !isVisible) {
+			this.client.stop();
+			this.client = null;
 		}
 		super.setVisible(isVisible);
 	}
@@ -108,12 +111,12 @@ public class ChatDialog extends JDialog
 	 * チャットダイアログでエンターキーで確定した文字列を取得する。
 	 */
 	@Override
-	public String sendMessage() {
+	public String send() {
 		return this.panel.textField.establish();
 	}
 
 	@Override
-	public void receiveMessage(String message) {
+	public void receive(String message) {
 		ChatMessageContainer cc = ChatMessageContainer.getInstance(ChatMessageType.PUBLIC);
 		this.panel.textArea.updateMessagesBy(cc.getMessageOf("1"));
 	}

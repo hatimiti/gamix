@@ -2,8 +2,11 @@ package com.github.hatimiti.gamix.base.network.chat;
 
 import io.netty.channel.ChannelHandlerContext;
 
+import org.slf4j.Logger;
+
 import com.github.hatimiti.gamix.base.network.JsonHandler;
 import com.github.hatimiti.gamix.base.network.exchange.json.chat.ExchangeChatMessageJson;
+import com.github.hatimiti.gamix.base.util._Util;
 
 /**
  * @author hatimiti
@@ -12,6 +15,8 @@ import com.github.hatimiti.gamix.base.network.exchange.json.chat.ExchangeChatMes
 class ChatClientHandler
 		extends JsonHandler<ExchangeChatMessageJson, String> {
 
+	private static final Logger LOG = _Util.getLogger();
+	
 	private ChatMessageSender sender;
 
 	ChatClientHandler(ChatMessageSender sender) {
@@ -23,10 +28,13 @@ class ChatClientHandler
 			final ExchangeChatMessageJson json,
 			final ChannelHandlerContext ctx) {
 
-		ChatMessageContainer cc = ChatMessageContainer.getInstance(ChatMessageType.PUBLIC);
+		ChatMessageContainer cc
+			= ChatMessageContainer.getInstance(ChatMessageType.PUBLIC);
+		
+		LOG.debug("Client received message: {}", json.message);
+		
 		cc.addMessageTo("1", json.message);
-
-		this.sender.receiveMessage(json.message);
+		this.sender.receive(json.message);
 	}
 
 	@Override

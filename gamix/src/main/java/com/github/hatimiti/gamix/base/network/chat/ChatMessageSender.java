@@ -6,11 +6,11 @@ public interface ChatMessageSender {
 	 * サーバーへの送信
 	 * @return
 	 */
-	public String sendMessage();
+	public String send();
 
 	/**
 	 * サーバーからの返答
 	 */
-	public void receiveMessage(String message);
+	public void receive(String message);
 
 }
