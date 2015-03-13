@@ -32,7 +32,8 @@ public class EntityClientHandler
 	@Override
 	protected void execute(
 			final ExchangeEntityServerJson json,
-			final ChannelHandlerContext ctx) {
+			final ChannelHandlerContext ctx,
+			final DatagramPacket packet) {
 
 		LOG.debug("json = {}", json);
 

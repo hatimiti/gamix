@@ -1,8 +1,11 @@
 package com.github.hatimiti.gamix.app.game.field.network.handler;
 
+import io.netty.buffer.Unpooled;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.socket.DatagramPacket;
 import io.netty.util.CharsetUtil;
+import net.arnx.jsonic.JSON;
+import net.arnx.jsonic.JSONException;
 
 import org.apache.commons.lang3.RandomStringUtils;
 import org.newdawn.slick.SlickException;
@@ -36,7 +39,8 @@ public class EntityServerHandler
 	@Override
 	protected void execute(
 			final ExchangeEntityClientJson clientJson,
-			final ChannelHandlerContext ctx) {
+			final ChannelHandlerContext ctx,
+			final DatagramPacket packet) {
 
 		LOG.debug("clientJson = {}", clientJson);
 
@@ -73,9 +77,17 @@ public class EntityServerHandler
 
 		System.out.println("serverJson = " + serverJson);
 
-//		ctx.write(new DatagramPacket(
-//				Unpooled.copiedBuffer(JSON.encode(serverJson), CharsetUtil.UTF_8),
-//				packet.sender()));
+		try {
+			ctx.writeAndFlush(new DatagramPacket(
+					Unpooled.copiedBuffer(JSON.encode(serverJson), CharsetUtil.UTF_8),
+					packet.sender())).sync();
+		} catch (JSONException e) {
+			// TODO 自動生成された catch ブロック
+			e.printStackTrace();
+		} catch (InterruptedException e) {
+			// TODO 自動生成された catch ブロック
+			e.printStackTrace();
+		}
 	}
 
 	@Override

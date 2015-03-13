@@ -28,8 +28,10 @@ class ChatServerHandler
 	}
 
 	@Override
-	protected void execute(ExchangeChatMessageJson json,
-			ChannelHandlerContext ctx) {
+	protected void execute(
+			ExchangeChatMessageJson json,
+			ChannelHandlerContext ctx,
+			String packet) {
 
 		LOG.debug("packet = {}", json);
 

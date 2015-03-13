@@ -20,7 +20,7 @@ public abstract class JsonHandler<J extends BaseExchangeJson, P>
 	protected static final Logger LOG = _Util.getLogger();
 
 	@Override
-	public final void messageReceived(
+	public void messageReceived(
 			final ChannelHandlerContext ctx,
 			final P packet) {
 
@@ -41,10 +41,15 @@ public abstract class JsonHandler<J extends BaseExchangeJson, P>
 			return;
 		}
 
-		execute(jsonEntity, ctx);
+		execute(jsonEntity, ctx, packet);
 	}
 
-	protected abstract void execute(J json, ChannelHandlerContext ctx);
+	@Override
+    public void channelReadComplete(ChannelHandlerContext ctx) {
+        ctx.flush();
+    }
+
+	protected abstract void execute(J json, ChannelHandlerContext ctx, P packet);
 	protected abstract Class<J> getExchangeClass();
 	protected abstract String getContent(P packet);
 }

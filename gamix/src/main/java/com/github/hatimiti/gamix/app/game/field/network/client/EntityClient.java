@@ -14,12 +14,17 @@ import java.net.InetSocketAddress;
 
 import net.arnx.jsonic.JSON;
 
+import org.slf4j.Logger;
+
 import com.github.hatimiti.gamix.app.game.field.entity.character.Player;
 import com.github.hatimiti.gamix.app.game.field.network.exchange.json.entity.ExchangeEntityClientJson;
 import com.github.hatimiti.gamix.app.game.field.network.handler.EntityClientHandler;
 import com.github.hatimiti.gamix.app.game.field.type.entity.EntityId;
+import com.github.hatimiti.gamix.base.util._Util;
 
 public class EntityClient implements Runnable {
+
+	private static final Logger LOG = _Util.getLogger();
 
 	private final InetSocketAddress serverAddress;
 	private final int updateInterval;
@@ -68,12 +73,16 @@ public class EntityClient implements Runnable {
 					p.setEntityId(EntityId.INIT);
 				}
 
-				ch.write(new DatagramPacket(
+				LOG.debug("send json to server: " + JSON.encode(json));
+
+				ch.writeAndFlush(new DatagramPacket(
 						Unpooled.copiedBuffer(JSON.encode(json), CharsetUtil.UTF_8),
 						this.serverAddress)
-				);
+				).sync();
 
-				ch.closeFuture().await(this.updateInterval);
+				if (!ch.closeFuture().await(this.updateInterval)) {
+	                System.err.println("request timed out.");
+	            }
 
 			} catch (InterruptedException e) {
 				throw new RuntimeException(e);
