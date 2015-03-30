@@ -3,7 +3,6 @@ package com.github.hatimiti.gamix.app.game.field.entity;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.newdawn.slick.SlickException;
 import org.newdawn.slick.geom.Point;
 
 import com.github.hatimiti.gamix.app.game.field.entity.character.OnlinePlayer;
@@ -30,7 +29,7 @@ public class EntityContainer {
 		return get(tile).entities.add(entity);
 	}
 
-	public void update(final MapTile tile, final ExchangePlayer player) throws SlickException {
+	public void update(final MapTile tile, final ExchangePlayer player) {
 
 		//FIXME メインキャラ以外の更新も必要
 		if (getEntityListIn(tile).updatePlayer(player)) {

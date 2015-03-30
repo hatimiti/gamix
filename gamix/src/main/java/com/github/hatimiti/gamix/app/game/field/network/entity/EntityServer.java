@@ -1,4 +1,4 @@
-package com.github.hatimiti.gamix.app.game.field.network.server;
+package com.github.hatimiti.gamix.app.game.field.network.entity;
 
 import io.netty.bootstrap.Bootstrap;
 import io.netty.channel.ChannelOption;
@@ -7,7 +7,6 @@ import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.nio.NioDatagramChannel;
 
 import com.github.hatimiti.gamix.app.game.field.entity.EntityContainer;
-import com.github.hatimiti.gamix.app.game.field.network.handler.EntityServerHandler;
 
 public class EntityServer implements Runnable {
 

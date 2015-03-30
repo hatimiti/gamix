@@ -3,6 +3,8 @@ package com.github.hatimiti.gamix.app.game.field.network.exchange.json.entity;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.slf4j.Logger;
+
 import com.github.hatimiti.gamix.app.game.field.entity.Entity;
 import com.github.hatimiti.gamix.app.game.field.entity.EntityContainer;
 import com.github.hatimiti.gamix.app.game.field.entity.character.OnlinePlayer;
@@ -11,6 +13,7 @@ import com.github.hatimiti.gamix.app.game.field.network.exchange.entity.Exchange
 import com.github.hatimiti.gamix.app.game.field.network.exchange.entity.ExchangePlayer;
 import com.github.hatimiti.gamix.app.game.field.type.entity.EntityId;
 import com.github.hatimiti.gamix.base.network.exchange.BaseExchangeJson;
+import com.github.hatimiti.gamix.base.util._Util;
 
 
 /**
@@ -20,6 +23,8 @@ import com.github.hatimiti.gamix.base.network.exchange.BaseExchangeJson;
 public class ExchangeEntityServerJson
 		extends BaseExchangeJson {
 
+	private static final Logger LOG = _Util.getLogger();
+	
 	/** map */
 	public ExchangeMap m = new ExchangeMap();
 	/** player */
@@ -65,7 +70,8 @@ public class ExchangeEntityServerJson
 			p.y = c.getY();
 			p.d = c.getDirection().getValue();
 			this.ops.add(p);
-			System.out.println("snd:" + p.eid + ":x=" + p.x + ":y=" + p.y);
+			
+			LOG.debug("send: {} :x= {} :y= {}", p.eid, p.x, p.y);
 		}
 	}
 

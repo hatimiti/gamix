@@ -37,7 +37,7 @@ public class MapTile
 	public MapTile(
 			final MapId mapId,
 			final MapTilePoint point,
-			final Image background) throws SlickException {
+			final Image background) {
 		super(new Rectangle(0, 0, 800, 600));
 		init(mapId, point,
 				background,

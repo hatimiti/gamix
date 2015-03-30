@@ -1,4 +1,4 @@
-package com.github.hatimiti.gamix.app.game.field.network.handler;
+package com.github.hatimiti.gamix.app.game.field.network.entity;
 
 import io.netty.buffer.Unpooled;
 import io.netty.channel.ChannelHandlerContext;
@@ -8,7 +8,6 @@ import net.arnx.jsonic.JSON;
 import net.arnx.jsonic.JSONException;
 
 import org.apache.commons.lang3.RandomStringUtils;
-import org.newdawn.slick.SlickException;
 import org.slf4j.Logger;
 
 import com.github.hatimiti.gamix.app.game.field.entity.EntityContainer;
@@ -18,6 +17,7 @@ import com.github.hatimiti.gamix.app.game.field.entity.map.support.MapId;
 import com.github.hatimiti.gamix.app.game.field.network.exchange.json.entity.ExchangeEntityClientJson;
 import com.github.hatimiti.gamix.app.game.field.network.exchange.json.entity.ExchangeEntityServerJson;
 import com.github.hatimiti.gamix.app.game.field.type.entity.EntityId;
+import com.github.hatimiti.gamix.base.GamixRuntimeException;
 import com.github.hatimiti.gamix.base.network.JsonHandler;
 import com.github.hatimiti.gamix.base.util._Util;
 
@@ -44,49 +44,31 @@ public class EntityServerHandler
 
 		LOG.debug("clientJson = {}", clientJson);
 
-		MapTile tile;
-		try {
-			tile = new MapTile(
+		MapTile tile = new MapTile(
 					MapId.getBy(clientJson.m.mid),
 					new MapTilePoint(
 							clientJson.m.tx,
 							clientJson.m.ty),
 					null);
-		} catch (SlickException e) {
-			e.printStackTrace();
-			return;
-		}
 
 		if (new EntityId(clientJson.p.eid).isNone()) {
 			clientJson.p.eid
 				= RandomStringUtils.randomAlphanumeric(10);
 		}
 
-		try {
-			this.container.update(tile, clientJson.p);
-		} catch (SlickException e1) {
-			e1.printStackTrace();
-			return;
-		}
-//		for (BaseEntity e : this.container.getEntitiesIn(tile)) {
-//			System.out.println("client-entities = " + e.getEntityId() + ", :x=" + e.getX() + ", :y=" + e.getY());
-//		}
+		this.container.update(tile, clientJson.p);
 
 		ExchangeEntityServerJson serverJson
 			= new ExchangeEntityServerJson(tile, clientJson, this.container);
 
-		System.out.println("serverJson = " + serverJson);
+		LOG.info("serverJson = {}" + serverJson);
 
 		try {
 			ctx.writeAndFlush(new DatagramPacket(
 					Unpooled.copiedBuffer(JSON.encode(serverJson), CharsetUtil.UTF_8),
 					packet.sender())).sync();
-		} catch (JSONException e) {
-			// TODO 自動生成された catch ブロック
-			e.printStackTrace();
-		} catch (InterruptedException e) {
-			// TODO 自動生成された catch ブロック
-			e.printStackTrace();
+		} catch (JSONException | InterruptedException e) {
+			throw new GamixRuntimeException(e);
 		}
 	}
 

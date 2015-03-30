@@ -1,5 +1,6 @@
 package com.github.hatimiti.gamix.app.game.field.entity.map;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -19,9 +20,8 @@ public abstract class BaseMap {
 		this.mapId = mapId;
 		this.tileMap = new HashMap<>();
 
-		for (MapTile tile : tiles) {
-			this.tileMap.put(tile.getPoint(), tile);
-		}
+		Arrays.asList(tiles)
+			.forEach(t -> this.tileMap.put(t.getPoint(), t));
 	}
 
 	public MapId getMapId() {

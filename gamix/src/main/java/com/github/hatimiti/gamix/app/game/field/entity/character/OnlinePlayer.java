@@ -1,6 +1,5 @@
 package com.github.hatimiti.gamix.app.game.field.entity.character;
 
-import org.newdawn.slick.SlickException;
 import org.newdawn.slick.geom.Point;
 
 import com.github.hatimiti.gamix.app.game.field.entity.EntityContainer;
@@ -15,7 +14,7 @@ public class OnlinePlayer
 
 	public OnlinePlayer(
 			int characterNumber,
-			Point defaultPoint) throws SlickException {
+			Point defaultPoint) {
 		super(characterNumber, defaultPoint);
 	}
 

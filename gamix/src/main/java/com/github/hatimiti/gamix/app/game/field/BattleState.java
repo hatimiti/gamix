@@ -21,9 +21,7 @@ import com.github.hatimiti.gamix.app.game.field.entity.support.move.mover.AutoAp
 import com.github.hatimiti.gamix.app.game.field.entity.support.move.mover.AutoStopMover;
 import com.github.hatimiti.gamix.app.game.field.entity.support.status.AbilityDefineListener;
 import com.github.hatimiti.gamix.app.game.field.entity.support.status.AbilityParameter;
-import com.github.hatimiti.gamix.app.game.field.network.client.EntityClient;
-import com.github.hatimiti.gamix.app.game.field.network.client.EntityClient.EntityUpdateListener;
-import com.github.hatimiti.gamix.app.game.field.network.exchange.json.entity.ExchangeEntityClientJson;
+import com.github.hatimiti.gamix.app.game.field.network.entity.EntityClient;
 import com.github.hatimiti.gamix.app.game.field.type.collection.EntityList;
 import com.github.hatimiti.gamix.app.support.GameSceneState;
 import com.github.hatimiti.gamix.app.util.ConstProperty;
@@ -46,6 +44,8 @@ public class BattleState
 	BattleInputHelper inputHelper;
 	BattleGUIManager guiManager;
 
+	EntityClient entityClient;
+	
 	public BattleState() {
 		super(GameSceneState.BATTLE);
 	}
@@ -74,6 +74,12 @@ public class BattleState
 		this.entityContainer.addTo(getNowTile(), this.player);
 		this.entityContainer.addTo(getNowTile(), target);
 
+		this.entityClient = new EntityClient(
+			new InetSocketAddress(
+				ConstProperty.getInstance().getString("network.server.ip"),
+				ConstProperty.getInstance().getInt("network.server.port.entity")),
+				ConstProperty.getInstance().getInt("network.update.interval.entity"));
+		
 		this.guiManager.init(gc, game);
 	}
 
@@ -83,34 +89,7 @@ public class BattleState
 			final StateBasedGame game) throws SlickException {
 
 		super.enter(gc, game);
-
 		this.guiManager.enter(gc, game);
-
-		new Thread(new EntityClient(
-			new InetSocketAddress(
-				ConstProperty.getInstance().getString("network.server.ip"),
-				ConstProperty.getInstance().getInt("network.server.port.entity")),
-				ConstProperty.getInstance().getInt("network.update.interval.entity"),
-			new EntityUpdateListener() {
-				@Override
-				public ExchangeEntityClientJson createLatestEntity() {
-					ExchangeEntityClientJson json = new ExchangeEntityClientJson();
-					json.m.mid = BattleState.this.map.getMapId().getValue();
-					json.m.tx = getNowTile().getPoint().getX();
-					json.m.ty = getNowTile().getPoint().getY();
-					json.p.eid = BattleState.this.player.getEntityId().getVal();
-					json.p.x = BattleState.this.player.getX();
-					json.p.y = BattleState.this.player.getY();
-					json.p.d = BattleState.this.player.getDirection().getValue();
-					return json;
-				}
-
-				@Override
-				public Player getLatestPlayer() {
-					return BattleState.this.player;
-				}
-		})).start();
-
 //		this.midiPlayer.play(new File(
 //				ResourceLoader.getResource("musicFiles/sh_battle4.mid").getPath()));
 	}
@@ -136,6 +115,8 @@ public class BattleState
 
 		moveMapTile();
 
+		this.entityClient.update();
+		
 		EntityList entities
 			= this.entityContainer.getEntityListIn(getNowTile());
 		entities.update(this.entityContainer);

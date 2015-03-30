@@ -92,7 +92,7 @@ public abstract class Entity
 	 * setter
 	 */
 
-	public void setEntityId(final EntityId entityId) {
+	public synchronized void setEntityId(final EntityId entityId) {
 		this.entityId = entityId;
 	}
 

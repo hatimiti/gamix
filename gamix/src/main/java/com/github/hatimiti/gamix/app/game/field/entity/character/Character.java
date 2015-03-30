@@ -3,7 +3,6 @@ package com.github.hatimiti.gamix.app.game.field.entity.character;
 import static com.github.hatimiti.gamix.app.game.field.entity.support.direction.FacingDirection.*;
 
 import org.newdawn.slick.Graphics;
-import org.newdawn.slick.SlickException;
 import org.newdawn.slick.geom.Point;
 import org.newdawn.slick.geom.Rectangle;
 
@@ -56,7 +55,7 @@ public abstract class Character
 
 	public Character(
 			final int characterNumber,
-			final Point defaultPoint) throws SlickException {
+			final Point defaultPoint) {
 
 		super(new Rectangle(
 				defaultPoint.getX(), defaultPoint.getY(), 20, 32));

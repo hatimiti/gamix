@@ -1,17 +1,15 @@
-package com.github.hatimiti.gamix.app.game.field.network.handler;
+package com.github.hatimiti.gamix.app.game.field.network.entity;
 
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.socket.DatagramPacket;
 import io.netty.util.CharsetUtil;
 
-import org.newdawn.slick.SlickException;
 import org.slf4j.Logger;
 
 import com.github.hatimiti.gamix.app.game.field.entity.EntityContainer;
 import com.github.hatimiti.gamix.app.game.field.entity.map.MapTile;
 import com.github.hatimiti.gamix.app.game.field.entity.map.MapTilePoint;
 import com.github.hatimiti.gamix.app.game.field.entity.map.support.MapId;
-import com.github.hatimiti.gamix.app.game.field.network.exchange.entity.ExchangePlayer;
 import com.github.hatimiti.gamix.app.game.field.network.exchange.json.entity.ExchangeEntityServerJson;
 import com.github.hatimiti.gamix.app.game.field.type.entity.EntityId;
 import com.github.hatimiti.gamix.base.network.JsonHandler;
@@ -37,35 +35,15 @@ public class EntityClientHandler
 
 		LOG.debug("json = {}", json);
 
-		MapTile tile;
-
-		try {
-			tile = new MapTile(
-					MapId.getBy(json.m.mid),
-					new MapTilePoint(
-							json.m.tx,
-							json.m.ty),
-							null);
-		} catch (SlickException e) {
-			e.printStackTrace();
-			return;
-		}
+		MapTile tile = new MapTile(
+				MapId.getBy(json.m.mid),
+				new MapTilePoint(json.m.tx, json.m.ty),
+				null);
 
 		EntityContainer ec = EntityContainer.getInstance();
 		ec.getPlayer().setEntityId(new EntityId(json.p.eid));
 
-		try {
-			for (ExchangePlayer op : json.ops) {
-				ec.update(tile, op);
-			}
-		} catch (SlickException e) {
-			e.printStackTrace();
-			return;
-		}
-
-//		for (BaseEntity e : ec.getEntitiesIn(tile)) {
-//			System.out.println("client-entities = " + e.getEntityId());
-//		}
+		json.ops.forEach(op -> ec.update(tile, op));
 	}
 
 	@Override
