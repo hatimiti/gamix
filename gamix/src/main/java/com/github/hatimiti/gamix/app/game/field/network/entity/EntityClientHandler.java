@@ -1,8 +1,6 @@
 package com.github.hatimiti.gamix.app.game.field.network.entity;
 
 import io.netty.channel.ChannelHandlerContext;
-import io.netty.channel.socket.DatagramPacket;
-import io.netty.util.CharsetUtil;
 
 import org.slf4j.Logger;
 
@@ -20,7 +18,7 @@ import com.github.hatimiti.gamix.base.util._Util;
  *
  */
 public class EntityClientHandler
-		extends JsonHandler<ExchangeEntityServerJson, DatagramPacket> {
+		extends JsonHandler<ExchangeEntityServerJson, String> {
 
 	private static final Logger LOG = _Util.getLogger();
 
@@ -31,7 +29,7 @@ public class EntityClientHandler
 	protected void execute(
 			final ExchangeEntityServerJson json,
 			final ChannelHandlerContext ctx,
-			final DatagramPacket packet) {
+			final String packet) {
 
 		LOG.debug("json = {}", json);
 
@@ -52,8 +50,8 @@ public class EntityClientHandler
 	}
 
 	@Override
-	protected String getContent(DatagramPacket packet) {
-		return packet.content().toString(CharsetUtil.UTF_8);
+	protected String getContent(String packet) {
+		return packet;
 	}
 
 }

@@ -1,12 +1,12 @@
 package com.github.hatimiti.gamix.app.game.field.network.entity;
 
-import io.netty.bootstrap.Bootstrap;
-import io.netty.channel.ChannelOption;
+import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.EventLoopGroup;
 import io.netty.channel.nio.NioEventLoopGroup;
-import io.netty.channel.socket.nio.NioDatagramChannel;
+import io.netty.channel.socket.nio.NioServerSocketChannel;
 
 import com.github.hatimiti.gamix.app.game.field.entity.EntityContainer;
+import com.github.hatimiti.gamix.base.GamixRuntimeException;
 
 public class EntityServer implements Runnable {
 
@@ -21,20 +21,21 @@ public class EntityServer implements Runnable {
 	@Override
 	public void run() {
 		System.out.println("EntityサーバーUDP開始");
-		EventLoopGroup group = new NioEventLoopGroup();
+		EventLoopGroup bossGroup = new NioEventLoopGroup(1);
+		EventLoopGroup workerGroup = new NioEventLoopGroup();
 		try {
-			Bootstrap b = new Bootstrap();
-			b.group(group)
-				.channel(NioDatagramChannel.class)
-				.option(ChannelOption.SO_BROADCAST, false)
-				.handler(new EntityServerHandler(this.entityContainer));
+			ServerBootstrap b = new ServerBootstrap();
+			b.group(bossGroup, workerGroup)
+				.channel(NioServerSocketChannel.class)
+				.childHandler(new EntityServerInitializer(this.entityContainer));
 
-			b.bind(this.port).sync().channel().closeFuture().await();
-
+			b.bind(this.port).sync().channel().closeFuture().sync();
+			
 		} catch (InterruptedException e) {
-			throw new RuntimeException(e);
+			throw new GamixRuntimeException(e);
 		} finally {
-			group.shutdownGracefully();
+			bossGroup.shutdownGracefully();
+			workerGroup.shutdownGracefully();
 		}
 		System.out.println("EntityサーバーUDP終了");
 	}

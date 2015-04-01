@@ -1,11 +1,11 @@
 package com.github.hatimiti.gamix.app.game.field.network.entity;
 
-import io.netty.buffer.Unpooled;
+import io.netty.channel.Channel;
 import io.netty.channel.ChannelHandlerContext;
-import io.netty.channel.socket.DatagramPacket;
-import io.netty.util.CharsetUtil;
+import io.netty.channel.group.ChannelGroup;
+import io.netty.channel.group.DefaultChannelGroup;
+import io.netty.util.concurrent.GlobalEventExecutor;
 import net.arnx.jsonic.JSON;
-import net.arnx.jsonic.JSONException;
 
 import org.apache.commons.lang3.RandomStringUtils;
 import org.slf4j.Logger;
@@ -17,7 +17,6 @@ import com.github.hatimiti.gamix.app.game.field.entity.map.support.MapId;
 import com.github.hatimiti.gamix.app.game.field.network.exchange.json.entity.ExchangeEntityClientJson;
 import com.github.hatimiti.gamix.app.game.field.network.exchange.json.entity.ExchangeEntityServerJson;
 import com.github.hatimiti.gamix.app.game.field.type.entity.EntityId;
-import com.github.hatimiti.gamix.base.GamixRuntimeException;
 import com.github.hatimiti.gamix.base.network.JsonHandler;
 import com.github.hatimiti.gamix.base.util._Util;
 
@@ -26,21 +25,30 @@ import com.github.hatimiti.gamix.base.util._Util;
  *
  */
 public class EntityServerHandler
-		extends JsonHandler<ExchangeEntityClientJson, DatagramPacket> {
+		extends JsonHandler<ExchangeEntityClientJson, String> {
 
 	private static final Logger LOG = _Util.getLogger();
 
 	protected EntityContainer container;
 
+	/** 接続中のクライアント */
+	private static final ChannelGroup channels
+		= new DefaultChannelGroup(GlobalEventExecutor.INSTANCE);
+
 	public EntityServerHandler(final EntityContainer container) {
 		this.container = container;
+	}
+	
+	@Override
+	public void channelActive(final ChannelHandlerContext ctx) {
+		channels.add(ctx.channel());
 	}
 
 	@Override
 	protected void execute(
 			final ExchangeEntityClientJson clientJson,
 			final ChannelHandlerContext ctx,
-			final DatagramPacket packet) {
+			final String packet) {
 
 		LOG.debug("clientJson = {}", clientJson);
 
@@ -63,12 +71,13 @@ public class EntityServerHandler
 
 		LOG.info("serverJson = {}" + serverJson);
 
-		try {
-			ctx.writeAndFlush(new DatagramPacket(
-					Unpooled.copiedBuffer(JSON.encode(serverJson), CharsetUtil.UTF_8),
-					packet.sender())).sync();
-		} catch (JSONException | InterruptedException e) {
-			throw new GamixRuntimeException(e);
+		for (Channel c: channels) {
+			if (c != ctx.channel()) {
+				continue;
+			}
+			// Sends message to myself
+			c.writeAndFlush(JSON.encode(serverJson) + "\r\n");
+			break;
 		}
 	}
 
@@ -78,8 +87,14 @@ public class EntityServerHandler
 	}
 
 	@Override
-	protected String getContent(DatagramPacket packet) {
-		return packet.content().toString(CharsetUtil.UTF_8);
+	protected String getContent(String packet) {
+		return packet;
+	}
+	
+	@Override
+	public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) {
+		cause.printStackTrace();
+		ctx.close();
 	}
 
 }

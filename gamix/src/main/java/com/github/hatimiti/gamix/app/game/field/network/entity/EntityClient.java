@@ -1,14 +1,11 @@
 package com.github.hatimiti.gamix.app.game.field.network.entity;
 
 import io.netty.bootstrap.Bootstrap;
-import io.netty.buffer.Unpooled;
 import io.netty.channel.Channel;
-import io.netty.channel.ChannelOption;
+import io.netty.channel.ChannelFuture;
 import io.netty.channel.EventLoopGroup;
 import io.netty.channel.nio.NioEventLoopGroup;
-import io.netty.channel.socket.DatagramPacket;
-import io.netty.channel.socket.nio.NioDatagramChannel;
-import io.netty.util.CharsetUtil;
+import io.netty.channel.socket.nio.NioSocketChannel;
 
 import java.net.InetSocketAddress;
 
@@ -38,47 +35,47 @@ public class EntityClient implements Runnable {
 		this.updateInterval = updateInterval;
 	}
 	
-	public void update() {
-		if (this.isStarted) {
-			return;
-		}
+	public void start() {
+		this.isStarted = true;
 		new Thread(this).start();
 	}
 	
 	public synchronized void run() {
 
-		this.isStarted = true;
-		
 		EventLoopGroup group = new NioEventLoopGroup();
 		try {
 			Bootstrap b = new Bootstrap();
 			b.group(group)
-				.channel(NioDatagramChannel.class)
-				.option(ChannelOption.SO_BROADCAST, false)
-				.handler(new EntityClientHandler());
+				.channel(NioSocketChannel.class)
+				.handler(new EntityClientInitializer());
 
-			Channel ch = b.bind(0).sync().channel();
+			Channel ch = b.connect(this.serverAddress).sync().channel();
 
-			Player player = EntityContainer.getInstance().getPlayer();
-			if (EntityId.INIT.equals(player.getEntityId())) {
-				return;
+			for (;;) {
+				
+				Thread.sleep(20);
+			
+				Player player = EntityContainer.getInstance().getPlayer();
+				if (EntityId.INIT.equals(player.getEntityId())) {
+					return;
+				}
+	
+				ExchangeEntityClientJson json = createJSON(player);
+	
+				if (EntityId.NONE.equals(player.getEntityId())) {
+					player.setEntityId(EntityId.INIT);
+				}
+	
+				LOG.debug("send json to server: " + JSON.encode(json));
+	
+				ChannelFuture lastWriteFuture = ch.writeAndFlush(JSON.encode(json) + "\r\n");
+	
+				if (lastWriteFuture != null) {
+					lastWriteFuture.sync();
+				}
+
 			}
-
-			ExchangeEntityClientJson json = createJSON(player);
-
-			if (EntityId.NONE.equals(player.getEntityId())) {
-				player.setEntityId(EntityId.INIT);
-			}
-
-			LOG.debug("send json to server: " + JSON.encode(json));
-
-			ch.writeAndFlush(new DatagramPacket(
-					Unpooled.copiedBuffer(JSON.encode(json), CharsetUtil.UTF_8),
-					this.serverAddress)
-			).sync();
-
-			ch.closeFuture().await(1000);
-
+			
 		} catch (InterruptedException e) {
 			throw new RuntimeException(e);
 		} finally {

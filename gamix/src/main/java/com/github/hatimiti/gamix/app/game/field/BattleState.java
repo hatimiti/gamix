@@ -90,6 +90,7 @@ public class BattleState
 
 		super.enter(gc, game);
 		this.guiManager.enter(gc, game);
+		this.entityClient.start();
 //		this.midiPlayer.play(new File(
 //				ResourceLoader.getResource("musicFiles/sh_battle4.mid").getPath()));
 	}
@@ -114,8 +115,6 @@ public class BattleState
 		this.inputHelper.input(gc);
 
 		moveMapTile();
-
-		this.entityClient.update();
 		
 		EntityList entities
 			= this.entityContainer.getEntityListIn(getNowTile());
