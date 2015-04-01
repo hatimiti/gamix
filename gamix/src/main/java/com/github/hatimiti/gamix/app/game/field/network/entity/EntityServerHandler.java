@@ -69,7 +69,7 @@ public class EntityServerHandler
 		ExchangeEntityServerJson serverJson
 			= new ExchangeEntityServerJson(tile, clientJson, this.container);
 
-		LOG.info("serverJson = {}" + serverJson);
+		LOG.debug("serverJson = {}" + serverJson);
 
 		for (Channel c: channels) {
 			if (c != ctx.channel()) {

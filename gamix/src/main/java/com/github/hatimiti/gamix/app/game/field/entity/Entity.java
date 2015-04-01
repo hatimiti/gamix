@@ -93,6 +93,9 @@ public abstract class Entity
 	 */
 
 	public synchronized void setEntityId(final EntityId entityId) {
+		if (this.entityId != null) {
+			return;
+		}
 		this.entityId = entityId;
 	}
 

@@ -1,13 +1,9 @@
 package com.github.hatimiti.gamix.app.game.field.network.entity;
 
-import io.netty.bootstrap.Bootstrap;
 import io.netty.channel.Channel;
-import io.netty.channel.ChannelFuture;
-import io.netty.channel.EventLoopGroup;
-import io.netty.channel.nio.NioEventLoopGroup;
-import io.netty.channel.socket.nio.NioSocketChannel;
 
 import java.net.InetSocketAddress;
+import java.util.Optional;
 
 import net.arnx.jsonic.JSON;
 
@@ -17,73 +13,45 @@ import com.github.hatimiti.gamix.app.game.field.entity.EntityContainer;
 import com.github.hatimiti.gamix.app.game.field.entity.character.Player;
 import com.github.hatimiti.gamix.app.game.field.network.exchange.json.entity.ExchangeEntityClientJson;
 import com.github.hatimiti.gamix.app.game.field.type.entity.EntityId;
+import com.github.hatimiti.gamix.base.network.TCPClient;
 import com.github.hatimiti.gamix.base.util._Util;
 
-public class EntityClient implements Runnable {
+public class EntityClient extends TCPClient<ExchangeEntityClientJson> {
 
 	private static final Logger LOG = _Util.getLogger();
-
-	private final InetSocketAddress serverAddress;
-	private final int updateInterval;
-	private boolean isStarted;
 
 	public EntityClient(
 			final InetSocketAddress serverAddress,
 			final int updateInterval) {
 
-		this.serverAddress = serverAddress;
-		this.updateInterval = updateInterval;
+		super(serverAddress, updateInterval, new EntityClientInitializer());
 	}
 	
-	public void start() {
-		this.isStarted = true;
-		new Thread(this).start();
-	}
-	
-	public synchronized void run() {
-
-		EventLoopGroup group = new NioEventLoopGroup();
-		try {
-			Bootstrap b = new Bootstrap();
-			b.group(group)
-				.channel(NioSocketChannel.class)
-				.handler(new EntityClientInitializer());
-
-			Channel ch = b.connect(this.serverAddress).sync().channel();
-
-			for (;;) {
-				
-				Thread.sleep(20);
-			
-				Player player = EntityContainer.getInstance().getPlayer();
-				if (EntityId.INIT.equals(player.getEntityId())) {
-					return;
-				}
-	
-				ExchangeEntityClientJson json = createJSON(player);
-	
-				if (EntityId.NONE.equals(player.getEntityId())) {
-					player.setEntityId(EntityId.INIT);
-				}
-	
-				LOG.debug("send json to server: " + JSON.encode(json));
-	
-				ChannelFuture lastWriteFuture = ch.writeAndFlush(JSON.encode(json) + "\r\n");
-	
-				if (lastWriteFuture != null) {
-					lastWriteFuture.sync();
-				}
-
-			}
-			
-		} catch (InterruptedException e) {
-			throw new RuntimeException(e);
-		} finally {
-			this.isStarted = false;
-			group.shutdownGracefully();
+	@Override
+	protected Optional<ExchangeEntityClientJson> execute(Channel ch) {
+		
+		Player player = EntityContainer.getInstance().getPlayer();
+		
+		if (EntityId.INIT.equals(player.getEntityId())) {
+			return Optional.empty();
 		}
+
+		ExchangeEntityClientJson json = createJSON(player);
+
+		if (EntityId.NONE.equals(player.getEntityId())) {
+			player.setEntityId(EntityId.INIT);
+		}
+
+		LOG.debug("send json to server: " + JSON.encode(json));
+		
+		return Optional.of(json);
 	}
 
+	@Override
+	protected Object prepareWrite(ExchangeEntityClientJson value) {
+		return JSON.encode(value) + "\r\n";
+	}
+	
 	private ExchangeEntityClientJson createJSON(Player player) {
 		ExchangeEntityClientJson json = new ExchangeEntityClientJson();
 		// TODO 現在のマップ情報を取得する
@@ -96,5 +64,4 @@ public class EntityClient implements Runnable {
 		json.p.d = player.getDirection().getValue();
 		return json;
 	}
-
 }

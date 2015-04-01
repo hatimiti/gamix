@@ -15,9 +15,6 @@ import com.github.hatimiti.gamix.base.network.chat.ChatServer;
 
 public class ServerState extends BaseGameState {
 
-	protected Thread entityThread;
-	protected Thread chatThread;
-
 	protected EntityContainer entityContainer;
 
 	public ServerState() {
@@ -34,16 +31,19 @@ public class ServerState extends BaseGameState {
 	@Override
 	public void enter(final GameContainer gc, final StateBasedGame game)
 			throws SlickException {
+		
 		super.enter(gc, game);
 
 		this.entityContainer.clearEntities();
 
-		this.entityThread = new Thread(new EntityServer(
-				ConstProperty.getInstance().getInt("network.server.port.entity"), this.entityContainer));
-		this.entityThread.start();
-		this.chatThread = new Thread(new ChatServer(
-				ConstProperty.getInstance().getInt("network.server.port.chat")));
-		this.chatThread.start();
+		new EntityServer(
+				ConstProperty.getInstance().getInt("network.server.port.entity"),
+				this.entityContainer
+		).start();
+
+		new ChatServer(
+				ConstProperty.getInstance().getInt("network.server.port.chat")
+		).start();
 	}
 
 	@Override
