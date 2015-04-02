@@ -8,8 +8,8 @@ public class EntityServer extends TCPServer {
 	public EntityServer(
 			final int port,
 			final EntityContainer entityContainer) {
-		
+
 		super(port, new EntityServerInitializer(entityContainer));
 	}
-	
+
 }
