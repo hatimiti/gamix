@@ -7,8 +7,6 @@ import org.newdawn.slick.Graphics;
 import com.github.hatimiti.gamix.app.game.field.entity.Entity;
 import com.github.hatimiti.gamix.app.game.field.entity.EntityContainer;
 import com.github.hatimiti.gamix.app.game.field.entity.support.collision.CollisionHandler;
-import com.github.hatimiti.gamix.app.game.field.entity.support.direction.FacingDirection;
-import com.github.hatimiti.gamix.app.game.field.network.exchange.entity.ExchangePlayer;
 import com.github.hatimiti.gamix.app.game.field.type.entity.EntityId;
 import com.github.hatimiti.gamix.base.type.SyncListType;
 
@@ -36,21 +34,12 @@ public final class EntityList extends SyncListType<Entity> {
 		judgeCollision();
 	}
 
-	public boolean updatePlayer(final ExchangePlayer player) {
-
-		Optional<Entity> target = this.stream()
-			.filter(e -> new EntityId(player.eid).equals(e.getEntityId()))
-			.findFirst();
-
-		if (target.isPresent()) {
-			target.get().position(player.x, player.y);
-			target.get().faceTo(FacingDirection.getBy(player.d));
-			return true;
-		}
-
-		return false;
+	public Optional<Entity> findEntity(final EntityId entityId) {
+		return this.stream()
+				.filter(e -> entityId.equals(e.getEntityId()))
+				.findFirst();
 	}
-
+	
 	@Override
 	public void clear() {
 		super.clear();
