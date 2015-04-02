@@ -8,8 +8,6 @@ import org.newdawn.slick.SlickException;
 import org.newdawn.slick.geom.Point;
 import org.newdawn.slick.state.StateBasedGame;
 
-import com.github.hatimiti.gamix.app.game.field.entity.EmptyEntity;
-import com.github.hatimiti.gamix.app.game.field.entity.Entity;
 import com.github.hatimiti.gamix.app.game.field.entity.EntityContainer;
 import com.github.hatimiti.gamix.app.game.field.entity.character.AutoCharacter;
 import com.github.hatimiti.gamix.app.game.field.entity.character.Player;
@@ -36,7 +34,6 @@ public class BattleState
 	EntityContainer entityContainer;
 
 	Player player;
-	Entity target = new EmptyEntity();
 
 	BaseMap map;
 	MapTilePoint nowPoint;

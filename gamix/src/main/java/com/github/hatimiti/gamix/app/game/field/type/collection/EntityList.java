@@ -10,9 +10,9 @@ import com.github.hatimiti.gamix.app.game.field.entity.support.collision.Collisi
 import com.github.hatimiti.gamix.app.game.field.entity.support.direction.FacingDirection;
 import com.github.hatimiti.gamix.app.game.field.network.exchange.entity.ExchangePlayer;
 import com.github.hatimiti.gamix.app.game.field.type.entity.EntityId;
-import com.github.hatimiti.gamix.base.type.ListType;
+import com.github.hatimiti.gamix.base.type.SyncListType;
 
-public final class EntityList extends ListType<Entity> {
+public final class EntityList extends SyncListType<Entity> {
 
 	/** Judge collision */
 	private CollisionHandler collisionHandler;

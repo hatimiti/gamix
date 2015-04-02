@@ -1,6 +1,5 @@
 package com.github.hatimiti.gamix.base.type;
 
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
@@ -8,15 +7,18 @@ import java.util.ListIterator;
 import java.util.Objects;
 import java.util.function.Predicate;
 
-public abstract class ListType<O>
+abstract class ListType<O>
 		extends BaseType<List<O>>
 		implements List<O> {
 
-	protected final List<O> list = new ArrayList<>();
+	protected final List<O> list = createNewList();
+	
+	abstract List<O> createNewList();
+	abstract List<O> createList(List<O> orig);
 
 	@Override
 	public List<O> getVal() {
-		return new ArrayList<>(this.list);
+		return createList(this.list);
 	}
 
 	@Override
