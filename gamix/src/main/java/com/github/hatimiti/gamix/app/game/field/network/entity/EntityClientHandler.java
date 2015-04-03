@@ -1,10 +1,11 @@
 package com.github.hatimiti.gamix.app.game.field.network.entity;
 
+import static com.github.hatimiti.gamix.app.game.field.entity.ClientEntityContainer.clientEntityContainer;
 import io.netty.channel.ChannelHandlerContext;
 
 import org.slf4j.Logger;
 
-import com.github.hatimiti.gamix.app.game.field.entity.EntityContainer;
+import com.github.hatimiti.gamix.app.game.field.entity.ClientEntityContainer;
 import com.github.hatimiti.gamix.app.game.field.entity.map.MapTile;
 import com.github.hatimiti.gamix.app.game.field.entity.map.MapTilePoint;
 import com.github.hatimiti.gamix.app.game.field.entity.map.support.MapId;
@@ -38,7 +39,7 @@ public class EntityClientHandler
 				new MapTilePoint(json.m.tx, json.m.ty),
 				null);
 
-		EntityContainer ec = EntityContainer.getInstance();
+		ClientEntityContainer ec = clientEntityContainer();
 		ec.getPlayer().setEntityId(new EntityId(json.p.eid));
 
 		json.ops.forEach(op -> ec.update(tile, op));

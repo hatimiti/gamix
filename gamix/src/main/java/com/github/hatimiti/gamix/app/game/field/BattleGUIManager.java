@@ -116,7 +116,7 @@ class BattleGUIManager implements DamageListener {
 		AutoCharacter c = (AutoCharacter) event.getTo();
 		this.targetHPBar.update(c.getStatus());
 		DamageLabel dl = new DamageLabel(event.getDamage(), event.getPoint());
-		this.state.entityContainer.addTo(this.state.getNowTile(), dl);
+		this.state.clientEntityContainer.addTo(this.state.getNowTile(), dl);
 	}
 
 	@Override

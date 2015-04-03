@@ -1,5 +1,6 @@
 package com.github.hatimiti.gamix.app.game.field.network.entity;
 
+import static com.github.hatimiti.gamix.app.game.field.entity.ClientEntityContainer.clientEntityContainer;
 import io.netty.channel.Channel;
 
 import java.net.InetSocketAddress;
@@ -9,7 +10,6 @@ import net.arnx.jsonic.JSON;
 
 import org.slf4j.Logger;
 
-import com.github.hatimiti.gamix.app.game.field.entity.EntityContainer;
 import com.github.hatimiti.gamix.app.game.field.entity.character.Player;
 import com.github.hatimiti.gamix.app.game.field.network.exchange.json.entity.ExchangeEntityClientJson;
 import com.github.hatimiti.gamix.app.game.field.type.entity.EntityId;
@@ -26,12 +26,12 @@ public class EntityClient extends TCPClient<ExchangeEntityClientJson> {
 
 		super(serverAddress, updateInterval, new EntityClientInitializer());
 	}
-	
+
 	@Override
 	protected Optional<ExchangeEntityClientJson> execute(Channel ch) {
-		
-		Player player = EntityContainer.getInstance().getPlayer();
-		
+
+		Player player = clientEntityContainer().getPlayer();
+
 		if (EntityId.INIT.equals(player.getEntityId())) {
 			return Optional.empty();
 		}
@@ -43,7 +43,7 @@ public class EntityClient extends TCPClient<ExchangeEntityClientJson> {
 		}
 
 		LOG.debug("send json to server: " + JSON.encode(json));
-		
+
 		return Optional.of(json);
 	}
 
@@ -51,7 +51,7 @@ public class EntityClient extends TCPClient<ExchangeEntityClientJson> {
 	protected Object prepareWrite(ExchangeEntityClientJson value) {
 		return JSON.encode(value) + "\r\n";
 	}
-	
+
 	private ExchangeEntityClientJson createJSON(Player player) {
 		ExchangeEntityClientJson json = new ExchangeEntityClientJson();
 		// TODO 現在のマップ情報を取得する

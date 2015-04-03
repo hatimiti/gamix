@@ -102,14 +102,14 @@ class BattleInputHelper implements InputHelpable {
 		// 武器装備
 		Weapon weapon = new Sword001(this.state.player);
 		this.state.player.equipWeapon(weapon);
-		this.state.entityContainer.addTo(this.state.getNowTile(), weapon);
+		this.state.clientEntityContainer.addTo(this.state.getNowTile(), weapon);
 	}
 
 	private void invokeMagic() throws SlickException {
 		// 魔法
 		Magic magic = new Magic(
 				new Point(this.state.player.getCenterX(), this.state.player.getCenterY()));
-		this.state.entityContainer.addTo(this.state.getNowTile(), magic);
+		this.state.clientEntityContainer.addTo(this.state.getNowTile(), magic);
 		magic.faceTo(this.state.player.getDirection());
 		magic.move();
 	}

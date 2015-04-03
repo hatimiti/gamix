@@ -1,12 +1,13 @@
 package com.github.hatimiti.gamix.app.game.field.network.exchange.json.entity;
 
+import static com.github.hatimiti.gamix.app.game.field.entity.ServerEntityContainer.serverEntityContainer;
+
 import java.util.ArrayList;
 import java.util.List;
 
 import org.slf4j.Logger;
 
 import com.github.hatimiti.gamix.app.game.field.entity.Entity;
-import com.github.hatimiti.gamix.app.game.field.entity.EntityContainer;
 import com.github.hatimiti.gamix.app.game.field.entity.character.OnlinePlayer;
 import com.github.hatimiti.gamix.app.game.field.entity.map.MapTile;
 import com.github.hatimiti.gamix.app.game.field.network.exchange.entity.ExchangeMap;
@@ -24,7 +25,7 @@ public class ExchangeEntityServerJson
 		extends BaseExchangeJson {
 
 	private static final Logger LOG = _Util.getLogger();
-	
+
 	/** map */
 	public ExchangeMap m = new ExchangeMap();
 	/** player */
@@ -37,21 +38,19 @@ public class ExchangeEntityServerJson
 
 	public ExchangeEntityServerJson(
 			final MapTile tile,
-			final ExchangeEntityClientJson client,
-			final EntityContainer container) {
+			final ExchangeEntityClientJson client) {
 
-		convert(client, container, tile);
+		convert(client, tile);
 	}
 
 	protected void convert(
 			final ExchangeEntityClientJson client,
-			final EntityContainer container,
 			final MapTile tile) {
 
 		this.p = client.p;
 		this.m = client.m;
 
-		for (Entity entity : container.getEntityListIn(tile)) {
+		for (Entity entity : serverEntityContainer().getEntityListIn(tile)) {
 
 			if (!(entity instanceof OnlinePlayer)) {
 				continue;
@@ -70,7 +69,7 @@ public class ExchangeEntityServerJson
 			p.y = c.getY();
 			p.d = c.getDirection().getValue();
 			this.ops.add(p);
-			
+
 			LOG.debug("send: {} :x= {} :y= {}", p.eid, p.x, p.y);
 		}
 	}

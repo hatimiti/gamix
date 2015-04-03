@@ -8,16 +8,8 @@ import io.netty.handler.codec.Delimiters;
 import io.netty.handler.codec.string.StringDecoder;
 import io.netty.handler.codec.string.StringEncoder;
 
-import com.github.hatimiti.gamix.app.game.field.entity.EntityContainer;
-
 class EntityServerInitializer extends ChannelInitializer<SocketChannel> {
 
-	protected EntityContainer container;
-
-	public EntityServerInitializer(final EntityContainer container) {
-		this.container = container;
-	}
-	
 	@Override
 	public void initChannel(SocketChannel ch) throws Exception {
 		ChannelPipeline pipeline = ch.pipeline();
@@ -28,6 +20,6 @@ class EntityServerInitializer extends ChannelInitializer<SocketChannel> {
 		pipeline.addLast(new StringEncoder());
 
 		// and then business logic.
-		pipeline.addLast(new EntityServerHandler(this.container));
+		pipeline.addLast(new EntityServerHandler());
 	}
 }

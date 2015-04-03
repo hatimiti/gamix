@@ -1,5 +1,7 @@
 package com.github.hatimiti.gamix.app.game.field;
 
+import static com.github.hatimiti.gamix.app.game.field.entity.ClientEntityContainer.clientEntityContainer;
+
 import java.net.InetSocketAddress;
 
 import org.newdawn.slick.GameContainer;
@@ -31,7 +33,7 @@ public class BattleState
 		extends BaseGameState
 		implements AbilityDefineListener {
 
-	EntityContainer entityContainer;
+	EntityContainer clientEntityContainer;
 
 	Player player;
 
@@ -42,7 +44,7 @@ public class BattleState
 	BattleGUIManager guiManager;
 
 	EntityClient entityClient;
-	
+
 	public BattleState() {
 		super(GameSceneState.BATTLE);
 	}
@@ -55,8 +57,8 @@ public class BattleState
 		this.inputHelper = new BattleInputHelper(this);
 		this.guiManager = new BattleGUIManager(this);
 
-		this.entityContainer = EntityContainer.getInstance();
-		this.entityContainer.clearEntities();
+		this.clientEntityContainer = clientEntityContainer();
+		this.clientEntityContainer.clearEntities();
 
 		this.map = new FirstTownMap();
 		this.nowPoint = new MapTilePoint(0, 0);
@@ -67,16 +69,16 @@ public class BattleState
 		AutoCharacter target = new AutoCharacter(33, new AutoStopMover(), new Point(300, 450));
 		target.addDamageListener(this.guiManager);
 
-		this.entityContainer.addTo(getNowTile(), this.map.getTileIn(this.nowPoint));
-		this.entityContainer.addTo(getNowTile(), this.player);
-		this.entityContainer.addTo(getNowTile(), target);
+		this.clientEntityContainer.addTo(getNowTile(), this.map.getTileIn(this.nowPoint));
+		this.clientEntityContainer.addTo(getNowTile(), this.player);
+		this.clientEntityContainer.addTo(getNowTile(), target);
 
 		this.entityClient = new EntityClient(
 			new InetSocketAddress(
 				ConstProperty.getInstance().getString("network.server.ip"),
 				ConstProperty.getInstance().getInt("network.server.port.entity")),
 				ConstProperty.getInstance().getInt("network.update.interval.entity"));
-		
+
 		this.guiManager.init(gc, game);
 	}
 
@@ -98,7 +100,7 @@ public class BattleState
 			final StateBasedGame game,
 			final Graphics g) throws SlickException {
 
-		this.entityContainer.getEntityListIn(getNowTile()).draw(g);
+		this.clientEntityContainer.getEntityListIn(getNowTile()).draw(g);
 		this.guiManager.render(gc, game, g);
 	}
 
@@ -112,23 +114,23 @@ public class BattleState
 		this.inputHelper.input(gc);
 
 		moveMapTile();
-		
+
 		EntityList entities
-			= this.entityContainer.getEntityListIn(getNowTile());
-		entities.update(this.entityContainer);
+			= this.clientEntityContainer.getEntityListIn(getNowTile());
+		entities.update(this.clientEntityContainer);
 	}
 
 	protected void moveMapTile() throws SlickException {
 		if (getNowTile().containsInLeftRoad(this.player.getShape())
 				|| getNowTile().containsInRightRoad(this.player.getShape())) {
 
-			this.entityContainer.clearEntitiesIn(getNowTile());
+			this.clientEntityContainer.clearEntitiesIn(getNowTile());
 			this.nowPoint = new MapTilePoint(0, 1);
-			this.entityContainer.addTo(getNowTile(), this.map.getTileIn(this.nowPoint));
-			this.entityContainer.addTo(getNowTile(), this.player);
+			this.clientEntityContainer.addTo(getNowTile(), this.map.getTileIn(this.nowPoint));
+			this.clientEntityContainer.addTo(getNowTile(), this.player);
 			AutoCharacter ac = new AutoCharacter(111, new AutoApproachMover(), new Point(300, 450));
 			ac.addDamageListener(this.guiManager);
-			this.entityContainer.addTo(getNowTile(), ac);
+			this.clientEntityContainer.addTo(getNowTile(), ac);
 			this.player.setPoint(new Point(650, 400));
 		}
 	}

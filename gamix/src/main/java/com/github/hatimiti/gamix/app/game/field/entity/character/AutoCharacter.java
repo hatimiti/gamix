@@ -1,5 +1,7 @@
 package com.github.hatimiti.gamix.app.game.field.entity.character;
 
+import static com.github.hatimiti.gamix.app.game.field.entity.ClientEntityContainer.clientEntityContainer;
+
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.geom.Point;
 
@@ -32,7 +34,8 @@ public class AutoCharacter
 		if (isNotNormalStatus()) {
 			stop();
 		} else {
-			this.autoMover.update(this, ec);
+			//FIXME EntityContainerの渡し方
+			this.autoMover.update(this, clientEntityContainer().getPlayer());
 		}
 
 	}

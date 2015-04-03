@@ -1,7 +1,7 @@
 package com.github.hatimiti.gamix.app.game.field.entity.support.move.mover;
 
-import com.github.hatimiti.gamix.app.game.field.entity.EntityContainer;
 import com.github.hatimiti.gamix.app.game.field.entity.character.AutoCharacter;
+import com.github.hatimiti.gamix.app.game.field.entity.character.Player;
 import com.github.hatimiti.gamix.app.game.field.entity.support.direction.FacingDirection;
 
 /**
@@ -15,9 +15,9 @@ public class AutoApproachMover
 	@Override
 	public void update(
 			final AutoCharacter target,
-			final EntityContainer ec) {
+			final Player player) {
 
-		float px = ec.getPlayer().getShape().getCenterX();
+		float px = player.getShape().getCenterX();
 		float sx = target.getShape().getCenterX();
 		int dx = 0x0000;
 
@@ -27,7 +27,7 @@ public class AutoApproachMover
 			dx = FacingDirection.LEFT.getValue();
 		}
 
-		float py = ec.getPlayer().getShape().getCenterY();
+		float py = player.getShape().getCenterY();
 		float sy = target.getShape().getCenterY();
 		int dy = 0x0000;
 

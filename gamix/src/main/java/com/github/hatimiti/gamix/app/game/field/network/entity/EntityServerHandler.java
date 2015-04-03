@@ -1,5 +1,6 @@
 package com.github.hatimiti.gamix.app.game.field.network.entity;
 
+import static com.github.hatimiti.gamix.app.game.field.entity.ServerEntityContainer.serverEntityContainer;
 import io.netty.channel.Channel;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.group.ChannelGroup;
@@ -10,7 +11,6 @@ import net.arnx.jsonic.JSON;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.slf4j.Logger;
 
-import com.github.hatimiti.gamix.app.game.field.entity.EntityContainer;
 import com.github.hatimiti.gamix.app.game.field.entity.map.MapTile;
 import com.github.hatimiti.gamix.app.game.field.entity.map.MapTilePoint;
 import com.github.hatimiti.gamix.app.game.field.entity.map.support.MapId;
@@ -29,16 +29,10 @@ public class EntityServerHandler
 
 	private static final Logger LOG = _Util.getLogger();
 
-	protected EntityContainer container;
-
 	/** 接続中のクライアント */
 	private static final ChannelGroup channels
 		= new DefaultChannelGroup(GlobalEventExecutor.INSTANCE);
 
-	public EntityServerHandler(final EntityContainer container) {
-		this.container = container;
-	}
-	
 	@Override
 	public void channelActive(final ChannelHandlerContext ctx) {
 		channels.add(ctx.channel());
@@ -64,10 +58,10 @@ public class EntityServerHandler
 				= RandomStringUtils.randomAlphanumeric(10);
 		}
 
-		this.container.update(tile, clientJson.p);
+		serverEntityContainer().update(tile, clientJson.p);
 
 		ExchangeEntityServerJson serverJson
-			= new ExchangeEntityServerJson(tile, clientJson, this.container);
+			= new ExchangeEntityServerJson(tile, clientJson);
 
 		LOG.debug("serverJson = {}" + serverJson);
 
@@ -90,7 +84,7 @@ public class EntityServerHandler
 	protected String getContent(String packet) {
 		return packet;
 	}
-	
+
 	@Override
 	public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) {
 		cause.printStackTrace();

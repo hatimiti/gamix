@@ -1,11 +1,12 @@
 package com.github.hatimiti.gamix.app.game.server;
 
+import static com.github.hatimiti.gamix.app.game.field.entity.ServerEntityContainer.serverEntityContainer;
+
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.StateBasedGame;
 
-import com.github.hatimiti.gamix.app.game.field.entity.EntityContainer;
 import com.github.hatimiti.gamix.app.game.field.network.entity.EntityServer;
 import com.github.hatimiti.gamix.app.support.GameSceneState;
 import com.github.hatimiti.gamix.app.util.ConstProperty;
@@ -15,11 +16,8 @@ import com.github.hatimiti.gamix.base.network.chat.ChatServer;
 
 public class ServerState extends BaseGameState {
 
-	protected EntityContainer entityContainer;
-
 	public ServerState() {
 		super(GameSceneState.SERVER);
-		this.entityContainer = EntityContainer.getInstance();
 	}
 
 	@Override
@@ -31,14 +29,13 @@ public class ServerState extends BaseGameState {
 	@Override
 	public void enter(final GameContainer gc, final StateBasedGame game)
 			throws SlickException {
-		
+
 		super.enter(gc, game);
 
-		this.entityContainer.clearEntities();
+		serverEntityContainer().clearEntities();
 
 		new EntityServer(
-				ConstProperty.getInstance().getInt("network.server.port.entity"),
-				this.entityContainer
+				ConstProperty.getInstance().getInt("network.server.port.entity")
 		).start();
 
 		new ChatServer(
