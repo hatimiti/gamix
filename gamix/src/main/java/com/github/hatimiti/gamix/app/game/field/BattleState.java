@@ -1,8 +1,11 @@
 package com.github.hatimiti.gamix.app.game.field;
 
-import static com.github.hatimiti.gamix.app.game.field.entity.ClientEntityContainer.clientEntityContainer;
+import static com.github.hatimiti.gamix.app.game.field.entity.ClientEntityContainer.*;
+import static com.github.hatimiti.gamix.base.util._Util.*;
 
 import java.net.InetSocketAddress;
+
+import javax.annotation.Resource;
 
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
@@ -10,6 +13,7 @@ import org.newdawn.slick.SlickException;
 import org.newdawn.slick.geom.Point;
 import org.newdawn.slick.state.StateBasedGame;
 
+import com.github.hatimiti.gamix.app.game.di.service.SampleService;
 import com.github.hatimiti.gamix.app.game.field.entity.EntityContainer;
 import com.github.hatimiti.gamix.app.game.field.entity.character.AutoCharacter;
 import com.github.hatimiti.gamix.app.game.field.entity.character.Player;
@@ -33,6 +37,9 @@ public class BattleState
 		extends BaseGameState
 		implements AbilityDefineListener {
 
+	@Resource
+	private SampleService sampleService;
+	
 	EntityContainer clientEntityContainer;
 
 	Player player;
@@ -80,6 +87,8 @@ public class BattleState
 				ConstProperty.getInstance().getInt("network.update.interval.entity"));
 
 		this.guiManager.init(gc, game);
+		
+		this.sampleService = getComponent(SampleService.class);
 	}
 
 	@Override
@@ -92,6 +101,7 @@ public class BattleState
 		this.entityClient.start();
 //		this.midiPlayer.play(new File(
 //				ResourceLoader.getResource("musicFiles/sh_battle4.mid").getPath()));
+		sampleService.execute();
 	}
 
 	@Override

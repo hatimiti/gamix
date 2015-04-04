@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE components PUBLIC "-//SEASAR//DTD S2Container 2.4//EN"
+	"http://www.seasar.org/dtd/components24.dtd">
+<components namespace="dbflute">
+    <include path="j2ee.dicon"/>
+
+    <!-- The components of DBFlute Runtime. -->
+    <component name="introduction" class="com.github.hatimiti.gamix.app.dbflute.allcommon.DBFluteInitializer"/>
+    <component name="invokerAssistant" class="com.github.hatimiti.gamix.app.dbflute.allcommon.ImplementedInvokerAssistant"/>
+    <component name="commonColumnAutoSetupper" class="com.github.hatimiti.gamix.app.dbflute.allcommon.ImplementedCommonColumnAutoSetupper"/>
+    <component name="behaviorSelector" class="com.github.hatimiti.gamix.app.dbflute.allcommon.ImplementedBehaviorSelector"/>
+    <component name="behaviorCommandInvoker" class="org.dbflute.bhv.core.BehaviorCommandInvoker"/>
+
+    <!-- The components of Behavior. -->
+    <component name="tcmSampleBhv" class="com.github.hatimiti.gamix.app.dbflute.exbhv.TcmSampleBhv"/>
+</components>

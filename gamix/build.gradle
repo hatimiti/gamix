@@ -19,9 +19,13 @@ jar {
 
 repositories {
     mavenCentral()
+    maven {
+        url 'http://maven.seasar.org/maven2/'
+    }
 }
 
 def LOGBACK_VERSION = '1.1.2'
+def S2CONTAINER_VER = '2.4.48'
 
 dependencies {
     compile files('lib/TWL.jar')
@@ -38,6 +42,17 @@ dependencies {
     compile group: 'org.slf4j', name: 'slf4j-api', version: '1.7.10'
     compile group: 'ch.qos.logback', name: 'logback-classic', version: LOGBACK_VERSION
     compile group: 'ch.qos.logback', name: 'logback-core', version: LOGBACK_VERSION
+
+    // Settings DI Container
+    compile group: 'org.seasar.container', name: 's2-framework', version: S2CONTAINER_VER
+    compile group: 'org.seasar.container', name: 's2-extension', version: S2CONTAINER_VER
+    compile group: 'org.seasar.container', name: 's2-tiger', version: S2CONTAINER_VER
+    compile group: 'org.apache.geronimo.specs', name: 'geronimo-ejb_3.0_spec', version: '1.0.1'
+    compile group: 'org.apache.geronimo.specs', name: 'geronimo-jta_1.1_spec', version: '1.1.1'
+
+    // Settings DB
+    compile group: 'org.dbflute', name: 'dbflute-runtime', version: '1.1.0-sp2'
+    compile group: 'com.h2database', name: 'h2', version: '1.4.186'
 
     testCompile group: 'junit', name: 'junit', version: '4.+'
 }

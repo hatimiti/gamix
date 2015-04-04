@@ -1,0 +1,1415 @@
+2015-04-04 20:04:23,916 [main] INFO  (DfReplaceSchemaTask#begin():91) - +------------------------------------------+
+2015-04-04 20:04:23,921 [main] INFO  (DfReplaceSchemaTask#begin():92) - |                                          |
+2015-04-04 20:04:23,921 [main] INFO  (DfReplaceSchemaTask#begin():93) - |              ReplaceSchema               |
+2015-04-04 20:04:23,925 [main] INFO  (DfReplaceSchemaTask#begin():101) - |                                          |
+2015-04-04 20:04:23,926 [main] INFO  (DfReplaceSchemaTask#begin():102) - +------------------------------------------+
+2015-04-04 20:04:23,928 [main] INFO  (DfReplaceSchemaTask#waitBeforeReps():333) - ...Waiting for your GO SIGN from stdin before ReplaceSchema:
+2015-04-04 20:04:28,647 [main] INFO  (DfDataSourceHandler#prepare():78) - ...Preparing data source:
+2015-04-04 20:04:28,648 [main] INFO  (DfDataSourceHandler#prepare():79) -   driver = org.h2.Driver
+2015-04-04 20:04:28,649 [main] INFO  (DfDataSourceHandler#prepare():80) -   url    = jdbc:h2:file:../src/main/resources/db/gamix
+2015-04-04 20:04:28,650 [main] INFO  (DfDataSourceHandler#prepare():81) -   user   = sa
+2015-04-04 20:04:28,657 [main] INFO  (DfDataSourceHandler#createConnection():166) - ...Connecting to database by data source:
+2015-04-04 20:04:28,887 [main] INFO  (DfDataSourceHandler#setupConnectionMetaInfo():233) -   product = H2 1.4.186 (2015-03-02)
+2015-04-04 20:04:28,888 [main] INFO  (DfDataSourceHandler#setupConnectionMetaInfo():234) -   driver  = H2 JDBC Driver 1.4.186 (2015-03-02) for JDBC 4.0
+2015-04-04 20:04:28,907 [main] ERROR (DfDBFluteTaskUtil#logException():150) - Look! Read the message below.
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+Failed to execute DBFlute Task 'ReplaceSchema'.
+
+[Advice]
+Check the exception messages and the stack traces.
+
+[Database Product]
+H2 1.4.186 (2015-03-02)
+
+[JDBC Driver]
+H2 JDBC Driver 1.4.186 (2015-03-02) for JDBC 4.0
+* * * * * * * * * */
+org.dbflute.infra.reps.exception.DfReplaceSchemaExecuteNotAllowedException: Look! Read the message below.
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+Your ReplaceSchema execution was not allowed.
+
+[Advice]
+Not found SQL files for ReplaceSchema,
+so your execution might be mistake...?
+
+[SQL Root Directory]
+playsql
+* * * * * * * * * */
+	at org.dbflute.infra.reps.DfRepsExecuteLimitter.throwReplaceSchemaExecuteNotAllowedException(DfRepsExecuteLimitter.java:76)
+	at org.dbflute.infra.reps.DfRepsExecuteLimitter.checkExecutableOrNot(DfRepsExecuteLimitter.java:60)
+	at org.dbflute.logic.replaceschema.process.DfCreateSchemaProcess.checkBeforeInitialize(DfCreateSchemaProcess.java:151)
+	at org.dbflute.logic.replaceschema.process.DfCreateSchemaProcess.execute(DfCreateSchemaProcess.java:139)
+	at org.dbflute.task.DfReplaceSchemaTask.createSchema(DfReplaceSchemaTask.java:252)
+	at org.dbflute.task.DfReplaceSchemaTask.doExecuteCoreProcess(DfReplaceSchemaTask.java:241)
+	at org.dbflute.task.DfReplaceSchemaTask.executeCoreProcess(DfReplaceSchemaTask.java:236)
+	at org.dbflute.task.DfReplaceSchemaTask.processMain(DfReplaceSchemaTask.java:229)
+	at org.dbflute.task.DfReplaceSchemaTask.doExecute(DfReplaceSchemaTask.java:157)
+	at org.dbflute.task.bs.DfAbstractTexenTask$1.callActualExecute(DfAbstractTexenTask.java:130)
+	at org.dbflute.task.bs.assistant.DfTaskBasicController.doExecute(DfTaskBasicController.java:183)
+	at org.dbflute.task.bs.assistant.DfTaskBasicController.execute(DfTaskBasicController.java:77)
+	at org.dbflute.task.bs.DfAbstractTexenTask.execute(DfAbstractTexenTask.java:152)
+	at org.apache.tools.ant.UnknownElement.execute(UnknownElement.java:288)
+	at sun.reflect.GeneratedMethodAccessor3.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.apache.tools.ant.dispatch.DispatchUtils.execute(DispatchUtils.java:105)
+	at org.apache.tools.ant.Task.perform(Task.java:348)
+	at org.apache.tools.ant.Target.execute(Target.java:357)
+	at org.apache.tools.ant.Target.performTasks(Target.java:385)
+	at org.apache.tools.ant.Project.executeSortedTargets(Project.java:1329)
+	at org.apache.tools.ant.Project.executeTarget(Project.java:1298)
+	at org.apache.tools.ant.helper.DefaultExecutor.executeTargets(DefaultExecutor.java:41)
+	at org.apache.tools.ant.Project.executeTargets(Project.java:1181)
+	at org.apache.tools.ant.Main.runBuild(Main.java:698)
+	at org.apache.tools.ant.Main.startAnt(Main.java:199)
+	at org.apache.tools.ant.launch.Launcher.run(Launcher.java:257)
+	at org.apache.tools.ant.launch.Launcher.main(Launcher.java:104)
+2015-04-04 20:04:28,936 [main] INFO  (DfDataSourceHandler#destroy():120) - ...closeReally()
+2015-04-04 20:04:28,949 [main] INFO  (DfDBFluteTaskUtil#logFinalMessage():139) - 
+_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
+[Final Message]: 00m05s050ms *Abort
+
+  DBFLUTE_CLIENT: {gamix}
+    database  = h2 (H2 1.4.186 (2015-03-02))
+    language  = java
+    container = seasar
+    package   = com.github.hatimiti.gamix.app.dbflute
+
+  DBFLUTE_ENVIRONMENT_TYPE: {}
+    driver = org.h2.Driver
+    url    = jdbc:h2:file:../src/main/resources/db/gamix
+    schema = {GAMIX.PUBLIC as main}
+    user   = sa
+    props  = {}
+    additionalSchema = 
+    repsEnvType      = ut
+    refreshProject   = $$AutoDetect$$
+
+
+_/_/_/_/_/_/_/_/_/_/ {ReplaceSchema}
+2015-04-04 20:05:21,005 [main] INFO  (DfReplaceSchemaTask#begin():91) - +------------------------------------------+
+2015-04-04 20:05:21,009 [main] INFO  (DfReplaceSchemaTask#begin():92) - |                                          |
+2015-04-04 20:05:21,009 [main] INFO  (DfReplaceSchemaTask#begin():93) - |              ReplaceSchema               |
+2015-04-04 20:05:21,013 [main] INFO  (DfReplaceSchemaTask#begin():101) - |                                          |
+2015-04-04 20:05:21,013 [main] INFO  (DfReplaceSchemaTask#begin():102) - +------------------------------------------+
+2015-04-04 20:05:21,015 [main] INFO  (DfReplaceSchemaTask#waitBeforeReps():333) - ...Waiting for your GO SIGN from stdin before ReplaceSchema:
+2015-04-04 20:05:21,768 [main] INFO  (DfDataSourceHandler#prepare():78) - ...Preparing data source:
+2015-04-04 20:05:21,769 [main] INFO  (DfDataSourceHandler#prepare():79) -   driver = org.h2.Driver
+2015-04-04 20:05:21,770 [main] INFO  (DfDataSourceHandler#prepare():80) -   url    = jdbc:h2:file:../src/main/resources/db/gamix
+2015-04-04 20:05:21,771 [main] INFO  (DfDataSourceHandler#prepare():81) -   user   = sa
+2015-04-04 20:05:21,780 [main] INFO  (DfDataSourceHandler#createConnection():166) - ...Connecting to database by data source:
+2015-04-04 20:05:22,014 [main] INFO  (DfDataSourceHandler#setupConnectionMetaInfo():233) -   product = H2 1.4.186 (2015-03-02)
+2015-04-04 20:05:22,015 [main] INFO  (DfDataSourceHandler#setupConnectionMetaInfo():234) -   driver  = H2 JDBC Driver 1.4.186 (2015-03-02) for JDBC 4.0
+2015-04-04 20:05:22,030 [main] INFO  (DfCreateSchemaProcess#initializeSchemaMainDrop():206) - 
+2015-04-04 20:05:22,030 [main] INFO  (DfCreateSchemaProcess#initializeSchemaMainDrop():207) - * * * * * * * * * * *
+2015-04-04 20:05:22,031 [main] INFO  (DfCreateSchemaProcess#initializeSchemaMainDrop():208) - *                   *
+2015-04-04 20:05:22,032 [main] INFO  (DfCreateSchemaProcess#initializeSchemaMainDrop():209) - * Initialize Schema *
+2015-04-04 20:05:22,032 [main] INFO  (DfCreateSchemaProcess#initializeSchemaMainDrop():210) - *                   *
+2015-04-04 20:05:22,033 [main] INFO  (DfCreateSchemaProcess#initializeSchemaMainDrop():211) - * * * * * * * * * * *
+2015-04-04 20:05:22,046 [main] INFO  (DfTableExtractor#doGetTableList():66) - ...Getting tables:
+2015-04-04 20:05:22,047 [main] INFO  (DfTableExtractor#doGetTableList():67) -   schema = {GAMIX.PUBLIC as main}
+2015-04-04 20:05:22,047 [main] INFO  (DfTableExtractor#doGetTableList():68) -   types  = [TABLE, VIEW]
+2015-04-04 20:05:22,093 [main] INFO  (DfCreateSchemaProcess#createSchema():243) - 
+2015-04-04 20:05:22,094 [main] INFO  (DfCreateSchemaProcess#createSchema():244) - * * * * * * * * *
+2015-04-04 20:05:22,094 [main] INFO  (DfCreateSchemaProcess#createSchema():245) - *               *
+2015-04-04 20:05:22,095 [main] INFO  (DfCreateSchemaProcess#createSchema():246) - * Create Schema *
+2015-04-04 20:05:22,095 [main] INFO  (DfCreateSchemaProcess#createSchema():247) - *               *
+2015-04-04 20:05:22,096 [main] INFO  (DfCreateSchemaProcess#createSchema():248) - * * * * * * * * *
+2015-04-04 20:05:22,100 [main] INFO  (DfSqlFileFireMan#fire():64) - ...Firing: replace-schema.sql
+2015-04-04 20:05:22,104 [main] INFO  (DfSqlFileRunnerBase#isSqlLineCommentOnly():480) - The SQL has line comments only so skip it:
+--CREATE SEQUENCE SCM_SAMPLE_ID START WITH 1 INCREMENT BY 1 MAXVALUE 999999999999 NOCYCLE NOCACHE
+2015-04-04 20:05:22,106 [main] INFO  (DfSqlFileRunnerBase#traceSql():168) - 
+DROP TABLE IF EXISTS
+ TCM_SAMPLE
+ CASCADE
+2015-04-04 20:05:22,109 [main] INFO  (DfSqlFileRunnerBase#traceSql():168) - 
+CREATE TABLE TCM_SAMPLE (
+  TCM_SAMPLE_ID IDENTITY PRIMARY KEY,
+  SAMPLE_NAME VARCHAR(50)
+)
+2015-04-04 20:05:22,131 [main] INFO  (DfSqlFileRunnerBase#traceResult():172) -  -> success=2 failure=0
+2015-04-04 20:05:22,131 [main] INFO  (DfSqlFileFireMan#fire():89) - {Create Schema}: success=2 failure=0 (in 1 files)
+2015-04-04 20:05:22,206 [main] INFO  (DfLoadDataProcess#execute():129) - 
+2015-04-04 20:05:22,207 [main] INFO  (DfLoadDataProcess#execute():130) - * * * * * * * * * * *
+2015-04-04 20:05:22,207 [main] INFO  (DfLoadDataProcess#execute():131) - *                   *
+2015-04-04 20:05:22,208 [main] INFO  (DfLoadDataProcess#execute():132) - * Load Data         *
+2015-04-04 20:05:22,209 [main] INFO  (DfLoadDataProcess#execute():133) - *                   *
+2015-04-04 20:05:22,209 [main] INFO  (DfLoadDataProcess#execute():134) - * * * * * * * * * * *
+2015-04-04 20:05:22,239 [main] INFO  (DfTakeFinallyProcess#takeFinally():219) - 
+2015-04-04 20:05:22,240 [main] INFO  (DfTakeFinallyProcess#takeFinally():220) - * * * * * * * **
+2015-04-04 20:05:22,240 [main] INFO  (DfTakeFinallyProcess#takeFinally():221) - *              *
+2015-04-04 20:05:22,241 [main] INFO  (DfTakeFinallyProcess#takeFinally():222) - * Take Finally *
+2015-04-04 20:05:22,241 [main] INFO  (DfTakeFinallyProcess#takeFinally():223) - *              *
+2015-04-04 20:05:22,241 [main] INFO  (DfTakeFinallyProcess#takeFinally():224) - * * * * * * * **
+2015-04-04 20:05:22,249 [main] INFO  (DfSqlFileFireMan#fire():64) - ...Firing: take-finally.sql
+2015-04-04 20:05:22,250 [main] INFO  (DfSqlFileRunnerBase#traceResult():172) -  -> success=0 failure=0
+2015-04-04 20:05:22,250 [main] INFO  (DfSqlFileFireMan#fire():89) - {Take Finally}: success=0 failure=0 (in 1 files)
+2015-04-04 20:05:22,252 [main] INFO  (DfDataSourceHandler#destroy():120) - ...closeReally()
+2015-04-04 20:05:22,264 [main] INFO  (DfDBFluteTaskUtil#logFinalMessage():139) - 
+_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
+[Final Message]: 00m01s275ms
+
+  DBFLUTE_CLIENT: {gamix}
+    database  = h2 (H2 1.4.186 (2015-03-02))
+    language  = java
+    container = seasar
+    package   = com.github.hatimiti.gamix.app.dbflute
+
+  DBFLUTE_ENVIRONMENT_TYPE: {}
+    driver = org.h2.Driver
+    url    = jdbc:h2:file:../src/main/resources/db/gamix
+    schema = {GAMIX.PUBLIC as main}
+    user   = sa
+    props  = {}
+    additionalSchema = 
+    repsEnvType      = ut
+    refreshProject   = $$AutoDetect$$
+
+ {Create Schema}: success=2 failure=0 (in 1 files)
+  o replace-schema.sql
+
+ {Load Data}: loaded-files=0
+  - (no data file)
+
+ {Take Finally}: success=0 failure=0 (in 1 files)
+  o take-finally.sql
+_/_/_/_/_/_/_/_/_/_/ {ReplaceSchema}
+2015-04-04 20:06:47,281 [main] INFO  (DfReplaceSchemaTask#begin():91) - +------------------------------------------+
+2015-04-04 20:06:47,285 [main] INFO  (DfReplaceSchemaTask#begin():92) - |                                          |
+2015-04-04 20:06:47,286 [main] INFO  (DfReplaceSchemaTask#begin():93) - |              ReplaceSchema               |
+2015-04-04 20:06:47,290 [main] INFO  (DfReplaceSchemaTask#begin():101) - |                                          |
+2015-04-04 20:06:47,291 [main] INFO  (DfReplaceSchemaTask#begin():102) - +------------------------------------------+
+2015-04-04 20:06:47,294 [main] INFO  (DfReplaceSchemaTask#waitBeforeReps():333) - ...Waiting for your GO SIGN from stdin before ReplaceSchema:
+2015-04-04 20:06:48,215 [main] INFO  (DfDataSourceHandler#prepare():78) - ...Preparing data source:
+2015-04-04 20:06:48,216 [main] INFO  (DfDataSourceHandler#prepare():79) -   driver = org.h2.Driver
+2015-04-04 20:06:48,217 [main] INFO  (DfDataSourceHandler#prepare():80) -   url    = jdbc:h2:file:../src/main/resources/db/gamix
+2015-04-04 20:06:48,218 [main] INFO  (DfDataSourceHandler#prepare():81) -   user   = sa
+2015-04-04 20:06:48,224 [main] INFO  (DfDataSourceHandler#createConnection():166) - ...Connecting to database by data source:
+2015-04-04 20:06:48,506 [main] INFO  (DfDataSourceHandler#setupConnectionMetaInfo():233) -   product = H2 1.4.186 (2015-03-02)
+2015-04-04 20:06:48,507 [main] INFO  (DfDataSourceHandler#setupConnectionMetaInfo():234) -   driver  = H2 JDBC Driver 1.4.186 (2015-03-02) for JDBC 4.0
+2015-04-04 20:06:48,522 [main] INFO  (DfCreateSchemaProcess#initializeSchemaMainDrop():206) - 
+2015-04-04 20:06:48,522 [main] INFO  (DfCreateSchemaProcess#initializeSchemaMainDrop():207) - * * * * * * * * * * *
+2015-04-04 20:06:48,523 [main] INFO  (DfCreateSchemaProcess#initializeSchemaMainDrop():208) - *                   *
+2015-04-04 20:06:48,524 [main] INFO  (DfCreateSchemaProcess#initializeSchemaMainDrop():209) - * Initialize Schema *
+2015-04-04 20:06:48,524 [main] INFO  (DfCreateSchemaProcess#initializeSchemaMainDrop():210) - *                   *
+2015-04-04 20:06:48,525 [main] INFO  (DfCreateSchemaProcess#initializeSchemaMainDrop():211) - * * * * * * * * * * *
+2015-04-04 20:06:48,550 [main] INFO  (DfTableExtractor#doGetTableList():66) - ...Getting tables:
+2015-04-04 20:06:48,551 [main] INFO  (DfTableExtractor#doGetTableList():67) -   schema = {GAMIX.PUBLIC as main}
+2015-04-04 20:06:48,554 [main] INFO  (DfTableExtractor#doGetTableList():68) -   types  = [TABLE, VIEW]
+2015-04-04 20:06:48,592 [main] INFO  (DfSchemaInitializerJdbc#logReplaceSql():609) - truncate table TCM_SAMPLE
+2015-04-04 20:06:48,600 [main] INFO  (DfSchemaInitializerJdbc#logReplaceSql():609) - drop table TCM_SAMPLE
+2015-04-04 20:06:48,651 [main] INFO  (DfCreateSchemaProcess#createSchema():243) - 
+2015-04-04 20:06:48,651 [main] INFO  (DfCreateSchemaProcess#createSchema():244) - * * * * * * * * *
+2015-04-04 20:06:48,652 [main] INFO  (DfCreateSchemaProcess#createSchema():245) - *               *
+2015-04-04 20:06:48,652 [main] INFO  (DfCreateSchemaProcess#createSchema():246) - * Create Schema *
+2015-04-04 20:06:48,653 [main] INFO  (DfCreateSchemaProcess#createSchema():247) - *               *
+2015-04-04 20:06:48,653 [main] INFO  (DfCreateSchemaProcess#createSchema():248) - * * * * * * * * *
+2015-04-04 20:06:48,657 [main] INFO  (DfSqlFileFireMan#fire():64) - ...Firing: replace-schema.sql
+2015-04-04 20:06:48,663 [main] INFO  (DfSqlFileRunnerBase#isSqlLineCommentOnly():480) - The SQL has line comments only so skip it:
+--CREATE SEQUENCE SCM_SAMPLE_ID START WITH 1 INCREMENT BY 1 MAXVALUE 999999999999 NOCYCLE NOCACHE
+2015-04-04 20:06:48,664 [main] INFO  (DfSqlFileRunnerBase#traceSql():168) - 
+DROP TABLE IF EXISTS
+ TCM_SAMPLE
+ CASCADE
+2015-04-04 20:06:48,667 [main] INFO  (DfSqlFileRunnerBase#traceSql():168) - 
+CREATE TABLE TCM_SAMPLE (
+  TCM_SAMPLE_ID IDENTITY PRIMARY KEY,
+  SAMPLE_NAME VARCHAR(50)
+)
+2015-04-04 20:06:48,686 [main] INFO  (DfSqlFileRunnerBase#traceResult():172) -  -> success=2 failure=0
+2015-04-04 20:06:48,686 [main] INFO  (DfSqlFileFireMan#fire():89) - {Create Schema}: success=2 failure=0 (in 1 files)
+2015-04-04 20:06:48,753 [main] INFO  (DfLoadDataProcess#execute():129) - 
+2015-04-04 20:06:48,755 [main] INFO  (DfLoadDataProcess#execute():130) - * * * * * * * * * * *
+2015-04-04 20:06:48,755 [main] INFO  (DfLoadDataProcess#execute():131) - *                   *
+2015-04-04 20:06:48,757 [main] INFO  (DfLoadDataProcess#execute():132) - * Load Data         *
+2015-04-04 20:06:48,758 [main] INFO  (DfLoadDataProcess#execute():133) - *                   *
+2015-04-04 20:06:48,759 [main] INFO  (DfLoadDataProcess#execute():134) - * * * * * * * * * * *
+2015-04-04 20:06:48,785 [main] INFO  (DfTakeFinallyProcess#takeFinally():219) - 
+2015-04-04 20:06:48,786 [main] INFO  (DfTakeFinallyProcess#takeFinally():220) - * * * * * * * **
+2015-04-04 20:06:48,786 [main] INFO  (DfTakeFinallyProcess#takeFinally():221) - *              *
+2015-04-04 20:06:48,787 [main] INFO  (DfTakeFinallyProcess#takeFinally():222) - * Take Finally *
+2015-04-04 20:06:48,787 [main] INFO  (DfTakeFinallyProcess#takeFinally():223) - *              *
+2015-04-04 20:06:48,787 [main] INFO  (DfTakeFinallyProcess#takeFinally():224) - * * * * * * * **
+2015-04-04 20:06:48,797 [main] INFO  (DfSqlFileFireMan#fire():64) - ...Firing: take-finally.sql
+2015-04-04 20:06:48,799 [main] INFO  (DfSqlFileRunnerBase#traceResult():172) -  -> success=0 failure=0
+2015-04-04 20:06:48,800 [main] INFO  (DfSqlFileFireMan#fire():89) - {Take Finally}: success=0 failure=0 (in 1 files)
+2015-04-04 20:06:48,802 [main] INFO  (DfDataSourceHandler#destroy():120) - ...closeReally()
+2015-04-04 20:06:48,819 [main] INFO  (DfDBFluteTaskUtil#logFinalMessage():139) - 
+_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
+[Final Message]: 00m01s557ms
+
+  DBFLUTE_CLIENT: {gamix}
+    database  = h2 (H2 1.4.186 (2015-03-02))
+    language  = java
+    container = seasar
+    package   = com.github.hatimiti.gamix.app.dbflute
+
+  DBFLUTE_ENVIRONMENT_TYPE: {}
+    driver = org.h2.Driver
+    url    = jdbc:h2:file:../src/main/resources/db/gamix
+    schema = {GAMIX.PUBLIC as main}
+    user   = sa
+    props  = {}
+    additionalSchema = 
+    repsEnvType      = ut
+    refreshProject   = $$AutoDetect$$
+
+ {Create Schema}: success=2 failure=0 (in 1 files)
+  o replace-schema.sql
+
+ {Load Data}: loaded-files=0
+  - (no data file)
+
+ {Take Finally}: success=0 failure=0 (in 1 files)
+  o take-finally.sql
+_/_/_/_/_/_/_/_/_/_/ {ReplaceSchema}
+2015-04-04 20:06:49,901 [main] INFO  (TorqueJDBCTransformTask#begin():104) - +------------------------------------------+
+2015-04-04 20:06:49,905 [main] INFO  (TorqueJDBCTransformTask#begin():105) - |                                          |
+2015-04-04 20:06:49,906 [main] INFO  (TorqueJDBCTransformTask#begin():106) - |                   JDBC                   |
+2015-04-04 20:06:49,907 [main] INFO  (TorqueJDBCTransformTask#begin():107) - |                                          |
+2015-04-04 20:06:49,908 [main] INFO  (TorqueJDBCTransformTask#begin():108) - +------------------------------------------+
+2015-04-04 20:06:49,934 [main] INFO  (DfDataSourceHandler#prepare():78) - ...Preparing data source:
+2015-04-04 20:06:49,935 [main] INFO  (DfDataSourceHandler#prepare():79) -   driver = org.h2.Driver
+2015-04-04 20:06:49,935 [main] INFO  (DfDataSourceHandler#prepare():80) -   url    = jdbc:h2:file:../src/main/resources/db/gamix
+2015-04-04 20:06:49,936 [main] INFO  (DfDataSourceHandler#prepare():81) -   user   = sa
+2015-04-04 20:06:49,972 [main] INFO  (DfSchemaXmlSerializer#serialize():285) - 
+2015-04-04 20:06:49,973 [main] INFO  (DfSchemaXmlSerializer#serialize():286) - ...Starting to process JDBC to SchemaXML
+2015-04-04 20:06:49,973 [main] INFO  (DfSchemaXmlSerializer#doLoadPreviousSchema():1460) - ...Loading previous schema (schema diff process)
+2015-04-04 20:06:49,974 [main] INFO  (DfSchemaXmlSerializer#doLoadPreviousSchema():1463) -  -> no previous (first time)
+2015-04-04 20:06:49,989 [main] INFO  (DfSchemaXmlSerializer#generateXML():359) - ...Getting DB connection
+2015-04-04 20:06:49,991 [main] INFO  (DfDataSourceHandler#createConnection():166) - ...Connecting to database by data source:
+2015-04-04 20:06:50,232 [main] INFO  (DfDataSourceHandler#setupConnectionMetaInfo():233) -   product = H2 1.4.186 (2015-03-02)
+2015-04-04 20:06:50,233 [main] INFO  (DfDataSourceHandler#setupConnectionMetaInfo():234) -   driver  = H2 JDBC Driver 1.4.186 (2015-03-02) for JDBC 4.0
+2015-04-04 20:06:50,235 [main] INFO  (DfSchemaXmlSerializer#generateXML():362) - ...Getting DB meta data
+2015-04-04 20:06:50,238 [main] INFO  (DfTableExtractor#doGetTableList():66) - ...Getting tables:
+2015-04-04 20:06:50,238 [main] INFO  (DfTableExtractor#doGetTableList():67) -   schema = {GAMIX.PUBLIC as main}
+2015-04-04 20:06:50,239 [main] INFO  (DfTableExtractor#doGetTableList():68) -   types  = [TABLE, VIEW]
+2015-04-04 20:06:50,281 [main] INFO  (DfSchemaXmlSerializer#processTable():419) - 
+2015-04-04 20:06:50,281 [main] INFO  (DfSchemaXmlSerializer#processTable():420) - $ /= = = = = = = = = = = = = = = = = = = = = = = = = =
+2015-04-04 20:06:50,282 [main] INFO  (DfSchemaXmlSerializer#processTable():421) - $ [Table List]
+2015-04-04 20:06:50,283 [main] INFO  (DfSchemaXmlSerializer#doProcessTable():501) - $ GAMIX.PUBLIC.TCM_SAMPLE(TABLE)
+2015-04-04 20:06:50,317 [main] INFO  (DfSchemaXmlSerializer#processTable():433) - $ 
+2015-04-04 20:06:50,318 [main] INFO  (DfSchemaXmlSerializer#processTable():434) - $ [Table Count]
+2015-04-04 20:06:50,318 [main] INFO  (DfSchemaXmlSerializer#processTable():435) - $ 1
+2015-04-04 20:06:50,319 [main] INFO  (DfSchemaXmlSerializer#processTable():436) - $ = = = = = = = = = =/
+2015-04-04 20:06:50,319 [main] INFO  (DfSchemaXmlSerializer#processTable():437) - 
+2015-04-04 20:06:50,320 [main] INFO  (DfSchemaXmlSerializer#processSequence():796) - ...Getting sequences
+2015-04-04 20:06:50,323 [main] INFO  (DfSequenceExtractorH2#doGetSequenceMap():52) - ...Loading sequence informations
+2015-04-04 20:06:50,326 [main] INFO  (DfSequenceExtractorBase#selectStringList():75) - select * from INFORMATION_SCHEMA.SEQUENCES where SEQUENCE_SCHEMA in ('PUBLIC')
+2015-04-04 20:06:50,329 [main] INFO  (DfSequenceExtractorH2#doGetSequenceMap():84) - 
+[SEQUENCE]
+ GAMIX.PUBLIC.SYSTEM_SEQUENCE_E9CB9BC0_C087_4A6A_802F_ADFD72E22FCE = GAMIX.PUBLIC.SYSTEM_SEQUENCE_E9CB9BC0_C087_4A6A_802F_ADFD72E22FCE:{null to null, increment 1}
+2015-04-04 20:06:50,331 [main] INFO  (DfSchemaXmlSerializer#processSequence():801) - ...Processing sequences: 1
+2015-04-04 20:06:50,347 [main] INFO  (DfSchemaXmlSerializer#serialize():300) - ...Serializing XML:
+2015-04-04 20:06:50,347 [main] INFO  (DfSchemaXmlSerializer#serialize():301) -   filePath = ./schema/project-schema-gamix.xml
+2015-04-04 20:06:50,348 [main] INFO  (DfSchemaXmlSerializer#serialize():302) -   encoding = UTF-8
+2015-04-04 20:06:50,364 [main] INFO  (DfDataSourceHandler#destroy():120) - ...closeReally()
+2015-04-04 20:06:50,371 [main] INFO  (DfDBFluteTaskUtil#logFinalMessage():139) - 
+_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
+[Final Message]: 00m00s488ms
+
+  DBFLUTE_CLIENT: {gamix}
+    database  = h2 (H2 1.4.186 (2015-03-02))
+    language  = java
+    container = seasar
+    package   = com.github.hatimiti.gamix.app.dbflute
+
+  DBFLUTE_ENVIRONMENT_TYPE: {}
+    driver = org.h2.Driver
+    url    = jdbc:h2:file:../src/main/resources/db/gamix
+    schema = {GAMIX.PUBLIC as main}
+    user   = sa
+    props  = {}
+    additionalSchema = 
+    repsEnvType      = ut
+    refreshProject   = $$AutoDetect$$
+_/_/_/_/_/_/_/_/_/_/ {JDBC}
+2015-04-04 20:06:51,478 [main] INFO  (TorqueDocumentationTask#begin():175) - +------------------------------------------+
+2015-04-04 20:06:51,481 [main] INFO  (TorqueDocumentationTask#begin():176) - |                                          |
+2015-04-04 20:06:51,481 [main] INFO  (TorqueDocumentationTask#begin():177) - |                   Doc                    |
+2015-04-04 20:06:51,483 [main] INFO  (TorqueDocumentationTask#begin():185) - |                                          |
+2015-04-04 20:06:51,484 [main] INFO  (TorqueDocumentationTask#begin():186) - +------------------------------------------+
+2015-04-04 20:06:51,513 [main] INFO  (DfDataSourceHandler#prepare():78) - ...Preparing data source:
+2015-04-04 20:06:51,514 [main] INFO  (DfDataSourceHandler#prepare():79) -   driver = org.h2.Driver
+2015-04-04 20:06:51,515 [main] INFO  (DfDataSourceHandler#prepare():80) -   url    = jdbc:h2:file:../src/main/resources/db/gamix
+2015-04-04 20:06:51,516 [main] INFO  (DfDataSourceHandler#prepare():81) -   user   = sa
+2015-04-04 20:06:51,519 [main] INFO  (TorqueDocumentationTask#processSchemaHtml():246) - 
+2015-04-04 20:06:51,520 [main] INFO  (TorqueDocumentationTask#processSchemaHtml():247) - * * * * * * * * * * *
+2015-04-04 20:06:51,520 [main] INFO  (TorqueDocumentationTask#processSchemaHtml():248) - *                   *
+2015-04-04 20:06:51,521 [main] INFO  (TorqueDocumentationTask#processSchemaHtml():249) - *    Schema HTML    *
+2015-04-04 20:06:51,521 [main] INFO  (TorqueDocumentationTask#processSchemaHtml():250) - *                   *
+2015-04-04 20:06:51,521 [main] INFO  (TorqueDocumentationTask#processSchemaHtml():251) - * * * * * * * * * * *
+2015-04-04 20:06:51,683 [main] INFO  (DTDResolver#resolveEntity():195) - ...Resolving XML by database.dtd in same package
+2015-04-04 20:06:51,733 [main] INFO  (DfAbstractTexenTask#fireVelocityProcess():255) - generator.parse("doc/ControlDocument.vm", c);
+2015-04-04 20:06:51,783 [main] INFO  (Database#doEnableDocumentOutputDirectory():1175) - ...Setting up documentOutputDirectory: ./output/doc
+2015-04-04 20:06:51,791 [main] INFO  (DfAdditionalPrimaryKeyInitializer#initializeAdditionalPrimaryKey():62) - /=======================================
+2015-04-04 20:06:51,792 [main] INFO  (DfAdditionalPrimaryKeyInitializer#initializeAdditionalPrimaryKey():63) - ...Initializing additional primary keys.
+2015-04-04 20:06:51,795 [main] INFO  (DfAdditionalPrimaryKeyInitializer#initializeAdditionalPrimaryKey():88) - ==========/
+2015-04-04 20:06:51,796 [main] INFO  (DfAdditionalUniqueKeyInitializer#initializeAdditionalUniqueKey():62) - /=======================================
+2015-04-04 20:06:51,797 [main] INFO  (DfAdditionalUniqueKeyInitializer#initializeAdditionalUniqueKey():63) - ...Initializing additional unique keys.
+2015-04-04 20:06:51,798 [main] INFO  (DfAdditionalUniqueKeyInitializer#initializeAdditionalUniqueKey():83) - ==========/
+2015-04-04 20:06:51,800 [main] INFO  (DfAdditionalForeignKeyInitializer#initializeAdditionalForeignKey():68) - /=======================================
+2015-04-04 20:06:51,800 [main] INFO  (DfAdditionalForeignKeyInitializer#initializeAdditionalForeignKey():69) - ...Initializing additional foreign keys.
+2015-04-04 20:06:51,802 [main] INFO  (DfAdditionalForeignKeyInitializer#initializeAdditionalForeignKey():88) - ==========/
+2015-04-04 20:06:51,809 [main] INFO  (DfDocumentSelector#doLoadSchemaHistory():150) - ...Loading schema history
+2015-04-04 20:06:51,809 [main] INFO  (DfDocumentSelector#doLoadSchemaHistory():156) -  -> no history
+2015-04-04 20:06:51,902 [main] INFO  (DfRefreshResourceProcess#show():297) - ...Refreshing [gamix] by http://localhost:8386/
+2015-04-04 20:06:51,934 [main] INFO  (DfDBFluteTaskUtil#logFinalMessage():139) - 
+_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
+[Final Message]: 00m00s471ms
+
+  DBFLUTE_CLIENT: {gamix}
+    database  = h2
+    language  = java
+    container = seasar
+    package   = com.github.hatimiti.gamix.app.dbflute
+
+  DBFLUTE_ENVIRONMENT_TYPE: {}
+    driver = org.h2.Driver
+    url    = jdbc:h2:file:../src/main/resources/db/gamix
+    schema = {GAMIX.PUBLIC as main}
+    user   = sa
+    props  = {}
+    additionalSchema = 
+    repsEnvType      = ut
+    refreshProject   = $$AutoDetect$$
+_/_/_/_/_/_/_/_/_/_/ {Doc}
+2015-04-04 20:06:55,021 [main] INFO  (TorqueDataModelTask#begin():109) - +------------------------------------------+
+2015-04-04 20:06:55,025 [main] INFO  (TorqueDataModelTask#begin():110) - |                                          |
+2015-04-04 20:06:55,025 [main] INFO  (TorqueDataModelTask#begin():111) - |                 Generate                 |
+2015-04-04 20:06:55,025 [main] INFO  (TorqueDataModelTask#begin():112) - |                                          |
+2015-04-04 20:06:55,026 [main] INFO  (TorqueDataModelTask#begin():113) - +------------------------------------------+
+2015-04-04 20:06:55,047 [main] INFO  (DfDataSourceHandler#prepare():78) - ...Preparing data source:
+2015-04-04 20:06:55,047 [main] INFO  (DfDataSourceHandler#prepare():79) -   driver = org.h2.Driver
+2015-04-04 20:06:55,048 [main] INFO  (DfDataSourceHandler#prepare():80) -   url    = jdbc:h2:file:../src/main/resources/db/gamix
+2015-04-04 20:06:55,048 [main] INFO  (DfDataSourceHandler#prepare():81) -   user   = sa
+2015-04-04 20:06:55,066 [main] INFO  (TorqueDataModelTask#setupControlTemplate():164) - 
+2015-04-04 20:06:55,067 [main] INFO  (TorqueDataModelTask#setupControlTemplate():165) - ...Using Java control: om/ControlGenerateJava.vm
+2015-04-04 20:06:55,220 [main] INFO  (DTDResolver#resolveEntity():195) - ...Resolving XML by database.dtd in same package
+2015-04-04 20:06:55,247 [main] INFO  (DfAbstractTexenTask#fireVelocityProcess():255) - generator.parse("om/ControlGenerateJava.vm", c);
+2015-04-04 20:06:55,343 [main] INFO  (Database#doEnableGenerateOutputDirectory():1143) - ...Setting up generateOutputDirectory: ../src/main/java
+2015-04-04 20:06:55,347 [main] INFO  (DfAdditionalPrimaryKeyInitializer#initializeAdditionalPrimaryKey():62) - /=======================================
+2015-04-04 20:06:55,347 [main] INFO  (DfAdditionalPrimaryKeyInitializer#initializeAdditionalPrimaryKey():63) - ...Initializing additional primary keys.
+2015-04-04 20:06:55,349 [main] INFO  (DfAdditionalPrimaryKeyInitializer#initializeAdditionalPrimaryKey():88) - ==========/
+2015-04-04 20:06:55,350 [main] INFO  (DfAdditionalUniqueKeyInitializer#initializeAdditionalUniqueKey():62) - /=======================================
+2015-04-04 20:06:55,351 [main] INFO  (DfAdditionalUniqueKeyInitializer#initializeAdditionalUniqueKey():63) - ...Initializing additional unique keys.
+2015-04-04 20:06:55,352 [main] INFO  (DfAdditionalUniqueKeyInitializer#initializeAdditionalUniqueKey():83) - ==========/
+2015-04-04 20:06:55,353 [main] INFO  (DfAdditionalForeignKeyInitializer#initializeAdditionalForeignKey():68) - /=======================================
+2015-04-04 20:06:55,354 [main] INFO  (DfAdditionalForeignKeyInitializer#initializeAdditionalForeignKey():69) - ...Initializing additional foreign keys.
+2015-04-04 20:06:55,355 [main] INFO  (DfAdditionalForeignKeyInitializer#initializeAdditionalForeignKey():88) - ==========/
+2015-04-04 20:06:55,367 [main] INFO  (DfIncludeQueryInitializer#initializeIncludeQuery():58) - /=============================
+2015-04-04 20:06:55,367 [main] INFO  (DfIncludeQueryInitializer#initializeIncludeQuery():59) - ...Initializing include query.
+2015-04-04 20:06:55,368 [main] INFO  (DfIncludeQueryInitializer#checkQueryMap():81) - String
+2015-04-04 20:06:55,368 [main] INFO  (DfIncludeQueryInitializer#checkQueryMap():81) - Number
+2015-04-04 20:06:55,368 [main] INFO  (DfIncludeQueryInitializer#checkQueryMap():81) - Date
+2015-04-04 20:06:55,368 [main] INFO  (DfIncludeQueryInitializer#checkQueryMap():86) -   NotEqual -> []
+2015-04-04 20:06:55,369 [main] INFO  (DfIncludeQueryInitializer#checkQueryMap():86) -   InScope -> []
+2015-04-04 20:06:55,369 [main] INFO  (DfIncludeQueryInitializer#checkQueryMap():86) -   NotInScope -> []
+2015-04-04 20:06:55,369 [main] INFO  (DfIncludeQueryInitializer#checkQueryMap():81) - OrderBy
+2015-04-04 20:06:55,369 [main] INFO  (DfIncludeQueryInitializer#initializeIncludeQuery():61) - ========/
+2015-04-04 20:06:55,382 [main] INFO  (Database#info():2711) - public void parseAllCommon() {
+2015-04-04 20:06:55,385 [main] INFO  (Database#info():2711) -     parse('DBCurrent');
+2015-04-04 20:06:55,389 [main] INFO  (Database#info():2711) -     parse('DBFluteConfig');
+2015-04-04 20:06:55,401 [main] INFO  (Database#info():2711) -     parse('DBFluteInitializer');
+2015-04-04 20:06:55,405 [main] INFO  (Database#info():2711) -     parse('DBMetaInstanceHandler');
+2015-04-04 20:06:55,419 [main] INFO  (Database#info():2711) -     parse('EntityDefinedCommonColumn');
+2015-04-04 20:06:55,423 [main] INFO  (Database#info():2711) -     parse('ImplementedBehaviorSelector');
+2015-04-04 20:06:55,427 [main] INFO  (Database#info():2711) -     parse('ImplementedCommonColumnAutoSetupper');
+2015-04-04 20:06:55,431 [main] INFO  (Database#info():2711) -     parse('ImplementedInvokerAssistant');
+2015-04-04 20:06:55,436 [main] INFO  (Database#info():2711) -     parse('ImplementedSqlClauseCreator');
+2015-04-04 20:06:55,440 [main] INFO  (Database#info():2711) - }
+2015-04-04 20:06:55,440 [main] INFO  (Database#info():2711) - public void parseContainerConfig() {
+2015-04-04 20:06:55,441 [main] INFO  (Database#info():2711) -     parse('../resources/dbflute.dicon')
+2015-04-04 20:06:55,448 [main] INFO  (Database#info():2711) - }
+2015-04-04 20:06:55,456 [main] INFO  (DfOldClassHandler#info():1033) - public void deleteOldTableClass() {
+2015-04-04 20:06:55,476 [main] INFO  (DfOldClassHandler#info():1033) - }
+2015-04-04 20:06:55,476 [main] INFO  (Database#info():2711) - public void parseTableClass() {
+2015-04-04 20:06:55,477 [main] INFO  (Database#info():2711) -     parse('TCM_SAMPLE');
+2015-04-04 20:06:55,742 [main] INFO  (Database#info():2711) - }
+2015-04-04 20:06:55,743 [main] INFO  (Database#info():2711) -  
+2015-04-04 20:06:55,827 [main] INFO  (DfRefreshResourceProcess#show():297) - ...Refreshing [gamix] by http://localhost:8386/
+2015-04-04 20:06:55,834 [main] INFO  (DfDBFluteTaskUtil#logFinalMessage():139) - 
+_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
+[Final Message]: 00m00s830ms
+
+  DBFLUTE_CLIENT: {gamix}
+    database  = h2
+    language  = java
+    container = seasar
+    package   = com.github.hatimiti.gamix.app.dbflute
+
+  DBFLUTE_ENVIRONMENT_TYPE: {}
+    driver = org.h2.Driver
+    url    = jdbc:h2:file:../src/main/resources/db/gamix
+    schema = {GAMIX.PUBLIC as main}
+    user   = sa
+    props  = {}
+    additionalSchema = 
+    repsEnvType      = ut
+    refreshProject   = $$AutoDetect$$
+_/_/_/_/_/_/_/_/_/_/ {Generate}
+2015-04-04 20:06:57,022 [main] INFO  (DfOutsideSqlTestTask#begin():77) - +------------------------------------------+
+2015-04-04 20:06:57,024 [main] INFO  (DfOutsideSqlTestTask#begin():78) - |                                          |
+2015-04-04 20:06:57,024 [main] INFO  (DfOutsideSqlTestTask#begin():79) - |              OutsideSqlTest              |
+2015-04-04 20:06:57,025 [main] INFO  (DfOutsideSqlTestTask#begin():80) - |                                          |
+2015-04-04 20:06:57,026 [main] INFO  (DfOutsideSqlTestTask#begin():81) - +------------------------------------------+
+2015-04-04 20:06:57,047 [main] INFO  (DfDataSourceHandler#prepare():78) - ...Preparing data source:
+2015-04-04 20:06:57,047 [main] INFO  (DfDataSourceHandler#prepare():79) -   driver = org.h2.Driver
+2015-04-04 20:06:57,048 [main] INFO  (DfDataSourceHandler#prepare():80) -   url    = jdbc:h2:file:../src/main/resources/db/gamix
+2015-04-04 20:06:57,048 [main] INFO  (DfDataSourceHandler#prepare():81) -   user   = sa
+2015-04-04 20:06:57,091 [main] INFO  (DfSqlFileFireMan#fire():89) - {Fired SQL}: success=0 failure=0 (in 0 files)
+2015-04-04 20:06:57,099 [main] INFO  (DfDBFluteTaskUtil#logFinalMessage():139) - 
+_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
+[Final Message]: 00m00s086ms
+
+  DBFLUTE_CLIENT: {gamix}
+    database  = h2
+    language  = java
+    container = seasar
+    package   = com.github.hatimiti.gamix.app.dbflute
+
+  DBFLUTE_ENVIRONMENT_TYPE: {}
+    driver = org.h2.Driver
+    url    = jdbc:h2:file:../src/main/resources/db/gamix
+    schema = {GAMIX.PUBLIC as main}
+    user   = sa
+    props  = {}
+    additionalSchema = 
+    repsEnvType      = ut
+    refreshProject   = $$AutoDetect$$
+
+ {Checked SQL}
+_/_/_/_/_/_/_/_/_/_/ {OutsideSqlTest}
+2015-04-04 20:06:58,383 [main] INFO  (DfSql2EntityTask#begin():105) - +------------------------------------------+
+2015-04-04 20:06:58,386 [main] INFO  (DfSql2EntityTask#begin():106) - |                                          |
+2015-04-04 20:06:58,386 [main] INFO  (DfSql2EntityTask#begin():107) - |                Sql2Entity                |
+2015-04-04 20:06:58,387 [main] INFO  (DfSql2EntityTask#begin():108) - |                                          |
+2015-04-04 20:06:58,387 [main] INFO  (DfSql2EntityTask#begin():109) - +------------------------------------------+
+2015-04-04 20:06:58,409 [main] INFO  (DfDataSourceHandler#prepare():78) - ...Preparing data source:
+2015-04-04 20:06:58,410 [main] INFO  (DfDataSourceHandler#prepare():79) -   driver = org.h2.Driver
+2015-04-04 20:06:58,410 [main] INFO  (DfDataSourceHandler#prepare():80) -   url    = jdbc:h2:file:../src/main/resources/db/gamix
+2015-04-04 20:06:58,411 [main] INFO  (DfDataSourceHandler#prepare():81) -   user   = sa
+2015-04-04 20:06:58,425 [main] INFO  (DfSql2EntityTask#setupControlTemplate():175) - 
+2015-04-04 20:06:58,426 [main] INFO  (DfSql2EntityTask#setupControlTemplate():176) - ...Using Java control: om/ControlSql2EntityJava.vm
+2015-04-04 20:06:58,432 [main] INFO  (DTDResolver#resolveEntity():195) - ...Resolving XML by database.dtd in same package
+2015-04-04 20:06:58,520 [main] INFO  (DfSqlFileFireMan#fire():89) - {Fired SQL}: success=0 failure=0 (in 0 files)
+2015-04-04 20:06:58,713 [main] INFO  (DfSql2EntityTask#initControlContext():306) - 
+2015-04-04 20:06:58,713 [main] INFO  (DfSql2EntityTask#initControlContext():307) - ...Preparing generation of customize-entities and parameter-beans
+2015-04-04 20:06:58,714 [main] INFO  (DfSql2EntityTask#initControlContext():308) - * * * * * * * * * *
+2015-04-04 20:06:58,714 [main] INFO  (DfSql2EntityTask#initControlContext():309) - * CustomizeEntity *
+2015-04-04 20:06:58,714 [main] INFO  (DfSql2EntityTask#initControlContext():310) - * * * * * * * * * *
+2015-04-04 20:06:58,714 [main] INFO  (DfSql2EntityTask#showParameterBean():927) - * * * * * * * * *
+2015-04-04 20:06:58,715 [main] INFO  (DfSql2EntityTask#showParameterBean():928) - * ParameterBean *
+2015-04-04 20:06:58,715 [main] INFO  (DfSql2EntityTask#showParameterBean():929) - * * * * * * * * *
+2015-04-04 20:06:58,719 [main] INFO  (DfAbstractTexenTask#fireVelocityProcess():255) - generator.parse("om/ControlSql2EntityJava.vm", c);
+2015-04-04 20:06:58,807 [main] INFO  (Database#doEnableSql2EntityOutputDirectory():1159) - ...Setting up sql2EntityOutputDirectory: ../src/main/java
+2015-04-04 20:06:58,810 [main] INFO  (DfOldClassHandler#info():1033) - public void deleteOldCustomizeClass() {
+2015-04-04 20:06:58,818 [main] INFO  (DfOldClassHandler#info():1033) - }
+2015-04-04 20:06:58,819 [main] INFO  (Database#info():2711) - public void parseCustomizeEntity() {
+2015-04-04 20:06:58,821 [main] INFO  (Database#info():2711) - }
+2015-04-04 20:06:58,842 [main] INFO  (DfSql2EntityTask#showTargetSqlFileInformation():298) - 
+/- - - - - - - - - - - - - - - - - - - - - - - -
+Target SQL files: 0
+
+- - - - - - - - - -/
+2015-04-04 20:06:58,849 [main] INFO  (DfRefreshResourceProcess#show():297) - ...Refreshing [gamix] by http://localhost:8386/
+2015-04-04 20:06:58,855 [main] INFO  (DfDBFluteTaskUtil#logFinalMessage():139) - 
+_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
+[Final Message]: 00m00s483ms
+
+  DBFLUTE_CLIENT: {gamix}
+    database  = h2
+    language  = java
+    container = seasar
+    package   = com.github.hatimiti.gamix.app.dbflute
+
+  DBFLUTE_ENVIRONMENT_TYPE: {}
+    driver = org.h2.Driver
+    url    = jdbc:h2:file:../src/main/resources/db/gamix
+    schema = {GAMIX.PUBLIC as main}
+    user   = sa
+    props  = {}
+    additionalSchema = 
+    repsEnvType      = ut
+    refreshProject   = $$AutoDetect$$
+_/_/_/_/_/_/_/_/_/_/ {Sql2Entity}
+2015-04-04 21:06:42,934 [main] INFO  (DfReplaceSchemaTask#begin():91) - +------------------------------------------+
+2015-04-04 21:06:42,937 [main] INFO  (DfReplaceSchemaTask#begin():92) - |                                          |
+2015-04-04 21:06:42,938 [main] INFO  (DfReplaceSchemaTask#begin():93) - |              ReplaceSchema               |
+2015-04-04 21:06:42,942 [main] INFO  (DfReplaceSchemaTask#begin():101) - |                                          |
+2015-04-04 21:06:42,943 [main] INFO  (DfReplaceSchemaTask#begin():102) - +------------------------------------------+
+2015-04-04 21:06:42,945 [main] INFO  (DfReplaceSchemaTask#waitBeforeReps():333) - ...Waiting for your GO SIGN from stdin before ReplaceSchema:
+2015-04-04 21:06:44,625 [main] INFO  (DfDataSourceHandler#prepare():78) - ...Preparing data source:
+2015-04-04 21:06:44,626 [main] INFO  (DfDataSourceHandler#prepare():79) -   driver = org.h2.Driver
+2015-04-04 21:06:44,626 [main] INFO  (DfDataSourceHandler#prepare():80) -   url    = jdbc:h2:file:../src/main/resources/db/gamix
+2015-04-04 21:06:44,627 [main] INFO  (DfDataSourceHandler#prepare():81) -   user   = sa
+2015-04-04 21:06:44,632 [main] INFO  (DfDataSourceHandler#createConnection():166) - ...Connecting to database by data source:
+2015-04-04 21:06:44,880 [main] INFO  (DfDataSourceHandler#setupConnectionMetaInfo():233) -   product = H2 1.4.186 (2015-03-02)
+2015-04-04 21:06:44,881 [main] INFO  (DfDataSourceHandler#setupConnectionMetaInfo():234) -   driver  = H2 JDBC Driver 1.4.186 (2015-03-02) for JDBC 4.0
+2015-04-04 21:06:44,899 [main] INFO  (DfCreateSchemaProcess#initializeSchemaMainDrop():206) - 
+2015-04-04 21:06:44,900 [main] INFO  (DfCreateSchemaProcess#initializeSchemaMainDrop():207) - * * * * * * * * * * *
+2015-04-04 21:06:44,900 [main] INFO  (DfCreateSchemaProcess#initializeSchemaMainDrop():208) - *                   *
+2015-04-04 21:06:44,902 [main] INFO  (DfCreateSchemaProcess#initializeSchemaMainDrop():209) - * Initialize Schema *
+2015-04-04 21:06:44,902 [main] INFO  (DfCreateSchemaProcess#initializeSchemaMainDrop():210) - *                   *
+2015-04-04 21:06:44,902 [main] INFO  (DfCreateSchemaProcess#initializeSchemaMainDrop():211) - * * * * * * * * * * *
+2015-04-04 21:06:44,918 [main] INFO  (DfTableExtractor#doGetTableList():66) - ...Getting tables:
+2015-04-04 21:06:44,919 [main] INFO  (DfTableExtractor#doGetTableList():67) -   schema = {GAMIX.PUBLIC as main}
+2015-04-04 21:06:44,919 [main] INFO  (DfTableExtractor#doGetTableList():68) -   types  = [TABLE, VIEW]
+2015-04-04 21:06:44,958 [main] INFO  (DfSchemaInitializerJdbc#logReplaceSql():609) - truncate table TCM_SAMPLE
+2015-04-04 21:06:44,965 [main] INFO  (DfSchemaInitializerJdbc#logReplaceSql():609) - drop table TCM_SAMPLE
+2015-04-04 21:06:44,984 [main] INFO  (DfCreateSchemaProcess#createSchema():243) - 
+2015-04-04 21:06:44,985 [main] INFO  (DfCreateSchemaProcess#createSchema():244) - * * * * * * * * *
+2015-04-04 21:06:44,985 [main] INFO  (DfCreateSchemaProcess#createSchema():245) - *               *
+2015-04-04 21:06:44,986 [main] INFO  (DfCreateSchemaProcess#createSchema():246) - * Create Schema *
+2015-04-04 21:06:44,986 [main] INFO  (DfCreateSchemaProcess#createSchema():247) - *               *
+2015-04-04 21:06:44,987 [main] INFO  (DfCreateSchemaProcess#createSchema():248) - * * * * * * * * *
+2015-04-04 21:06:44,991 [main] INFO  (DfSqlFileFireMan#fire():64) - ...Firing: replace-schema.sql
+2015-04-04 21:06:44,996 [main] INFO  (DfSqlFileRunnerBase#isSqlLineCommentOnly():480) - The SQL has line comments only so skip it:
+--CREATE SEQUENCE SCM_SAMPLE_ID START WITH 1 INCREMENT BY 1 MAXVALUE 999999999999 NOCYCLE NOCACHE
+2015-04-04 21:06:44,998 [main] INFO  (DfSqlFileRunnerBase#traceSql():168) - 
+DROP TABLE IF EXISTS
+ TCM_SAMPLE
+ CASCADE
+2015-04-04 21:06:45,000 [main] INFO  (DfSqlFileRunnerBase#traceSql():168) - 
+CREATE TABLE TCM_SAMPLE (
+  TCM_SAMPLE_ID IDENTITY PRIMARY KEY,
+  SAMPLE_NAME VARCHAR(50)
+)
+2015-04-04 21:06:45,018 [main] INFO  (DfSqlFileRunnerBase#traceResult():172) -  -> success=2 failure=0
+2015-04-04 21:06:45,019 [main] INFO  (DfSqlFileFireMan#fire():89) - {Create Schema}: success=2 failure=0 (in 1 files)
+2015-04-04 21:06:45,095 [main] INFO  (DfLoadDataProcess#execute():129) - 
+2015-04-04 21:06:45,096 [main] INFO  (DfLoadDataProcess#execute():130) - * * * * * * * * * * *
+2015-04-04 21:06:45,097 [main] INFO  (DfLoadDataProcess#execute():131) - *                   *
+2015-04-04 21:06:45,098 [main] INFO  (DfLoadDataProcess#execute():132) - * Load Data         *
+2015-04-04 21:06:45,098 [main] INFO  (DfLoadDataProcess#execute():133) - *                   *
+2015-04-04 21:06:45,099 [main] INFO  (DfLoadDataProcess#execute():134) - * * * * * * * * * * *
+2015-04-04 21:06:45,130 [main] INFO  (DfTakeFinallyProcess#takeFinally():219) - 
+2015-04-04 21:06:45,131 [main] INFO  (DfTakeFinallyProcess#takeFinally():220) - * * * * * * * **
+2015-04-04 21:06:45,131 [main] INFO  (DfTakeFinallyProcess#takeFinally():221) - *              *
+2015-04-04 21:06:45,132 [main] INFO  (DfTakeFinallyProcess#takeFinally():222) - * Take Finally *
+2015-04-04 21:06:45,132 [main] INFO  (DfTakeFinallyProcess#takeFinally():223) - *              *
+2015-04-04 21:06:45,133 [main] INFO  (DfTakeFinallyProcess#takeFinally():224) - * * * * * * * **
+2015-04-04 21:06:45,142 [main] INFO  (DfSqlFileFireMan#fire():64) - ...Firing: take-finally.sql
+2015-04-04 21:06:45,144 [main] INFO  (DfSqlFileRunnerBase#traceResult():172) -  -> success=0 failure=0
+2015-04-04 21:06:45,144 [main] INFO  (DfSqlFileFireMan#fire():89) - {Take Finally}: success=0 failure=0 (in 1 files)
+2015-04-04 21:06:45,146 [main] INFO  (DfDataSourceHandler#destroy():120) - ...closeReally()
+2015-04-04 21:06:45,155 [main] INFO  (DfDBFluteTaskUtil#logFinalMessage():139) - 
+_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
+[Final Message]: 00m02s237ms
+
+  DBFLUTE_CLIENT: {gamix}
+    database  = h2 (H2 1.4.186 (2015-03-02))
+    language  = java
+    container = seasar
+    package   = com.github.hatimiti.gamix.app.dbflute
+
+  DBFLUTE_ENVIRONMENT_TYPE: {}
+    driver = org.h2.Driver
+    url    = jdbc:h2:file:../src/main/resources/db/gamix
+    schema = {GAMIX.PUBLIC as main}
+    user   = sa
+    props  = {}
+    additionalSchema = 
+    repsEnvType      = ut
+    refreshProject   = $$AutoDetect$$
+
+ {Create Schema}: success=2 failure=0 (in 1 files)
+  o replace-schema.sql
+
+ {Load Data}: loaded-files=0
+  - (no data file)
+
+ {Take Finally}: success=0 failure=0 (in 1 files)
+  o take-finally.sql
+_/_/_/_/_/_/_/_/_/_/ {ReplaceSchema}
+2015-04-04 21:21:15,712 [main] INFO  (DfReplaceSchemaTask#begin():91) - +------------------------------------------+
+2015-04-04 21:21:15,716 [main] INFO  (DfReplaceSchemaTask#begin():92) - |                                          |
+2015-04-04 21:21:15,716 [main] INFO  (DfReplaceSchemaTask#begin():93) - |              ReplaceSchema               |
+2015-04-04 21:21:15,720 [main] INFO  (DfReplaceSchemaTask#begin():101) - |                                          |
+2015-04-04 21:21:15,721 [main] INFO  (DfReplaceSchemaTask#begin():102) - +------------------------------------------+
+2015-04-04 21:21:15,723 [main] INFO  (DfReplaceSchemaTask#waitBeforeReps():333) - ...Waiting for your GO SIGN from stdin before ReplaceSchema:
+2015-04-04 21:21:16,634 [main] INFO  (DfDataSourceHandler#prepare():78) - ...Preparing data source:
+2015-04-04 21:21:16,635 [main] INFO  (DfDataSourceHandler#prepare():79) -   driver = org.h2.Driver
+2015-04-04 21:21:16,636 [main] INFO  (DfDataSourceHandler#prepare():80) -   url    = jdbc:h2:file:../src/main/resources/db/gamix
+2015-04-04 21:21:16,636 [main] INFO  (DfDataSourceHandler#prepare():81) -   user   = gamix
+2015-04-04 21:21:16,641 [main] INFO  (DfDataSourceHandler#createConnection():166) - ...Connecting to database by data source:
+2015-04-04 21:21:17,173 [main] INFO  (DfReplaceSchemaTask#setupLazyConnection():143) - ...Being a lazy connection: Failed to connect: url=jdbc:h2:file:../src/main...
+2015-04-04 21:21:17,199 [main] INFO  (DfCreateSchemaProcess#initializeSchemaMainDrop():206) - 
+2015-04-04 21:21:17,201 [main] INFO  (DfCreateSchemaProcess#initializeSchemaMainDrop():207) - * * * * * * * * * * *
+2015-04-04 21:21:17,202 [main] INFO  (DfCreateSchemaProcess#initializeSchemaMainDrop():208) - *                   *
+2015-04-04 21:21:17,203 [main] INFO  (DfCreateSchemaProcess#initializeSchemaMainDrop():209) - * Initialize Schema *
+2015-04-04 21:21:17,204 [main] INFO  (DfCreateSchemaProcess#initializeSchemaMainDrop():210) - *                   *
+2015-04-04 21:21:17,205 [main] INFO  (DfCreateSchemaProcess#initializeSchemaMainDrop():211) - * * * * * * * * * * *
+2015-04-04 21:21:17,205 [main] INFO  (DfCreateSchemaProcess#initializeSchemaMainDrop():213) - *Passed because it's a lazy connection
+2015-04-04 21:21:17,207 [main] INFO  (DfCreateSchemaProcess#createSchema():243) - 
+2015-04-04 21:21:17,208 [main] INFO  (DfCreateSchemaProcess#createSchema():244) - * * * * * * * * *
+2015-04-04 21:21:17,208 [main] INFO  (DfCreateSchemaProcess#createSchema():245) - *               *
+2015-04-04 21:21:17,208 [main] INFO  (DfCreateSchemaProcess#createSchema():246) - * Create Schema *
+2015-04-04 21:21:17,209 [main] INFO  (DfCreateSchemaProcess#createSchema():247) - *               *
+2015-04-04 21:21:17,209 [main] INFO  (DfCreateSchemaProcess#createSchema():248) - * * * * * * * * *
+2015-04-04 21:21:17,214 [main] INFO  (DfSqlFileFireMan#fire():64) - ...Firing: replace-schema.sql
+2015-04-04 21:21:17,219 [main] INFO  (DfSqlFileRunnerBase#isSqlLineCommentOnly():480) - The SQL has line comments only so skip it:
+--CREATE SEQUENCE SCM_SAMPLE_ID START WITH 1 INCREMENT BY 1 MAXVALUE 999999999999 NOCYCLE NOCACHE
+2015-04-04 21:21:17,221 [main] INFO  (DfSqlFileRunnerBase#traceSql():168) - 
+DROP TABLE IF EXISTS
+ TCM_SAMPLE
+ CASCADE
+2015-04-04 21:21:17,224 [main] INFO  (DfCreateSchemaProcess$DfSqlFileRunnerExecuteCreateSchema#lazyConnectIfNeeds():443) - ...Connecting by main user lazily
+2015-04-04 21:21:17,225 [main] INFO  (DfDataSourceHandler#prepare():78) - ...Preparing data source:
+2015-04-04 21:21:17,225 [main] INFO  (DfDataSourceHandler#prepare():79) -   driver = org.h2.Driver
+2015-04-04 21:21:17,226 [main] INFO  (DfDataSourceHandler#prepare():80) -   url    = jdbc:h2:file:../src/main/resources/db/gamix
+2015-04-04 21:21:17,226 [main] INFO  (DfDataSourceHandler#prepare():81) -   user   = gamix
+2015-04-04 21:21:17,227 [main] INFO  (DfDataSourceHandler#createConnection():166) - ...Connecting to database by data source:
+2015-04-04 21:21:17,821 [main] INFO  (DfSqlFileFireMan#fire():89) - {Create Schema}: success=0 failure=1 *break (in 1 files)
+2015-04-04 21:21:17,856 [main] ERROR (DfDBFluteTaskUtil#logException():150) - Look! Read the message below.
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+Failed to execute DBFlute Task 'ReplaceSchema'.
+
+[Advice]
+Check the exception messages and the stack traces.
+* * * * * * * * * */
+org.dbflute.exception.SQLFailureException: Look! Read the message below.
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+Failed to execute the SQL!
+
+[SQL File]
+playsql\replace-schema.sql
+
+[Executed SQL]
+DROP TABLE IF EXISTS
+ TCM_SAMPLE
+ CASCADE
+
+[SQLState]
+28000
+
+[ErrorCode]
+28000
+
+[SQLException]
+org.dbflute.exception.DfJDBCException
+Failed to connect: url=jdbc:h2:file:../src/main/resources/db/gamix user=gamix
+
+[NextException]
+org.h2.jdbc.JdbcSQLException
+ユーザ名またはパスワードが不正です
+Wrong user name or password [28000-186]
+* * * * * * * * * */
+	at org.dbflute.helper.jdbc.sqlfile.DfSqlFileRunnerBase.throwSQLFailureException(DfSqlFileRunnerBase.java:587)
+	at org.dbflute.helper.jdbc.sqlfile.DfSqlFileRunnerExecute.execSQL(DfSqlFileRunnerExecute.java:80)
+	at org.dbflute.helper.jdbc.sqlfile.DfSqlFileRunnerBase.runTransaction(DfSqlFileRunnerBase.java:122)
+	at org.dbflute.helper.jdbc.sqlfile.DfSqlFileFireMan.processSqlFile(DfSqlFileFireMan.java:169)
+	at org.dbflute.helper.jdbc.sqlfile.DfSqlFileFireMan.fire(DfSqlFileFireMan.java:67)
+	at org.dbflute.logic.replaceschema.process.DfCreateSchemaProcess.createSchema(DfCreateSchemaProcess.java:251)
+	at org.dbflute.logic.replaceschema.process.DfCreateSchemaProcess.execute(DfCreateSchemaProcess.java:142)
+	at org.dbflute.task.DfReplaceSchemaTask.createSchema(DfReplaceSchemaTask.java:252)
+	at org.dbflute.task.DfReplaceSchemaTask.doExecuteCoreProcess(DfReplaceSchemaTask.java:241)
+	at org.dbflute.task.DfReplaceSchemaTask.executeCoreProcess(DfReplaceSchemaTask.java:236)
+	at org.dbflute.task.DfReplaceSchemaTask.processMain(DfReplaceSchemaTask.java:229)
+	at org.dbflute.task.DfReplaceSchemaTask.doExecute(DfReplaceSchemaTask.java:157)
+	at org.dbflute.task.bs.DfAbstractTexenTask$1.callActualExecute(DfAbstractTexenTask.java:130)
+	at org.dbflute.task.bs.assistant.DfTaskBasicController.doExecute(DfTaskBasicController.java:183)
+	at org.dbflute.task.bs.assistant.DfTaskBasicController.execute(DfTaskBasicController.java:77)
+	at org.dbflute.task.bs.DfAbstractTexenTask.execute(DfAbstractTexenTask.java:152)
+	at org.apache.tools.ant.UnknownElement.execute(UnknownElement.java:288)
+	at sun.reflect.GeneratedMethodAccessor3.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.apache.tools.ant.dispatch.DispatchUtils.execute(DispatchUtils.java:105)
+	at org.apache.tools.ant.Task.perform(Task.java:348)
+	at org.apache.tools.ant.Target.execute(Target.java:357)
+	at org.apache.tools.ant.Target.performTasks(Target.java:385)
+	at org.apache.tools.ant.Project.executeSortedTargets(Project.java:1329)
+	at org.apache.tools.ant.Project.executeTarget(Project.java:1298)
+	at org.apache.tools.ant.helper.DefaultExecutor.executeTargets(DefaultExecutor.java:41)
+	at org.apache.tools.ant.Project.executeTargets(Project.java:1181)
+	at org.apache.tools.ant.Main.runBuild(Main.java:698)
+	at org.apache.tools.ant.Main.startAnt(Main.java:199)
+	at org.apache.tools.ant.launch.Launcher.run(Launcher.java:257)
+	at org.apache.tools.ant.launch.Launcher.main(Launcher.java:104)
+Caused by: org.dbflute.exception.DfJDBCException: Failed to connect: url=jdbc:h2:file:../src/main/resources/db/gamix user=gamix
+	at org.dbflute.helper.jdbc.connection.DfDataSourceHandler.createConnection(DfDataSourceHandler.java:170)
+	at org.dbflute.helper.jdbc.connection.DfDataSourceHandler.processCachedConnection(DfDataSourceHandler.java:154)
+	at org.dbflute.helper.jdbc.connection.DfDataSourceHandler.getConnection(DfDataSourceHandler.java:137)
+	at org.dbflute.helper.jdbc.connection.DfFittingDataSource.getConnection(DfFittingDataSource.java:44)
+	at org.dbflute.helper.jdbc.context.DfSchemaSource.getConnection(DfSchemaSource.java:82)
+	at org.dbflute.task.DfReplaceSchemaTask.setupDataSource(DfReplaceSchemaTask.java:129)
+	at org.dbflute.task.DfReplaceSchemaTask$2.callbackSetupDataSource(DfReplaceSchemaTask.java:271)
+	at org.dbflute.logic.replaceschema.process.DfCreateSchemaProcess.setupDataSource(DfCreateSchemaProcess.java:132)
+	at org.dbflute.logic.replaceschema.process.DfCreateSchemaProcess$DfSqlFileRunnerExecuteCreateSchema.lazyConnectIfNeeds(DfCreateSchemaProcess.java:444)
+	at org.dbflute.helper.jdbc.sqlfile.DfSqlFileRunnerExecute.execSQL(DfSqlFileRunnerExecute.java:61)
+	... 30 more
+2015-04-04 21:21:17,901 [main] INFO  (DfDBFluteTaskUtil#logFinalMessage():139) - 
+_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
+[Final Message]: 00m02s206ms *Abort
+
+  DBFLUTE_CLIENT: {gamix}
+    database  = h2
+    language  = java
+    container = seasar
+    package   = com.github.hatimiti.gamix.app.dbflute
+
+  DBFLUTE_ENVIRONMENT_TYPE: {}
+    driver = org.h2.Driver
+    url    = jdbc:h2:file:../src/main/resources/db/gamix
+    schema = {GAMIX.PUBLIC as main}
+    user   = gamix
+    props  = {}
+    additionalSchema = 
+    repsEnvType      = ut
+    refreshProject   = $$AutoDetect$$
+
+ {Create Schema}: success=0 failure=1 *break (in 1 files)
+  x replace-schema.sql
+   >> (failed: Look at the exception message)
+    * * * * * *
+    * Failure *
+    * * * * * *
+_/_/_/_/_/_/_/_/_/_/ {ReplaceSchema}
+2015-04-04 21:23:53,768 [main] INFO  (DfReplaceSchemaTask#begin():91) - +------------------------------------------+
+2015-04-04 21:23:53,772 [main] INFO  (DfReplaceSchemaTask#begin():92) - |                                          |
+2015-04-04 21:23:53,773 [main] INFO  (DfReplaceSchemaTask#begin():93) - |              ReplaceSchema               |
+2015-04-04 21:23:53,776 [main] INFO  (DfReplaceSchemaTask#begin():101) - |                                          |
+2015-04-04 21:23:53,777 [main] INFO  (DfReplaceSchemaTask#begin():102) - +------------------------------------------+
+2015-04-04 21:23:53,779 [main] INFO  (DfReplaceSchemaTask#waitBeforeReps():333) - ...Waiting for your GO SIGN from stdin before ReplaceSchema:
+2015-04-04 21:23:54,609 [main] INFO  (DfDataSourceHandler#prepare():78) - ...Preparing data source:
+2015-04-04 21:23:54,610 [main] INFO  (DfDataSourceHandler#prepare():79) -   driver = org.h2.Driver
+2015-04-04 21:23:54,611 [main] INFO  (DfDataSourceHandler#prepare():80) -   url    = jdbc:h2:file:../src/main/resources/db/gamix
+2015-04-04 21:23:54,612 [main] INFO  (DfDataSourceHandler#prepare():81) -   user   = gamix
+2015-04-04 21:23:54,620 [main] INFO  (DfDataSourceHandler#createConnection():166) - ...Connecting to database by data source:
+2015-04-04 21:23:55,180 [main] INFO  (DfReplaceSchemaTask#setupLazyConnection():143) - ...Being a lazy connection: Failed to connect: url=jdbc:h2:file:../src/main...
+2015-04-04 21:23:55,211 [main] INFO  (DfCreateSchemaProcess#initializeSchemaMainDrop():206) - 
+2015-04-04 21:23:55,212 [main] INFO  (DfCreateSchemaProcess#initializeSchemaMainDrop():207) - * * * * * * * * * * *
+2015-04-04 21:23:55,212 [main] INFO  (DfCreateSchemaProcess#initializeSchemaMainDrop():208) - *                   *
+2015-04-04 21:23:55,213 [main] INFO  (DfCreateSchemaProcess#initializeSchemaMainDrop():209) - * Initialize Schema *
+2015-04-04 21:23:55,214 [main] INFO  (DfCreateSchemaProcess#initializeSchemaMainDrop():210) - *                   *
+2015-04-04 21:23:55,215 [main] INFO  (DfCreateSchemaProcess#initializeSchemaMainDrop():211) - * * * * * * * * * * *
+2015-04-04 21:23:55,215 [main] INFO  (DfCreateSchemaProcess#initializeSchemaMainDrop():213) - *Passed because it's a lazy connection
+2015-04-04 21:23:55,217 [main] INFO  (DfCreateSchemaProcess#createSchema():243) - 
+2015-04-04 21:23:55,218 [main] INFO  (DfCreateSchemaProcess#createSchema():244) - * * * * * * * * *
+2015-04-04 21:23:55,218 [main] INFO  (DfCreateSchemaProcess#createSchema():245) - *               *
+2015-04-04 21:23:55,218 [main] INFO  (DfCreateSchemaProcess#createSchema():246) - * Create Schema *
+2015-04-04 21:23:55,219 [main] INFO  (DfCreateSchemaProcess#createSchema():247) - *               *
+2015-04-04 21:23:55,219 [main] INFO  (DfCreateSchemaProcess#createSchema():248) - * * * * * * * * *
+2015-04-04 21:23:55,224 [main] INFO  (DfSqlFileFireMan#fire():64) - ...Firing: replace-schema.sql
+2015-04-04 21:23:55,228 [main] INFO  (DfSqlFileRunnerBase#isSqlLineCommentOnly():480) - The SQL has line comments only so skip it:
+--CREATE SEQUENCE SCM_SAMPLE_ID START WITH 1 INCREMENT BY 1 MAXVALUE 999999999999 NOCYCLE NOCACHE
+2015-04-04 21:23:55,230 [main] INFO  (DfSqlFileRunnerBase#traceSql():168) - 
+DROP TABLE IF EXISTS
+ TCM_SAMPLE
+ CASCADE
+2015-04-04 21:23:55,233 [main] INFO  (DfCreateSchemaProcess$DfSqlFileRunnerExecuteCreateSchema#lazyConnectIfNeeds():443) - ...Connecting by main user lazily
+2015-04-04 21:23:55,233 [main] INFO  (DfDataSourceHandler#prepare():78) - ...Preparing data source:
+2015-04-04 21:23:55,234 [main] INFO  (DfDataSourceHandler#prepare():79) -   driver = org.h2.Driver
+2015-04-04 21:23:55,234 [main] INFO  (DfDataSourceHandler#prepare():80) -   url    = jdbc:h2:file:../src/main/resources/db/gamix
+2015-04-04 21:23:55,235 [main] INFO  (DfDataSourceHandler#prepare():81) -   user   = gamix
+2015-04-04 21:23:55,235 [main] INFO  (DfDataSourceHandler#createConnection():166) - ...Connecting to database by data source:
+2015-04-04 21:23:55,798 [main] INFO  (DfSqlFileFireMan#fire():89) - {Create Schema}: success=0 failure=1 *break (in 1 files)
+2015-04-04 21:23:55,858 [main] ERROR (DfDBFluteTaskUtil#logException():150) - Look! Read the message below.
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+Failed to execute DBFlute Task 'ReplaceSchema'.
+
+[Advice]
+Check the exception messages and the stack traces.
+* * * * * * * * * */
+org.dbflute.exception.SQLFailureException: Look! Read the message below.
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+Failed to execute the SQL!
+
+[SQL File]
+playsql\replace-schema.sql
+
+[Executed SQL]
+DROP TABLE IF EXISTS
+ TCM_SAMPLE
+ CASCADE
+
+[SQLState]
+28000
+
+[ErrorCode]
+28000
+
+[SQLException]
+org.dbflute.exception.DfJDBCException
+Failed to connect: url=jdbc:h2:file:../src/main/resources/db/gamix user=gamix
+
+[NextException]
+org.h2.jdbc.JdbcSQLException
+ユーザ名またはパスワードが不正です
+Wrong user name or password [28000-186]
+* * * * * * * * * */
+	at org.dbflute.helper.jdbc.sqlfile.DfSqlFileRunnerBase.throwSQLFailureException(DfSqlFileRunnerBase.java:587)
+	at org.dbflute.helper.jdbc.sqlfile.DfSqlFileRunnerExecute.execSQL(DfSqlFileRunnerExecute.java:80)
+	at org.dbflute.helper.jdbc.sqlfile.DfSqlFileRunnerBase.runTransaction(DfSqlFileRunnerBase.java:122)
+	at org.dbflute.helper.jdbc.sqlfile.DfSqlFileFireMan.processSqlFile(DfSqlFileFireMan.java:169)
+	at org.dbflute.helper.jdbc.sqlfile.DfSqlFileFireMan.fire(DfSqlFileFireMan.java:67)
+	at org.dbflute.logic.replaceschema.process.DfCreateSchemaProcess.createSchema(DfCreateSchemaProcess.java:251)
+	at org.dbflute.logic.replaceschema.process.DfCreateSchemaProcess.execute(DfCreateSchemaProcess.java:142)
+	at org.dbflute.task.DfReplaceSchemaTask.createSchema(DfReplaceSchemaTask.java:252)
+	at org.dbflute.task.DfReplaceSchemaTask.doExecuteCoreProcess(DfReplaceSchemaTask.java:241)
+	at org.dbflute.task.DfReplaceSchemaTask.executeCoreProcess(DfReplaceSchemaTask.java:236)
+	at org.dbflute.task.DfReplaceSchemaTask.processMain(DfReplaceSchemaTask.java:229)
+	at org.dbflute.task.DfReplaceSchemaTask.doExecute(DfReplaceSchemaTask.java:157)
+	at org.dbflute.task.bs.DfAbstractTexenTask$1.callActualExecute(DfAbstractTexenTask.java:130)
+	at org.dbflute.task.bs.assistant.DfTaskBasicController.doExecute(DfTaskBasicController.java:183)
+	at org.dbflute.task.bs.assistant.DfTaskBasicController.execute(DfTaskBasicController.java:77)
+	at org.dbflute.task.bs.DfAbstractTexenTask.execute(DfAbstractTexenTask.java:152)
+	at org.apache.tools.ant.UnknownElement.execute(UnknownElement.java:288)
+	at sun.reflect.GeneratedMethodAccessor3.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.apache.tools.ant.dispatch.DispatchUtils.execute(DispatchUtils.java:105)
+	at org.apache.tools.ant.Task.perform(Task.java:348)
+	at org.apache.tools.ant.Target.execute(Target.java:357)
+	at org.apache.tools.ant.Target.performTasks(Target.java:385)
+	at org.apache.tools.ant.Project.executeSortedTargets(Project.java:1329)
+	at org.apache.tools.ant.Project.executeTarget(Project.java:1298)
+	at org.apache.tools.ant.helper.DefaultExecutor.executeTargets(DefaultExecutor.java:41)
+	at org.apache.tools.ant.Project.executeTargets(Project.java:1181)
+	at org.apache.tools.ant.Main.runBuild(Main.java:698)
+	at org.apache.tools.ant.Main.startAnt(Main.java:199)
+	at org.apache.tools.ant.launch.Launcher.run(Launcher.java:257)
+	at org.apache.tools.ant.launch.Launcher.main(Launcher.java:104)
+Caused by: org.dbflute.exception.DfJDBCException: Failed to connect: url=jdbc:h2:file:../src/main/resources/db/gamix user=gamix
+	at org.dbflute.helper.jdbc.connection.DfDataSourceHandler.createConnection(DfDataSourceHandler.java:170)
+	at org.dbflute.helper.jdbc.connection.DfDataSourceHandler.processCachedConnection(DfDataSourceHandler.java:154)
+	at org.dbflute.helper.jdbc.connection.DfDataSourceHandler.getConnection(DfDataSourceHandler.java:137)
+	at org.dbflute.helper.jdbc.connection.DfFittingDataSource.getConnection(DfFittingDataSource.java:44)
+	at org.dbflute.helper.jdbc.context.DfSchemaSource.getConnection(DfSchemaSource.java:82)
+	at org.dbflute.task.DfReplaceSchemaTask.setupDataSource(DfReplaceSchemaTask.java:129)
+	at org.dbflute.task.DfReplaceSchemaTask$2.callbackSetupDataSource(DfReplaceSchemaTask.java:271)
+	at org.dbflute.logic.replaceschema.process.DfCreateSchemaProcess.setupDataSource(DfCreateSchemaProcess.java:132)
+	at org.dbflute.logic.replaceschema.process.DfCreateSchemaProcess$DfSqlFileRunnerExecuteCreateSchema.lazyConnectIfNeeds(DfCreateSchemaProcess.java:444)
+	at org.dbflute.helper.jdbc.sqlfile.DfSqlFileRunnerExecute.execSQL(DfSqlFileRunnerExecute.java:61)
+	... 30 more
+2015-04-04 21:23:56,017 [main] INFO  (DfDBFluteTaskUtil#logFinalMessage():139) - 
+_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
+[Final Message]: 00m02s264ms *Abort
+
+  DBFLUTE_CLIENT: {gamix}
+    database  = h2
+    language  = java
+    container = seasar
+    package   = com.github.hatimiti.gamix.app.dbflute
+
+  DBFLUTE_ENVIRONMENT_TYPE: {}
+    driver = org.h2.Driver
+    url    = jdbc:h2:file:../src/main/resources/db/gamix
+    schema = {GAMIX.PUBLIC as main}
+    user   = gamix
+    props  = {}
+    additionalSchema = 
+    repsEnvType      = ut
+    refreshProject   = $$AutoDetect$$
+
+ {Create Schema}: success=0 failure=1 *break (in 1 files)
+  x replace-schema.sql
+   >> (failed: Look at the exception message)
+    * * * * * *
+    * Failure *
+    * * * * * *
+_/_/_/_/_/_/_/_/_/_/ {ReplaceSchema}
+2015-04-04 21:24:25,414 [main] INFO  (DfReplaceSchemaTask#begin():91) - +------------------------------------------+
+2015-04-04 21:24:25,418 [main] INFO  (DfReplaceSchemaTask#begin():92) - |                                          |
+2015-04-04 21:24:25,419 [main] INFO  (DfReplaceSchemaTask#begin():93) - |              ReplaceSchema               |
+2015-04-04 21:24:25,422 [main] INFO  (DfReplaceSchemaTask#begin():101) - |                                          |
+2015-04-04 21:24:25,423 [main] INFO  (DfReplaceSchemaTask#begin():102) - +------------------------------------------+
+2015-04-04 21:24:25,425 [main] INFO  (DfReplaceSchemaTask#waitBeforeReps():333) - ...Waiting for your GO SIGN from stdin before ReplaceSchema:
+2015-04-04 21:24:26,086 [main] INFO  (DfDataSourceHandler#prepare():78) - ...Preparing data source:
+2015-04-04 21:24:26,086 [main] INFO  (DfDataSourceHandler#prepare():79) -   driver = org.h2.Driver
+2015-04-04 21:24:26,087 [main] INFO  (DfDataSourceHandler#prepare():80) -   url    = jdbc:h2:file:../src/main/resources/db/gamix
+2015-04-04 21:24:26,088 [main] INFO  (DfDataSourceHandler#prepare():81) -   user   = GAMIX
+2015-04-04 21:24:26,093 [main] INFO  (DfDataSourceHandler#createConnection():166) - ...Connecting to database by data source:
+2015-04-04 21:24:26,344 [main] INFO  (DfDataSourceHandler#setupConnectionMetaInfo():233) -   product = H2 1.4.186 (2015-03-02)
+2015-04-04 21:24:26,345 [main] INFO  (DfDataSourceHandler#setupConnectionMetaInfo():234) -   driver  = H2 JDBC Driver 1.4.186 (2015-03-02) for JDBC 4.0
+2015-04-04 21:24:26,364 [main] INFO  (DfCreateSchemaProcess#initializeSchemaMainDrop():206) - 
+2015-04-04 21:24:26,365 [main] INFO  (DfCreateSchemaProcess#initializeSchemaMainDrop():207) - * * * * * * * * * * *
+2015-04-04 21:24:26,366 [main] INFO  (DfCreateSchemaProcess#initializeSchemaMainDrop():208) - *                   *
+2015-04-04 21:24:26,367 [main] INFO  (DfCreateSchemaProcess#initializeSchemaMainDrop():209) - * Initialize Schema *
+2015-04-04 21:24:26,367 [main] INFO  (DfCreateSchemaProcess#initializeSchemaMainDrop():210) - *                   *
+2015-04-04 21:24:26,368 [main] INFO  (DfCreateSchemaProcess#initializeSchemaMainDrop():211) - * * * * * * * * * * *
+2015-04-04 21:24:26,381 [main] INFO  (DfTableExtractor#doGetTableList():66) - ...Getting tables:
+2015-04-04 21:24:26,382 [main] INFO  (DfTableExtractor#doGetTableList():67) -   schema = {GAMIX.PUBLIC as main}
+2015-04-04 21:24:26,383 [main] INFO  (DfTableExtractor#doGetTableList():68) -   types  = [TABLE, VIEW]
+2015-04-04 21:24:26,433 [main] INFO  (DfSchemaInitializerJdbc#logReplaceSql():609) - drop table TCM_SAMPLE
+2015-04-04 21:24:26,435 [main] INFO  (DfSchemaInitializerJdbc#logReplaceSql():609) -   (x) retry: drop materialized view TCM_SAMPLE
+2015-04-04 21:24:26,438 [main] ERROR (DfDBFluteTaskUtil#logException():150) - Look! Read the message below.
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+Failed to execute DBFlute Task 'ReplaceSchema'.
+
+[Advice]
+Check the exception messages and the stack traces.
+
+[Database Product]
+H2 1.4.186 (2015-03-02)
+
+[JDBC Driver]
+H2 JDBC Driver 1.4.186 (2015-03-02) for JDBC 4.0
+* * * * * * * * * */
+org.dbflute.exception.SQLFailureException: Failed to drop the table: drop table TCM_SAMPLE
+	at org.dbflute.logic.replaceschema.schemainitializer.DfSchemaInitializerJdbc.callbackDropTableByJdbc(DfSchemaInitializerJdbc.java:400)
+	at org.dbflute.logic.replaceschema.schemainitializer.DfSchemaInitializerJdbc.dropTable(DfSchemaInitializerJdbc.java:346)
+	at org.dbflute.logic.replaceschema.schemainitializer.DfSchemaInitializerJdbc.executeTableProcess(DfSchemaInitializerJdbc.java:201)
+	at org.dbflute.logic.replaceschema.schemainitializer.DfSchemaInitializerJdbc.executeObject(DfSchemaInitializerJdbc.java:171)
+	at org.dbflute.logic.replaceschema.schemainitializer.DfSchemaInitializerJdbc.initializeSchema(DfSchemaInitializerJdbc.java:106)
+	at org.dbflute.logic.replaceschema.process.DfCreateSchemaProcess.initializeSchemaMainDrop(DfCreateSchemaProcess.java:219)
+	at org.dbflute.logic.replaceschema.process.DfCreateSchemaProcess.initializeSchema(DfCreateSchemaProcess.java:165)
+	at org.dbflute.logic.replaceschema.process.DfCreateSchemaProcess.execute(DfCreateSchemaProcess.java:140)
+	at org.dbflute.task.DfReplaceSchemaTask.createSchema(DfReplaceSchemaTask.java:252)
+	at org.dbflute.task.DfReplaceSchemaTask.doExecuteCoreProcess(DfReplaceSchemaTask.java:241)
+	at org.dbflute.task.DfReplaceSchemaTask.executeCoreProcess(DfReplaceSchemaTask.java:236)
+	at org.dbflute.task.DfReplaceSchemaTask.processMain(DfReplaceSchemaTask.java:229)
+	at org.dbflute.task.DfReplaceSchemaTask.doExecute(DfReplaceSchemaTask.java:157)
+	at org.dbflute.task.bs.DfAbstractTexenTask$1.callActualExecute(DfAbstractTexenTask.java:130)
+	at org.dbflute.task.bs.assistant.DfTaskBasicController.doExecute(DfTaskBasicController.java:183)
+	at org.dbflute.task.bs.assistant.DfTaskBasicController.execute(DfTaskBasicController.java:77)
+	at org.dbflute.task.bs.DfAbstractTexenTask.execute(DfAbstractTexenTask.java:152)
+	at org.apache.tools.ant.UnknownElement.execute(UnknownElement.java:288)
+	at sun.reflect.GeneratedMethodAccessor3.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.apache.tools.ant.dispatch.DispatchUtils.execute(DispatchUtils.java:105)
+	at org.apache.tools.ant.Task.perform(Task.java:348)
+	at org.apache.tools.ant.Target.execute(Target.java:357)
+	at org.apache.tools.ant.Target.performTasks(Target.java:385)
+	at org.apache.tools.ant.Project.executeSortedTargets(Project.java:1329)
+	at org.apache.tools.ant.Project.executeTarget(Project.java:1298)
+	at org.apache.tools.ant.helper.DefaultExecutor.executeTargets(DefaultExecutor.java:41)
+	at org.apache.tools.ant.Project.executeTargets(Project.java:1181)
+	at org.apache.tools.ant.Main.runBuild(Main.java:698)
+	at org.apache.tools.ant.Main.startAnt(Main.java:199)
+	at org.apache.tools.ant.launch.Launcher.run(Launcher.java:257)
+	at org.apache.tools.ant.launch.Launcher.main(Launcher.java:104)
+Caused by: org.h2.jdbc.JdbcSQLException: オブジェクト "PUBLIC.TCM_SAMPLE" に対する十分な権限がありません
+Not enough rights for object "PUBLIC.TCM_SAMPLE"; SQL statement:
+drop table TCM_SAMPLE [90096-186]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:345)
+	at org.h2.message.DbException.get(DbException.java:179)
+	at org.h2.message.DbException.get(DbException.java:155)
+	at org.h2.engine.User.checkRight(User.java:101)
+	at org.h2.command.ddl.DropTable.prepareDrop(DropTable.java:72)
+	at org.h2.command.ddl.DropTable.update(DropTable.java:113)
+	at org.h2.command.CommandContainer.update(CommandContainer.java:78)
+	at org.h2.command.Command.executeUpdate(Command.java:254)
+	at org.h2.jdbc.JdbcStatement.executeInternal(JdbcStatement.java:184)
+	at org.h2.jdbc.JdbcStatement.execute(JdbcStatement.java:158)
+	at org.dbflute.logic.replaceschema.schemainitializer.DfSchemaInitializerJdbc.callbackDropTableByJdbc(DfSchemaInitializerJdbc.java:393)
+	... 32 more
+2015-04-04 21:24:26,476 [main] INFO  (DfDataSourceHandler#destroy():120) - ...closeReally()
+2015-04-04 21:24:26,486 [main] INFO  (DfDBFluteTaskUtil#logFinalMessage():139) - 
+_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
+[Final Message]: 00m01s087ms *Abort
+
+  DBFLUTE_CLIENT: {gamix}
+    database  = h2 (H2 1.4.186 (2015-03-02))
+    language  = java
+    container = seasar
+    package   = com.github.hatimiti.gamix.app.dbflute
+
+  DBFLUTE_ENVIRONMENT_TYPE: {}
+    driver = org.h2.Driver
+    url    = jdbc:h2:file:../src/main/resources/db/gamix
+    schema = {GAMIX.PUBLIC as main}
+    user   = GAMIX
+    props  = {}
+    additionalSchema = 
+    repsEnvType      = ut
+    refreshProject   = $$AutoDetect$$
+
+
+_/_/_/_/_/_/_/_/_/_/ {ReplaceSchema}
+2015-04-04 21:25:34,332 [main] INFO  (DfReplaceSchemaTask#begin():91) - +------------------------------------------+
+2015-04-04 21:25:34,336 [main] INFO  (DfReplaceSchemaTask#begin():92) - |                                          |
+2015-04-04 21:25:34,337 [main] INFO  (DfReplaceSchemaTask#begin():93) - |              ReplaceSchema               |
+2015-04-04 21:25:34,340 [main] INFO  (DfReplaceSchemaTask#begin():101) - |                                          |
+2015-04-04 21:25:34,341 [main] INFO  (DfReplaceSchemaTask#begin():102) - +------------------------------------------+
+2015-04-04 21:25:34,343 [main] INFO  (DfReplaceSchemaTask#waitBeforeReps():333) - ...Waiting for your GO SIGN from stdin before ReplaceSchema:
+2015-04-04 21:25:36,334 [main] INFO  (DfDataSourceHandler#prepare():78) - ...Preparing data source:
+2015-04-04 21:25:36,336 [main] INFO  (DfDataSourceHandler#prepare():79) -   driver = org.h2.Driver
+2015-04-04 21:25:36,337 [main] INFO  (DfDataSourceHandler#prepare():80) -   url    = jdbc:h2:file:../src/main/resources/db/gamix
+2015-04-04 21:25:36,338 [main] INFO  (DfDataSourceHandler#prepare():81) -   user   = GAMIX
+2015-04-04 21:25:36,342 [main] INFO  (DfDataSourceHandler#createConnection():166) - ...Connecting to database by data source:
+2015-04-04 21:25:36,582 [main] INFO  (DfDataSourceHandler#setupConnectionMetaInfo():233) -   product = H2 1.4.186 (2015-03-02)
+2015-04-04 21:25:36,583 [main] INFO  (DfDataSourceHandler#setupConnectionMetaInfo():234) -   driver  = H2 JDBC Driver 1.4.186 (2015-03-02) for JDBC 4.0
+2015-04-04 21:25:36,600 [main] INFO  (DfCreateSchemaProcess#initializeSchemaMainDrop():206) - 
+2015-04-04 21:25:36,600 [main] INFO  (DfCreateSchemaProcess#initializeSchemaMainDrop():207) - * * * * * * * * * * *
+2015-04-04 21:25:36,601 [main] INFO  (DfCreateSchemaProcess#initializeSchemaMainDrop():208) - *                   *
+2015-04-04 21:25:36,602 [main] INFO  (DfCreateSchemaProcess#initializeSchemaMainDrop():209) - * Initialize Schema *
+2015-04-04 21:25:36,602 [main] INFO  (DfCreateSchemaProcess#initializeSchemaMainDrop():210) - *                   *
+2015-04-04 21:25:36,603 [main] INFO  (DfCreateSchemaProcess#initializeSchemaMainDrop():211) - * * * * * * * * * * *
+2015-04-04 21:25:36,621 [main] INFO  (DfTableExtractor#doGetTableList():66) - ...Getting tables:
+2015-04-04 21:25:36,621 [main] INFO  (DfTableExtractor#doGetTableList():67) -   schema = {GAMIX.PUBLIC as main}
+2015-04-04 21:25:36,622 [main] INFO  (DfTableExtractor#doGetTableList():68) -   types  = [TABLE, VIEW]
+2015-04-04 21:25:36,672 [main] INFO  (DfSchemaInitializerJdbc#logReplaceSql():609) - drop table TCM_SAMPLE
+2015-04-04 21:25:36,674 [main] INFO  (DfSchemaInitializerJdbc#logReplaceSql():609) -   (x) retry: drop materialized view TCM_SAMPLE
+2015-04-04 21:25:36,677 [main] ERROR (DfDBFluteTaskUtil#logException():150) - Look! Read the message below.
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+Failed to execute DBFlute Task 'ReplaceSchema'.
+
+[Advice]
+Check the exception messages and the stack traces.
+
+[Database Product]
+H2 1.4.186 (2015-03-02)
+
+[JDBC Driver]
+H2 JDBC Driver 1.4.186 (2015-03-02) for JDBC 4.0
+* * * * * * * * * */
+org.dbflute.exception.SQLFailureException: Failed to drop the table: drop table TCM_SAMPLE
+	at org.dbflute.logic.replaceschema.schemainitializer.DfSchemaInitializerJdbc.callbackDropTableByJdbc(DfSchemaInitializerJdbc.java:400)
+	at org.dbflute.logic.replaceschema.schemainitializer.DfSchemaInitializerJdbc.dropTable(DfSchemaInitializerJdbc.java:346)
+	at org.dbflute.logic.replaceschema.schemainitializer.DfSchemaInitializerJdbc.executeTableProcess(DfSchemaInitializerJdbc.java:201)
+	at org.dbflute.logic.replaceschema.schemainitializer.DfSchemaInitializerJdbc.executeObject(DfSchemaInitializerJdbc.java:171)
+	at org.dbflute.logic.replaceschema.schemainitializer.DfSchemaInitializerJdbc.initializeSchema(DfSchemaInitializerJdbc.java:106)
+	at org.dbflute.logic.replaceschema.process.DfCreateSchemaProcess.initializeSchemaMainDrop(DfCreateSchemaProcess.java:219)
+	at org.dbflute.logic.replaceschema.process.DfCreateSchemaProcess.initializeSchema(DfCreateSchemaProcess.java:165)
+	at org.dbflute.logic.replaceschema.process.DfCreateSchemaProcess.execute(DfCreateSchemaProcess.java:140)
+	at org.dbflute.task.DfReplaceSchemaTask.createSchema(DfReplaceSchemaTask.java:252)
+	at org.dbflute.task.DfReplaceSchemaTask.doExecuteCoreProcess(DfReplaceSchemaTask.java:241)
+	at org.dbflute.task.DfReplaceSchemaTask.executeCoreProcess(DfReplaceSchemaTask.java:236)
+	at org.dbflute.task.DfReplaceSchemaTask.processMain(DfReplaceSchemaTask.java:229)
+	at org.dbflute.task.DfReplaceSchemaTask.doExecute(DfReplaceSchemaTask.java:157)
+	at org.dbflute.task.bs.DfAbstractTexenTask$1.callActualExecute(DfAbstractTexenTask.java:130)
+	at org.dbflute.task.bs.assistant.DfTaskBasicController.doExecute(DfTaskBasicController.java:183)
+	at org.dbflute.task.bs.assistant.DfTaskBasicController.execute(DfTaskBasicController.java:77)
+	at org.dbflute.task.bs.DfAbstractTexenTask.execute(DfAbstractTexenTask.java:152)
+	at org.apache.tools.ant.UnknownElement.execute(UnknownElement.java:288)
+	at sun.reflect.GeneratedMethodAccessor3.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.apache.tools.ant.dispatch.DispatchUtils.execute(DispatchUtils.java:105)
+	at org.apache.tools.ant.Task.perform(Task.java:348)
+	at org.apache.tools.ant.Target.execute(Target.java:357)
+	at org.apache.tools.ant.Target.performTasks(Target.java:385)
+	at org.apache.tools.ant.Project.executeSortedTargets(Project.java:1329)
+	at org.apache.tools.ant.Project.executeTarget(Project.java:1298)
+	at org.apache.tools.ant.helper.DefaultExecutor.executeTargets(DefaultExecutor.java:41)
+	at org.apache.tools.ant.Project.executeTargets(Project.java:1181)
+	at org.apache.tools.ant.Main.runBuild(Main.java:698)
+	at org.apache.tools.ant.Main.startAnt(Main.java:199)
+	at org.apache.tools.ant.launch.Launcher.run(Launcher.java:257)
+	at org.apache.tools.ant.launch.Launcher.main(Launcher.java:104)
+Caused by: org.h2.jdbc.JdbcSQLException: オブジェクト "PUBLIC.TCM_SAMPLE" に対する十分な権限がありません
+Not enough rights for object "PUBLIC.TCM_SAMPLE"; SQL statement:
+drop table TCM_SAMPLE [90096-186]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:345)
+	at org.h2.message.DbException.get(DbException.java:179)
+	at org.h2.message.DbException.get(DbException.java:155)
+	at org.h2.engine.User.checkRight(User.java:101)
+	at org.h2.command.ddl.DropTable.prepareDrop(DropTable.java:72)
+	at org.h2.command.ddl.DropTable.update(DropTable.java:113)
+	at org.h2.command.CommandContainer.update(CommandContainer.java:78)
+	at org.h2.command.Command.executeUpdate(Command.java:254)
+	at org.h2.jdbc.JdbcStatement.executeInternal(JdbcStatement.java:184)
+	at org.h2.jdbc.JdbcStatement.execute(JdbcStatement.java:158)
+	at org.dbflute.logic.replaceschema.schemainitializer.DfSchemaInitializerJdbc.callbackDropTableByJdbc(DfSchemaInitializerJdbc.java:393)
+	... 32 more
+2015-04-04 21:25:36,715 [main] INFO  (DfDataSourceHandler#destroy():120) - ...closeReally()
+2015-04-04 21:25:36,723 [main] INFO  (DfDBFluteTaskUtil#logFinalMessage():139) - 
+_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
+[Final Message]: 00m02s408ms *Abort
+
+  DBFLUTE_CLIENT: {gamix}
+    database  = h2 (H2 1.4.186 (2015-03-02))
+    language  = java
+    container = seasar
+    package   = com.github.hatimiti.gamix.app.dbflute
+
+  DBFLUTE_ENVIRONMENT_TYPE: {}
+    driver = org.h2.Driver
+    url    = jdbc:h2:file:../src/main/resources/db/gamix
+    schema = {GAMIX.PUBLIC as main}
+    user   = GAMIX
+    props  = {}
+    additionalSchema = 
+    repsEnvType      = ut
+    refreshProject   = $$AutoDetect$$
+
+
+_/_/_/_/_/_/_/_/_/_/ {ReplaceSchema}
+2015-04-04 21:25:56,732 [main] INFO  (DfReplaceSchemaTask#begin():91) - +------------------------------------------+
+2015-04-04 21:25:56,736 [main] INFO  (DfReplaceSchemaTask#begin():92) - |                                          |
+2015-04-04 21:25:56,737 [main] INFO  (DfReplaceSchemaTask#begin():93) - |              ReplaceSchema               |
+2015-04-04 21:25:56,741 [main] INFO  (DfReplaceSchemaTask#begin():101) - |                                          |
+2015-04-04 21:25:56,742 [main] INFO  (DfReplaceSchemaTask#begin():102) - +------------------------------------------+
+2015-04-04 21:25:56,744 [main] INFO  (DfReplaceSchemaTask#waitBeforeReps():333) - ...Waiting for your GO SIGN from stdin before ReplaceSchema:
+2015-04-04 21:25:57,479 [main] INFO  (DfDataSourceHandler#prepare():78) - ...Preparing data source:
+2015-04-04 21:25:57,480 [main] INFO  (DfDataSourceHandler#prepare():79) -   driver = org.h2.Driver
+2015-04-04 21:25:57,482 [main] INFO  (DfDataSourceHandler#prepare():80) -   url    = jdbc:h2:file:../src/main/resources/db/gamix
+2015-04-04 21:25:57,483 [main] INFO  (DfDataSourceHandler#prepare():81) -   user   = GAMIX
+2015-04-04 21:25:57,490 [main] INFO  (DfDataSourceHandler#createConnection():166) - ...Connecting to database by data source:
+2015-04-04 21:25:57,755 [main] INFO  (DfDataSourceHandler#setupConnectionMetaInfo():233) -   product = H2 1.4.186 (2015-03-02)
+2015-04-04 21:25:57,756 [main] INFO  (DfDataSourceHandler#setupConnectionMetaInfo():234) -   driver  = H2 JDBC Driver 1.4.186 (2015-03-02) for JDBC 4.0
+2015-04-04 21:25:57,775 [main] INFO  (DfCreateSchemaProcess#initializeSchemaMainDrop():206) - 
+2015-04-04 21:25:57,775 [main] INFO  (DfCreateSchemaProcess#initializeSchemaMainDrop():207) - * * * * * * * * * * *
+2015-04-04 21:25:57,776 [main] INFO  (DfCreateSchemaProcess#initializeSchemaMainDrop():208) - *                   *
+2015-04-04 21:25:57,777 [main] INFO  (DfCreateSchemaProcess#initializeSchemaMainDrop():209) - * Initialize Schema *
+2015-04-04 21:25:57,777 [main] INFO  (DfCreateSchemaProcess#initializeSchemaMainDrop():210) - *                   *
+2015-04-04 21:25:57,778 [main] INFO  (DfCreateSchemaProcess#initializeSchemaMainDrop():211) - * * * * * * * * * * *
+2015-04-04 21:25:57,792 [main] INFO  (DfTableExtractor#doGetTableList():66) - ...Getting tables:
+2015-04-04 21:25:57,792 [main] INFO  (DfTableExtractor#doGetTableList():67) -   schema = {GAMIX.PUBLIC as main}
+2015-04-04 21:25:57,793 [main] INFO  (DfTableExtractor#doGetTableList():68) -   types  = [TABLE, VIEW]
+2015-04-04 21:25:57,841 [main] INFO  (DfSchemaInitializerJdbc#logReplaceSql():609) - drop table TCM_SAMPLE
+2015-04-04 21:25:57,844 [main] INFO  (DfSchemaInitializerJdbc#logReplaceSql():609) -   (x) retry: drop materialized view TCM_SAMPLE
+2015-04-04 21:25:57,847 [main] ERROR (DfDBFluteTaskUtil#logException():150) - Look! Read the message below.
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+Failed to execute DBFlute Task 'ReplaceSchema'.
+
+[Advice]
+Check the exception messages and the stack traces.
+
+[Database Product]
+H2 1.4.186 (2015-03-02)
+
+[JDBC Driver]
+H2 JDBC Driver 1.4.186 (2015-03-02) for JDBC 4.0
+* * * * * * * * * */
+org.dbflute.exception.SQLFailureException: Failed to drop the table: drop table TCM_SAMPLE
+	at org.dbflute.logic.replaceschema.schemainitializer.DfSchemaInitializerJdbc.callbackDropTableByJdbc(DfSchemaInitializerJdbc.java:400)
+	at org.dbflute.logic.replaceschema.schemainitializer.DfSchemaInitializerJdbc.dropTable(DfSchemaInitializerJdbc.java:346)
+	at org.dbflute.logic.replaceschema.schemainitializer.DfSchemaInitializerJdbc.executeTableProcess(DfSchemaInitializerJdbc.java:201)
+	at org.dbflute.logic.replaceschema.schemainitializer.DfSchemaInitializerJdbc.executeObject(DfSchemaInitializerJdbc.java:171)
+	at org.dbflute.logic.replaceschema.schemainitializer.DfSchemaInitializerJdbc.initializeSchema(DfSchemaInitializerJdbc.java:106)
+	at org.dbflute.logic.replaceschema.process.DfCreateSchemaProcess.initializeSchemaMainDrop(DfCreateSchemaProcess.java:219)
+	at org.dbflute.logic.replaceschema.process.DfCreateSchemaProcess.initializeSchema(DfCreateSchemaProcess.java:165)
+	at org.dbflute.logic.replaceschema.process.DfCreateSchemaProcess.execute(DfCreateSchemaProcess.java:140)
+	at org.dbflute.task.DfReplaceSchemaTask.createSchema(DfReplaceSchemaTask.java:252)
+	at org.dbflute.task.DfReplaceSchemaTask.doExecuteCoreProcess(DfReplaceSchemaTask.java:241)
+	at org.dbflute.task.DfReplaceSchemaTask.executeCoreProcess(DfReplaceSchemaTask.java:236)
+	at org.dbflute.task.DfReplaceSchemaTask.processMain(DfReplaceSchemaTask.java:229)
+	at org.dbflute.task.DfReplaceSchemaTask.doExecute(DfReplaceSchemaTask.java:157)
+	at org.dbflute.task.bs.DfAbstractTexenTask$1.callActualExecute(DfAbstractTexenTask.java:130)
+	at org.dbflute.task.bs.assistant.DfTaskBasicController.doExecute(DfTaskBasicController.java:183)
+	at org.dbflute.task.bs.assistant.DfTaskBasicController.execute(DfTaskBasicController.java:77)
+	at org.dbflute.task.bs.DfAbstractTexenTask.execute(DfAbstractTexenTask.java:152)
+	at org.apache.tools.ant.UnknownElement.execute(UnknownElement.java:288)
+	at sun.reflect.GeneratedMethodAccessor3.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.apache.tools.ant.dispatch.DispatchUtils.execute(DispatchUtils.java:105)
+	at org.apache.tools.ant.Task.perform(Task.java:348)
+	at org.apache.tools.ant.Target.execute(Target.java:357)
+	at org.apache.tools.ant.Target.performTasks(Target.java:385)
+	at org.apache.tools.ant.Project.executeSortedTargets(Project.java:1329)
+	at org.apache.tools.ant.Project.executeTarget(Project.java:1298)
+	at org.apache.tools.ant.helper.DefaultExecutor.executeTargets(DefaultExecutor.java:41)
+	at org.apache.tools.ant.Project.executeTargets(Project.java:1181)
+	at org.apache.tools.ant.Main.runBuild(Main.java:698)
+	at org.apache.tools.ant.Main.startAnt(Main.java:199)
+	at org.apache.tools.ant.launch.Launcher.run(Launcher.java:257)
+	at org.apache.tools.ant.launch.Launcher.main(Launcher.java:104)
+Caused by: org.h2.jdbc.JdbcSQLException: オブジェクト "PUBLIC.TCM_SAMPLE" に対する十分な権限がありません
+Not enough rights for object "PUBLIC.TCM_SAMPLE"; SQL statement:
+drop table TCM_SAMPLE [90096-186]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:345)
+	at org.h2.message.DbException.get(DbException.java:179)
+	at org.h2.message.DbException.get(DbException.java:155)
+	at org.h2.engine.User.checkRight(User.java:101)
+	at org.h2.command.ddl.DropTable.prepareDrop(DropTable.java:72)
+	at org.h2.command.ddl.DropTable.update(DropTable.java:113)
+	at org.h2.command.CommandContainer.update(CommandContainer.java:78)
+	at org.h2.command.Command.executeUpdate(Command.java:254)
+	at org.h2.jdbc.JdbcStatement.executeInternal(JdbcStatement.java:184)
+	at org.h2.jdbc.JdbcStatement.execute(JdbcStatement.java:158)
+	at org.dbflute.logic.replaceschema.schemainitializer.DfSchemaInitializerJdbc.callbackDropTableByJdbc(DfSchemaInitializerJdbc.java:393)
+	... 32 more
+2015-04-04 21:25:57,884 [main] INFO  (DfDataSourceHandler#destroy():120) - ...closeReally()
+2015-04-04 21:25:57,894 [main] INFO  (DfDBFluteTaskUtil#logFinalMessage():139) - 
+_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
+[Final Message]: 00m01s180ms *Abort
+
+  DBFLUTE_CLIENT: {gamix}
+    database  = h2 (H2 1.4.186 (2015-03-02))
+    language  = java
+    container = seasar
+    package   = com.github.hatimiti.gamix.app.dbflute
+
+  DBFLUTE_ENVIRONMENT_TYPE: {}
+    driver = org.h2.Driver
+    url    = jdbc:h2:file:../src/main/resources/db/gamix
+    schema = {GAMIX.PUBLIC as main}
+    user   = GAMIX
+    props  = {}
+    additionalSchema = 
+    repsEnvType      = ut
+    refreshProject   = $$AutoDetect$$
+
+
+_/_/_/_/_/_/_/_/_/_/ {ReplaceSchema}
+2015-04-04 21:47:10,607 [main] INFO  (DfReplaceSchemaTask#begin():91) - +------------------------------------------+
+2015-04-04 21:47:10,611 [main] INFO  (DfReplaceSchemaTask#begin():92) - |                                          |
+2015-04-04 21:47:10,612 [main] INFO  (DfReplaceSchemaTask#begin():93) - |              ReplaceSchema               |
+2015-04-04 21:47:10,617 [main] INFO  (DfReplaceSchemaTask#begin():101) - |                                          |
+2015-04-04 21:47:10,618 [main] INFO  (DfReplaceSchemaTask#begin():102) - +------------------------------------------+
+2015-04-04 21:47:10,620 [main] INFO  (DfReplaceSchemaTask#waitBeforeReps():333) - ...Waiting for your GO SIGN from stdin before ReplaceSchema:
+2015-04-04 21:47:11,547 [main] INFO  (DfDataSourceHandler#prepare():78) - ...Preparing data source:
+2015-04-04 21:47:11,547 [main] INFO  (DfDataSourceHandler#prepare():79) -   driver = org.h2.Driver
+2015-04-04 21:47:11,548 [main] INFO  (DfDataSourceHandler#prepare():80) -   url    = jdbc:h2:file:../src/main/resources/db/gamix
+2015-04-04 21:47:11,550 [main] INFO  (DfDataSourceHandler#prepare():81) -   user   = GAMIX
+2015-04-04 21:47:11,558 [main] INFO  (DfDataSourceHandler#createConnection():166) - ...Connecting to database by data source:
+2015-04-04 21:47:11,820 [main] INFO  (DfDataSourceHandler#setupConnectionMetaInfo():233) -   product = H2 1.4.186 (2015-03-02)
+2015-04-04 21:47:11,821 [main] INFO  (DfDataSourceHandler#setupConnectionMetaInfo():234) -   driver  = H2 JDBC Driver 1.4.186 (2015-03-02) for JDBC 4.0
+2015-04-04 21:47:11,840 [main] INFO  (DfCreateSchemaProcess#initializeSchemaMainDrop():206) - 
+2015-04-04 21:47:11,840 [main] INFO  (DfCreateSchemaProcess#initializeSchemaMainDrop():207) - * * * * * * * * * * *
+2015-04-04 21:47:11,841 [main] INFO  (DfCreateSchemaProcess#initializeSchemaMainDrop():208) - *                   *
+2015-04-04 21:47:11,842 [main] INFO  (DfCreateSchemaProcess#initializeSchemaMainDrop():209) - * Initialize Schema *
+2015-04-04 21:47:11,842 [main] INFO  (DfCreateSchemaProcess#initializeSchemaMainDrop():210) - *                   *
+2015-04-04 21:47:11,843 [main] INFO  (DfCreateSchemaProcess#initializeSchemaMainDrop():211) - * * * * * * * * * * *
+2015-04-04 21:47:11,856 [main] INFO  (DfTableExtractor#doGetTableList():66) - ...Getting tables:
+2015-04-04 21:47:11,857 [main] INFO  (DfTableExtractor#doGetTableList():67) -   schema = {GAMIX.GAMIX as main}
+2015-04-04 21:47:11,858 [main] INFO  (DfTableExtractor#doGetTableList():68) -   types  = [TABLE, VIEW]
+2015-04-04 21:47:11,904 [main] INFO  (DfCreateSchemaProcess#createSchema():243) - 
+2015-04-04 21:47:11,905 [main] INFO  (DfCreateSchemaProcess#createSchema():244) - * * * * * * * * *
+2015-04-04 21:47:11,905 [main] INFO  (DfCreateSchemaProcess#createSchema():245) - *               *
+2015-04-04 21:47:11,905 [main] INFO  (DfCreateSchemaProcess#createSchema():246) - * Create Schema *
+2015-04-04 21:47:11,906 [main] INFO  (DfCreateSchemaProcess#createSchema():247) - *               *
+2015-04-04 21:47:11,906 [main] INFO  (DfCreateSchemaProcess#createSchema():248) - * * * * * * * * *
+2015-04-04 21:47:11,910 [main] INFO  (DfSqlFileFireMan#fire():64) - ...Firing: replace-schema.sql
+2015-04-04 21:47:11,915 [main] INFO  (DfSqlFileRunnerBase#isSqlLineCommentOnly():480) - The SQL has line comments only so skip it:
+--CREATE SEQUENCE SCM_SAMPLE_ID START WITH 1 INCREMENT BY 1 MAXVALUE 999999999999 NOCYCLE NOCACHE
+2015-04-04 21:47:11,917 [main] INFO  (DfSqlFileRunnerBase#traceSql():168) - 
+DROP TABLE IF EXISTS
+ TCM_SAMPLE
+ CASCADE
+2015-04-04 21:47:11,921 [main] INFO  (DfSqlFileRunnerBase#traceSql():168) - 
+CREATE TABLE TCM_SAMPLE (
+  TCM_SAMPLE_ID IDENTITY PRIMARY KEY,
+  SAMPLE_NAME VARCHAR(50)
+)
+2015-04-04 21:47:11,952 [main] INFO  (DfSqlFileRunnerBase#traceResult():172) -  -> success=2 failure=0
+2015-04-04 21:47:11,953 [main] INFO  (DfSqlFileFireMan#fire():89) - {Create Schema}: success=2 failure=0 (in 1 files)
+2015-04-04 21:47:12,029 [main] INFO  (DfLoadDataProcess#execute():129) - 
+2015-04-04 21:47:12,030 [main] INFO  (DfLoadDataProcess#execute():130) - * * * * * * * * * * *
+2015-04-04 21:47:12,030 [main] INFO  (DfLoadDataProcess#execute():131) - *                   *
+2015-04-04 21:47:12,031 [main] INFO  (DfLoadDataProcess#execute():132) - * Load Data         *
+2015-04-04 21:47:12,032 [main] INFO  (DfLoadDataProcess#execute():133) - *                   *
+2015-04-04 21:47:12,033 [main] INFO  (DfLoadDataProcess#execute():134) - * * * * * * * * * * *
+2015-04-04 21:47:12,058 [main] INFO  (DfTakeFinallyProcess#takeFinally():219) - 
+2015-04-04 21:47:12,059 [main] INFO  (DfTakeFinallyProcess#takeFinally():220) - * * * * * * * **
+2015-04-04 21:47:12,059 [main] INFO  (DfTakeFinallyProcess#takeFinally():221) - *              *
+2015-04-04 21:47:12,060 [main] INFO  (DfTakeFinallyProcess#takeFinally():222) - * Take Finally *
+2015-04-04 21:47:12,060 [main] INFO  (DfTakeFinallyProcess#takeFinally():223) - *              *
+2015-04-04 21:47:12,061 [main] INFO  (DfTakeFinallyProcess#takeFinally():224) - * * * * * * * **
+2015-04-04 21:47:12,069 [main] INFO  (DfSqlFileFireMan#fire():64) - ...Firing: take-finally.sql
+2015-04-04 21:47:12,071 [main] INFO  (DfSqlFileRunnerBase#traceResult():172) -  -> success=0 failure=0
+2015-04-04 21:47:12,072 [main] INFO  (DfSqlFileFireMan#fire():89) - {Take Finally}: success=0 failure=0 (in 1 files)
+2015-04-04 21:47:12,073 [main] INFO  (DfDataSourceHandler#destroy():120) - ...closeReally()
+2015-04-04 21:47:12,089 [main] INFO  (DfDBFluteTaskUtil#logFinalMessage():139) - 
+_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
+[Final Message]: 00m01s499ms
+
+  DBFLUTE_CLIENT: {gamix}
+    database  = h2 (H2 1.4.186 (2015-03-02))
+    language  = java
+    container = seasar
+    package   = com.github.hatimiti.gamix.app.dbflute
+
+  DBFLUTE_ENVIRONMENT_TYPE: {}
+    driver = org.h2.Driver
+    url    = jdbc:h2:file:../src/main/resources/db/gamix
+    schema = {GAMIX.GAMIX as main}
+    user   = GAMIX
+    props  = {}
+    additionalSchema = 
+    repsEnvType      = ut
+    refreshProject   = $$AutoDetect$$
+
+ {Create Schema}: success=2 failure=0 (in 1 files)
+  o replace-schema.sql
+
+ {Load Data}: loaded-files=0
+  - (no data file)
+
+ {Take Finally}: success=0 failure=0 (in 1 files)
+  o take-finally.sql
+_/_/_/_/_/_/_/_/_/_/ {ReplaceSchema}
+2015-04-04 21:51:02,097 [main] INFO  (DfReplaceSchemaTask#begin():91) - +------------------------------------------+
+2015-04-04 21:51:02,101 [main] INFO  (DfReplaceSchemaTask#begin():92) - |                                          |
+2015-04-04 21:51:02,102 [main] INFO  (DfReplaceSchemaTask#begin():93) - |              ReplaceSchema               |
+2015-04-04 21:51:02,105 [main] INFO  (DfReplaceSchemaTask#begin():101) - |                                          |
+2015-04-04 21:51:02,106 [main] INFO  (DfReplaceSchemaTask#begin():102) - +------------------------------------------+
+2015-04-04 21:51:02,108 [main] INFO  (DfReplaceSchemaTask#waitBeforeReps():333) - ...Waiting for your GO SIGN from stdin before ReplaceSchema:
+2015-04-04 21:51:02,792 [main] INFO  (DfDataSourceHandler#prepare():78) - ...Preparing data source:
+2015-04-04 21:51:02,793 [main] INFO  (DfDataSourceHandler#prepare():79) -   driver = org.h2.Driver
+2015-04-04 21:51:02,794 [main] INFO  (DfDataSourceHandler#prepare():80) -   url    = jdbc:h2:file:../src/main/resources/db/gamix
+2015-04-04 21:51:02,796 [main] INFO  (DfDataSourceHandler#prepare():81) -   user   = GAMIX
+2015-04-04 21:51:02,802 [main] INFO  (DfDataSourceHandler#createConnection():166) - ...Connecting to database by data source:
+2015-04-04 21:51:03,060 [main] INFO  (DfDataSourceHandler#setupConnectionMetaInfo():233) -   product = H2 1.4.186 (2015-03-02)
+2015-04-04 21:51:03,061 [main] INFO  (DfDataSourceHandler#setupConnectionMetaInfo():234) -   driver  = H2 JDBC Driver 1.4.186 (2015-03-02) for JDBC 4.0
+2015-04-04 21:51:03,077 [main] INFO  (DfCreateSchemaProcess#initializeSchemaMainDrop():206) - 
+2015-04-04 21:51:03,077 [main] INFO  (DfCreateSchemaProcess#initializeSchemaMainDrop():207) - * * * * * * * * * * *
+2015-04-04 21:51:03,078 [main] INFO  (DfCreateSchemaProcess#initializeSchemaMainDrop():208) - *                   *
+2015-04-04 21:51:03,079 [main] INFO  (DfCreateSchemaProcess#initializeSchemaMainDrop():209) - * Initialize Schema *
+2015-04-04 21:51:03,079 [main] INFO  (DfCreateSchemaProcess#initializeSchemaMainDrop():210) - *                   *
+2015-04-04 21:51:03,080 [main] INFO  (DfCreateSchemaProcess#initializeSchemaMainDrop():211) - * * * * * * * * * * *
+2015-04-04 21:51:03,096 [main] INFO  (DfTableExtractor#doGetTableList():66) - ...Getting tables:
+2015-04-04 21:51:03,096 [main] INFO  (DfTableExtractor#doGetTableList():67) -   schema = {GAMIX.PUBLIC as main}
+2015-04-04 21:51:03,097 [main] INFO  (DfTableExtractor#doGetTableList():68) -   types  = [TABLE, VIEW]
+2015-04-04 21:51:03,133 [main] INFO  (DfSchemaInitializerJdbc#logReplaceSql():609) - truncate table TCM_SAMPLE
+2015-04-04 21:51:03,141 [main] INFO  (DfSchemaInitializerJdbc#logReplaceSql():609) - drop table TCM_SAMPLE
+2015-04-04 21:51:03,162 [main] INFO  (DfCreateSchemaProcess#createSchema():243) - 
+2015-04-04 21:51:03,162 [main] INFO  (DfCreateSchemaProcess#createSchema():244) - * * * * * * * * *
+2015-04-04 21:51:03,163 [main] INFO  (DfCreateSchemaProcess#createSchema():245) - *               *
+2015-04-04 21:51:03,163 [main] INFO  (DfCreateSchemaProcess#createSchema():246) - * Create Schema *
+2015-04-04 21:51:03,164 [main] INFO  (DfCreateSchemaProcess#createSchema():247) - *               *
+2015-04-04 21:51:03,164 [main] INFO  (DfCreateSchemaProcess#createSchema():248) - * * * * * * * * *
+2015-04-04 21:51:03,169 [main] INFO  (DfSqlFileFireMan#fire():64) - ...Firing: replace-schema.sql
+2015-04-04 21:51:03,172 [main] INFO  (DfSqlFileRunnerBase#isSqlLineCommentOnly():480) - The SQL has line comments only so skip it:
+--CREATE SEQUENCE SCM_SAMPLE_ID START WITH 1 INCREMENT BY 1 MAXVALUE 999999999999 NOCYCLE NOCACHE
+2015-04-04 21:51:03,174 [main] INFO  (DfSqlFileRunnerBase#traceSql():168) - 
+DROP TABLE IF EXISTS
+ TCM_SAMPLE
+ CASCADE
+2015-04-04 21:51:03,176 [main] INFO  (DfSqlFileRunnerBase#traceSql():168) - 
+CREATE TABLE TCM_SAMPLE (
+  TCM_SAMPLE_ID IDENTITY PRIMARY KEY,
+  SAMPLE_NAME VARCHAR(50)
+)
+2015-04-04 21:51:03,194 [main] INFO  (DfSqlFileRunnerBase#traceResult():172) -  -> success=2 failure=0
+2015-04-04 21:51:03,194 [main] INFO  (DfSqlFileFireMan#fire():89) - {Create Schema}: success=2 failure=0 (in 1 files)
+2015-04-04 21:51:03,267 [main] INFO  (DfLoadDataProcess#execute():129) - 
+2015-04-04 21:51:03,267 [main] INFO  (DfLoadDataProcess#execute():130) - * * * * * * * * * * *
+2015-04-04 21:51:03,268 [main] INFO  (DfLoadDataProcess#execute():131) - *                   *
+2015-04-04 21:51:03,269 [main] INFO  (DfLoadDataProcess#execute():132) - * Load Data         *
+2015-04-04 21:51:03,269 [main] INFO  (DfLoadDataProcess#execute():133) - *                   *
+2015-04-04 21:51:03,270 [main] INFO  (DfLoadDataProcess#execute():134) - * * * * * * * * * * *
+2015-04-04 21:51:03,294 [main] INFO  (DfTakeFinallyProcess#takeFinally():219) - 
+2015-04-04 21:51:03,295 [main] INFO  (DfTakeFinallyProcess#takeFinally():220) - * * * * * * * **
+2015-04-04 21:51:03,295 [main] INFO  (DfTakeFinallyProcess#takeFinally():221) - *              *
+2015-04-04 21:51:03,296 [main] INFO  (DfTakeFinallyProcess#takeFinally():222) - * Take Finally *
+2015-04-04 21:51:03,296 [main] INFO  (DfTakeFinallyProcess#takeFinally():223) - *              *
+2015-04-04 21:51:03,297 [main] INFO  (DfTakeFinallyProcess#takeFinally():224) - * * * * * * * **
+2015-04-04 21:51:03,305 [main] INFO  (DfSqlFileFireMan#fire():64) - ...Firing: take-finally.sql
+2015-04-04 21:51:03,307 [main] INFO  (DfSqlFileRunnerBase#traceResult():172) -  -> success=0 failure=0
+2015-04-04 21:51:03,307 [main] INFO  (DfSqlFileFireMan#fire():89) - {Take Finally}: success=0 failure=0 (in 1 files)
+2015-04-04 21:51:03,309 [main] INFO  (DfDataSourceHandler#destroy():120) - ...closeReally()
+2015-04-04 21:51:03,320 [main] INFO  (DfDBFluteTaskUtil#logFinalMessage():139) - 
+_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
+[Final Message]: 00m01s238ms
+
+  DBFLUTE_CLIENT: {gamix}
+    database  = h2 (H2 1.4.186 (2015-03-02))
+    language  = java
+    container = seasar
+    package   = com.github.hatimiti.gamix.app.dbflute
+
+  DBFLUTE_ENVIRONMENT_TYPE: {}
+    driver = org.h2.Driver
+    url    = jdbc:h2:file:../src/main/resources/db/gamix
+    schema = {GAMIX.PUBLIC as main}
+    user   = GAMIX
+    props  = {}
+    additionalSchema = 
+    repsEnvType      = ut
+    refreshProject   = $$AutoDetect$$
+
+ {Create Schema}: success=2 failure=0 (in 1 files)
+  o replace-schema.sql
+
+ {Load Data}: loaded-files=0
+  - (no data file)
+
+ {Take Finally}: success=0 failure=0 (in 1 files)
+  o take-finally.sql
+_/_/_/_/_/_/_/_/_/_/ {ReplaceSchema}
