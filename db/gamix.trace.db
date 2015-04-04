@@ -1,0 +1,9 @@
+04-04 21:54:27 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: テーブル "TCM_SAMPLE" が見つかりません
+Table "TCM_SAMPLE" not found; SQL statement:
+select dfloc.TCM_SAMPLE_ID as TCM_SAMPLE_ID, dfloc.SAMPLE_NAME as SAMPLE_NAME
+  from TCM_SAMPLE dfloc
+ where dfloc.TCM_SAMPLE_ID = ? [42102-186]
+04-04 21:54:27 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: オブジェクトはすでに閉じられています
+The object is already closed [90007-186]
