@@ -6,7 +6,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 import org.newdawn.slick.geom.Line;
-import org.newdawn.slick.geom.Point;
+import com.github.hatimiti.gamix.base.util.Point;
 import org.newdawn.slick.geom.Shape;
 
 import com.github.hatimiti.gamix.app.game.field.entity.Entity;
@@ -98,7 +98,7 @@ public class CollisionHandler {
 					target.getCenterX(),
 					target.getCenterY());
 
-			this.point = new Point(line.getCenterX(), line.getCenterY());
+			this.point = Point.at(line.getCenterX(), line.getCenterY());
 		}
 
 	}

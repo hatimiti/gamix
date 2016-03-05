@@ -21,7 +21,7 @@ public abstract class BaseMap {
 		this.tileMap = new HashMap<>();
 
 		Arrays.asList(tiles)
-			.forEach(t -> this.tileMap.put(t.getPoint(), t));
+			.forEach(t -> this.tileMap.put(t.getTilePoint(), t));
 	}
 
 	public MapId getMapId() {

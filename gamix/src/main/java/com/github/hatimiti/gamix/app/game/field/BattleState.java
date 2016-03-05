@@ -10,7 +10,7 @@ import javax.annotation.Resource;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
-import org.newdawn.slick.geom.Point;
+import com.github.hatimiti.gamix.base.util.Point;
 import org.newdawn.slick.state.StateBasedGame;
 
 import com.github.hatimiti.gamix.app.game.di.service.SampleService;
@@ -70,10 +70,10 @@ public class BattleState
 		this.map = new FirstTownMap();
 		this.nowPoint = new MapTilePoint(0, 0);
 
-		this.player = new Player(101, new Point(300, 500));
+		this.player = new Player(101, Point.at(300, 500));
 		this.player.addDamageListener(this.guiManager);
 
-		AutoCharacter target = new AutoCharacter(33, new AutoStopMover(), new Point(300, 450));
+		AutoCharacter target = new AutoCharacter(33, new AutoStopMover(), Point.at(300, 450));
 		target.addDamageListener(this.guiManager);
 
 		this.clientEntityContainer.addTo(getNowTile(), this.map.getTileIn(this.nowPoint));
@@ -138,10 +138,10 @@ public class BattleState
 			this.nowPoint = new MapTilePoint(0, 1);
 			this.clientEntityContainer.addTo(getNowTile(), this.map.getTileIn(this.nowPoint));
 			this.clientEntityContainer.addTo(getNowTile(), this.player);
-			AutoCharacter ac = new AutoCharacter(111, new AutoApproachMover(), new Point(300, 450));
+			AutoCharacter ac = new AutoCharacter(111, new AutoApproachMover(), Point.at(300, 450));
 			ac.addDamageListener(this.guiManager);
 			this.clientEntityContainer.addTo(getNowTile(), ac);
-			this.player.setPoint(new Point(650, 400));
+			this.player.setPoint(Point.at(650, 400));
 		}
 	}
 

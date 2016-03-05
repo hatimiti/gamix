@@ -4,6 +4,7 @@ import org.newdawn.slick.Animation;
 import org.newdawn.slick.Graphics;
 
 import com.github.hatimiti.gamix.app.util.ImageFactory;
+import com.github.hatimiti.gamix.base.util.Point;
 
 
 public class MoveDirectionAnimation
@@ -48,11 +49,14 @@ public class MoveDirectionAnimation
 	}
 
 	@Override
-	public void draw(Graphics g, FacingDirection direction, float x, float y) {
+	public void draw(Graphics g, FacingDirection direction, Point p) {
 		
 		if (direction == null) {
 			return;
 		}
+		
+		final int x = p.getX();
+		final int y = p.getY();
 		
 		switch (direction) {
 		case UP:

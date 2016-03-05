@@ -15,7 +15,7 @@ public abstract class BaseEquipment
 	public BaseEquipment(
 			Character owner) {
 
-		super(new Rectangle(owner.getCenterX(), owner.getCenterY(), 0, 0));
+		super(new Rectangle(owner.getCenterPoint().getX(), owner.getCenterPoint().getY(), 0, 0));
 		this.owner = owner;
 	}
 

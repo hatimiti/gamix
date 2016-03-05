@@ -1,9 +1,13 @@
 package com.github.hatimiti.gamix.app.game.field.entity.character;
 
-import static com.github.hatimiti.gamix.app.game.field.entity.support.direction.FacingDirection.*;
+import static com.github.hatimiti.gamix.app.game.field.entity.support.direction.FacingDirection.DOWN;
+import static com.github.hatimiti.gamix.app.game.field.entity.support.direction.FacingDirection.LEFT;
+import static com.github.hatimiti.gamix.app.game.field.entity.support.direction.FacingDirection.NONE;
+import static com.github.hatimiti.gamix.app.game.field.entity.support.direction.FacingDirection.RIGHT;
+import static com.github.hatimiti.gamix.app.game.field.entity.support.direction.FacingDirection.UP;
 
+import org.newdawn.slick.Color;
 import org.newdawn.slick.Graphics;
-import org.newdawn.slick.geom.Point;
 import org.newdawn.slick.geom.Rectangle;
 
 import com.github.hatimiti.gamix.app.game.field.damage.DamageCalculator;
@@ -30,6 +34,7 @@ import com.github.hatimiti.gamix.app.game.field.entity.support.status.AbilitySta
 import com.github.hatimiti.gamix.app.game.field.entity.support.status.LiveStatus;
 import com.github.hatimiti.gamix.app.game.field.entity.support.status.Statusable;
 import com.github.hatimiti.gamix.app.game.field.type.live.HP;
+import com.github.hatimiti.gamix.base.util.Point;
 
 public abstract class Character
 		extends Entity
@@ -94,15 +99,15 @@ public abstract class Character
 	@Override
 	public void draw(final Graphics g) {
 
-//		g.setColor(Color.blue);
-//		g.draw(this.shape);
+		g.setColor(Color.blue);
+		g.draw(this.shape);
 
 		if (isNotNormalStatus()) {
-			this.liveStatus.draw(g, this.direction, getX(), getY());
+			this.liveStatus.draw(g, this.direction, getPoint());
 		} else if (isAttacking()) {
 			this.weapon.draw(g);
 		} else {
-			this.moveImage.draw(g, this.direction, getX(), getY());
+			this.moveImage.draw(g, this.direction, getPoint());
 		}
 	}
 
@@ -283,7 +288,7 @@ public abstract class Character
 
 	private FacingDirection faceXBy(final CollisionEvent event) {
 		int cx = event.getCenterX();
-		int sx = this.getCenterX();
+		int sx = this.getCenterPoint().getX();
 		return (cx < sx) ? RIGHT
 			: (sx < cx) ? LEFT
 			: NONE;
@@ -291,7 +296,7 @@ public abstract class Character
 	
 	private FacingDirection faceYBy(final CollisionEvent event) {
 		int cy = event.getCenterY();
-		int sy = this.getCenterY();
+		int sy = this.getCenterPoint().getY();
 		return (cy < sy) ? DOWN
 			: (sy < cy) ? UP
 			: NONE;

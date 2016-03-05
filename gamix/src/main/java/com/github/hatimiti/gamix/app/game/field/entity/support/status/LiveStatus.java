@@ -1,8 +1,12 @@
 package com.github.hatimiti.gamix.app.game.field.entity.support.status;
 
-import static com.github.hatimiti.gamix.app.game.field.entity.support.status.LiveState.*;
+import static com.github.hatimiti.gamix.app.game.field.entity.support.status.LiveState.DAMAGING;
+import static com.github.hatimiti.gamix.app.game.field.entity.support.status.LiveState.DEAD;
+import static com.github.hatimiti.gamix.app.game.field.entity.support.status.LiveState.NEARLY_DEAD;
+import static com.github.hatimiti.gamix.app.game.field.entity.support.status.LiveState.NORMAL;
 
 import org.newdawn.slick.Graphics;
+import com.github.hatimiti.gamix.base.util.Point;
 
 import com.github.hatimiti.gamix.app.game.field.entity.support.direction.FacingDirection;
 import com.github.hatimiti.gamix.app.game.field.type.live.HP;
@@ -51,8 +55,8 @@ public class LiveStatus implements Liveable {
 		this.liveState = getHP().getVal() <= 0 ? NEARLY_DEAD : DAMAGING;
 	}
 
-	public void draw(final Graphics g, final FacingDirection direction, final float x, final float y) {
-		this.liveImage.draw(g, direction, x, y);
+	public void draw(final Graphics g, final FacingDirection direction, Point point) {
+		this.liveImage.draw(g, direction, point);
 	}
 
 	public void update() {

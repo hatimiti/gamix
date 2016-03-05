@@ -59,8 +59,8 @@ public class EntityClient extends TCPClient<ExchangeEntityClientJson> {
 		json.m.tx = 0;
 		json.m.ty = 0;
 		json.p.eid = player.getEntityId().getVal();
-		json.p.x = player.getX();
-		json.p.y = player.getY();
+		json.p.x = player.getPoint().getX();
+		json.p.y = player.getPoint().getY();
 		json.p.d = player.getDirection().getValue();
 		return json;
 	}

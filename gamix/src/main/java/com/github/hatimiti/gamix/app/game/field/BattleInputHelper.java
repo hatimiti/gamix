@@ -3,7 +3,6 @@ package com.github.hatimiti.gamix.app.game.field;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
-import org.newdawn.slick.geom.Point;
 
 import com.github.hatimiti.gamix.app.game.field.entity.equipment.weapon.Sword001;
 import com.github.hatimiti.gamix.app.game.field.entity.equipment.weapon.Weapon;
@@ -107,8 +106,7 @@ class BattleInputHelper implements InputHelpable {
 
 	private void invokeMagic() throws SlickException {
 		// 魔法
-		Magic magic = new Magic(
-				new Point(this.state.player.getCenterX(), this.state.player.getCenterY()));
+		Magic magic = new Magic(this.state.player.getCenterPoint());
 		this.state.clientEntityContainer.addTo(this.state.getNowTile(), magic);
 		magic.faceTo(this.state.player.getDirection());
 		magic.move();

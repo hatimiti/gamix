@@ -3,7 +3,7 @@ package com.github.hatimiti.gamix.app.game.field.entity.support.collision;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
-import org.newdawn.slick.geom.Point;
+import com.github.hatimiti.gamix.base.util.Point;
 import org.newdawn.slick.geom.Shape;
 
 import com.github.hatimiti.gamix.app.game.field.entity.Entity;

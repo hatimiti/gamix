@@ -1,6 +1,6 @@
 package com.github.hatimiti.gamix.app.game.field.entity.equipment.weapon;
 
-import org.newdawn.slick.geom.Point;
+import com.github.hatimiti.gamix.base.util.Point;
 import org.newdawn.slick.geom.Rectangle;
 import org.newdawn.slick.geom.Shape;
 
@@ -37,7 +37,7 @@ public class EmptyWeapon extends Weapon {
 	@Override
 	protected Point[] getDrawPoints4AdjustByMotion() {
 		return new Point[] {
-				new Point(0, 0),
+			Point.at(0, 0),
 		};
 	}
 

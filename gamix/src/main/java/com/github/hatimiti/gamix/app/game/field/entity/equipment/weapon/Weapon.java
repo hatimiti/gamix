@@ -1,7 +1,7 @@
 package com.github.hatimiti.gamix.app.game.field.entity.equipment.weapon;
 
 import org.newdawn.slick.Graphics;
-import org.newdawn.slick.geom.Point;
+import com.github.hatimiti.gamix.base.util.Point;
 import org.newdawn.slick.geom.Shape;
 
 import com.github.hatimiti.gamix.app.game.field.entity.EntityContainer;
@@ -36,8 +36,8 @@ public abstract class Weapon
 			return;
 		}
 
-		this.getShape().setX(this.owner.getCenterX());
-		this.getShape().setY(this.owner.getCenterY());
+		this.getShape().setX(this.owner.getCenterPoint().getX());
+		this.getShape().setY(this.owner.getCenterPoint().getY());
 
 		if (getDelay() <= ++this.nowDelay) {
 			this.nowDelay = 0;
@@ -57,8 +57,7 @@ public abstract class Weapon
 
 //		g.draw(getCollisionShapeByMotion());
 
-		this.attackImage.draw(
-				g, this.getDirection(), this.owner.getX(), this.owner.getY());
+		this.attackImage.draw(g, this.getDirection(), this.owner.getPoint());
 	}
 
 	@Override

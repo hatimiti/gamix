@@ -25,8 +25,8 @@ public class AutoCircleMover
 		int r = 70;
 
 		double radian = Math.PI / 180 * this.degree;
-		float x = (float) (player.getX() + r * Math.cos(radian));
-		float y = (float) (player.getY() + r * Math.sin(radian));
+		float x = (float) (player.getPoint().getX() + r * Math.cos(radian));
+		float y = (float) (player.getPoint().getY() + r * Math.sin(radian));
 		this.degree = this.degree + 3 % 360;
 
 		target.getShape().setX(x);

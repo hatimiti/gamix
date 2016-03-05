@@ -1,6 +1,6 @@
 package com.github.hatimiti.gamix.app.game.field.entity.character;
 
-import org.newdawn.slick.geom.Point;
+import com.github.hatimiti.gamix.base.util.Point;
 
 import com.github.hatimiti.gamix.app.game.field.entity.EntityContainer;
 

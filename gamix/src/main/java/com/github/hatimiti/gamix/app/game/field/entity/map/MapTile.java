@@ -78,7 +78,7 @@ public class MapTile
 		this.leftWall = leftWall;
 	}
 
-	public MapTilePoint getPoint() {
+	public MapTilePoint getTilePoint() {
 		return this.point;
 	}
 

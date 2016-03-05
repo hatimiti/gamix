@@ -3,7 +3,7 @@ package com.github.hatimiti.gamix.app.game.field.entity.support.attack;
 import org.newdawn.slick.Animation;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SpriteSheet;
-import org.newdawn.slick.geom.Point;
+import com.github.hatimiti.gamix.base.util.Point;
 
 import com.github.hatimiti.gamix.app.game.field.entity.equipment.weapon.Weapon;
 import com.github.hatimiti.gamix.app.game.field.entity.equipment.weapon.EmptyWeapon;
@@ -97,10 +97,12 @@ public class AttackDirectionAnimation
 	}
 
 	@Override
-	public void draw(Graphics g, FacingDirection direction, float x, float y) {
+	public void draw(Graphics g, FacingDirection direction, Point p) {
 
-		int motion = this.weapon.getNowMotion();
-		Point aj = this.weapon.getDrawPoint4AdjustByMotion();
+		final int motion = this.weapon.getNowMotion();
+		final Point aj = this.weapon.getDrawPoint4AdjustByMotion();
+		final int x = p.getX();
+		final int y = p.getY();
 
 		switch (direction) {
 		case LEFT:

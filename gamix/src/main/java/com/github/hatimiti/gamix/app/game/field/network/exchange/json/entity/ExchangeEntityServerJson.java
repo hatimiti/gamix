@@ -65,8 +65,8 @@ public class ExchangeEntityServerJson
 
 			ExchangePlayer p = new ExchangePlayer();
 			p.eid = c.getEntityId().getVal();
-			p.x = c.getX();
-			p.y = c.getY();
+			p.x = c.getPoint().getX();
+			p.y = c.getPoint().getY();
 			p.d = c.getDirection().getValue();
 			this.ops.add(p);
 

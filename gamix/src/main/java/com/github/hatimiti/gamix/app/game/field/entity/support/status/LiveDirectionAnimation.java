@@ -3,6 +3,7 @@ package com.github.hatimiti.gamix.app.game.field.entity.support.status;
 import org.newdawn.slick.Animation;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SpriteSheet;
+import com.github.hatimiti.gamix.base.util.Point;
 
 import com.github.hatimiti.gamix.app.game.field.entity.support.direction.BaseDirectionAnimation;
 import com.github.hatimiti.gamix.app.game.field.entity.support.direction.FacingDirection;
@@ -57,32 +58,35 @@ public class LiveDirectionAnimation
 	}
 
 	@Override
-	public void draw(Graphics g, FacingDirection direction, float x, float y) {
+	public void draw(Graphics g, FacingDirection direction, Point point) {
 
 		int motion = this.liveable.getNowMotion();
 
 		if (this.liveable.isDamaging()) {
-			drawDamaging(g, direction, x, y, motion);
+			drawDamaging(g, direction, point, motion);
 		} else if (this.liveable.isNearlyDead()) {
 			this.deadEffectAnimation.setCurrentFrame(motion);
-			g.drawAnimation(this.deadEffectAnimation, x - 30, y - 20);
+			draw(g, this.deadEffectAnimation, point.minus(Point.at(30, 20)));
 		}
 
 	}
 
-	protected void drawDamaging(Graphics g, FacingDirection direction, float x,
-			float y, int motion) {
+	protected void drawDamaging(Graphics g, FacingDirection direction, Point point, int motion) {
 		switch (direction) {
 		case LEFT:
 			this.leftAnimation.setCurrentFrame(motion);
-			g.drawAnimation(this.leftAnimation, x, y);
+			draw(g, leftAnimation, point);
 			return;
 		case RIGHT:
 			this.rightAnimation.setCurrentFrame(motion);
-			g.drawAnimation(this.rightAnimation, x, y);
+			draw(g, this.rightAnimation, point);
 			return;
 		default:
 			return;
 		}
+	}
+
+	private static void draw(Graphics g, Animation animation, Point point) {
+		g.drawAnimation(animation, point.getX(), point.getY());
 	}
 }

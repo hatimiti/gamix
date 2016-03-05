@@ -3,7 +3,7 @@ package com.github.hatimiti.gamix.app.game.field.entity.character;
 import static com.github.hatimiti.gamix.app.game.field.entity.ClientEntityContainer.clientEntityContainer;
 
 import org.newdawn.slick.SlickException;
-import org.newdawn.slick.geom.Point;
+import com.github.hatimiti.gamix.base.util.Point;
 
 import com.github.hatimiti.gamix.app.game.field.entity.EntityContainer;
 import com.github.hatimiti.gamix.app.game.field.entity.support.move.mover.AutoMover;

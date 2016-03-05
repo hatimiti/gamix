@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 
-import org.newdawn.slick.geom.Point;
+import com.github.hatimiti.gamix.base.util.Point;
 import org.slf4j.Logger;
 
 import com.github.hatimiti.gamix.app.game.field.entity.character.OnlinePlayer;
@@ -37,11 +37,11 @@ public abstract class EntityContainer {
 		Optional<Entity> entity = getEntityListIn(tile).findEntity(eid);
 
 		if (entity.isPresent()) {
-			entity.get().position(player.x, player.y);
+			entity.get().positionAt(Point.at(player.x, player.y));
 			entity.get().faceTo(FacingDirection.getBy(player.d));
 
 		} else {
-			OnlinePlayer c = new OnlinePlayer(101, new Point(player.x, player.y));
+			OnlinePlayer c = new OnlinePlayer(101, Point.at(player.x, player.y));
 			c.entityId = eid;
 			addTo(tile, c);
 

@@ -13,10 +13,12 @@ import com.github.hatimiti.gamix.app.game.field.entity.support.collision.Collisi
 import com.github.hatimiti.gamix.app.game.field.entity.support.direction.FacingDirection;
 import com.github.hatimiti.gamix.app.game.field.type.collection.DamageListenerList;
 import com.github.hatimiti.gamix.app.game.field.type.entity.EntityId;
+import com.github.hatimiti.gamix.base.util.Point;
 
 public abstract class Entity
 		implements Serializable, CollisionListener {
 
+	private static final long serialVersionUID = 1L;
 	protected EntityId entityId = new EntityId(RandomStringUtils.randomAlphanumeric(10));//EntityId.NONE;
 	protected Shape shape;
 	protected FacingDirection direction;
@@ -62,25 +64,17 @@ public abstract class Entity
 		return this.shape;
 	}
 	
-	public void position(float x, float y) {
-		getShape().setX(x);
-		getShape().setY(y);
+	public void positionAt(Point p) {
+		getShape().setX(p.getX());
+		getShape().setY(p.getY());
 	}
 
-	public int getX() {
-		return (int) getShape().getX();
+	public Point getPoint() {
+		return Point.at(getShape());
 	}
 
-	public int getY() {
-		return (int) getShape().getY();
-	}
-
-	public int getCenterX() {
-		return (int) getShape().getCenterX();
-	}
-
-	public int getCenterY() {
-		return (int) getShape().getCenterY();
+	public Point getCenterPoint() {
+		return Point.atCenter(getShape());
 	}
 
 	@Override
@@ -107,6 +101,13 @@ public abstract class Entity
 	 * protected
 	 */
 
+	protected float getX() {
+		return getPoint().getX();
+	}
+	
+	protected float getY() {
+		return getPoint().getY();
+	}
 	/*
 	 * abstract
 	 */
