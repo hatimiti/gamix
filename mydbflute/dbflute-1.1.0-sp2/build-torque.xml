@@ -1,4 +1,4 @@
-<project name="Torque" default="jdbc" basedir=".">
+<project name="Torque" default="jdbc" basedir="">
   <!--
     Note - You should not have to edit this file.
 
@@ -33,7 +33,7 @@
   -->
   <path id="torque-classpath">
     <!-- The log4j.properties (should be valid at first) -->
-    <dirset dir=".">
+    <dirset dir="">
       <include name="${logprop.dir}"/>
     </dirset>
 

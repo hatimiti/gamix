@@ -2,7 +2,7 @@
 <!DOCTYPE logback>
 <configuration
 		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-		xsi:noNamespaceSchemaLocation="./logback.xsd">
+		xsi:noNamespaceSchemaLocation="logback.xsd">
 
 	<logger name="org.thymeleaf" level="ERROR" />
 	<logger name="io.netty.buffer" level="INFO" />
