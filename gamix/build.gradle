@@ -1,8 +1,19 @@
+buildscript {
+    repositories {
+        jcenter()
+    }
+    dependencies {
+    }
+}
+
 apply plugin: 'java'
+apply plugin: 'application'
 apply plugin: 'maven'
-apply plugin: 'eclipse'
 apply plugin: 'pmd'
 apply plugin: 'jacoco'
+
+apply plugin: 'eclipse'
+apply plugin: 'idea'
 
 def defaultEncoding = 'UTF-8'
 [compileJava, compileTestJava]*.options*.encoding = defaultEncoding
@@ -57,6 +68,9 @@ dependencies {
     testCompile group: 'junit', name: 'junit', version: '4.+'
 }
 
+mainClassName = 'com.github.hatimiti.gamix.app.Main'
+applicationDefaultJvmArgs = ["-Djava.library.path=./src/main/resources/lwjgl/native/macosx"]
+
 test {
     systemProperties 'property': 'value'
 }
@@ -86,7 +100,7 @@ jacocoTestReport {
 	}
 }
 
-check << {
+task cpdCheck(dependsOn: check) doLast {
 	File outDir = new File('build/reports/pmd/')
 	outDir.mkdirs()
 	ant.taskdef(name: 'cpd', classname: 'net.sourceforge.pmd.cpd.CPDTask',
