@@ -28,15 +28,15 @@ public class EntityClient extends TCPClient<ExchangeEntityClientJson> {
 	}
 
 	@Override
-	protected Optional<ExchangeEntityClientJson> execute(Channel ch) {
+	protected Optional<ExchangeEntityClientJson> execute(final Channel ch) {
 
-		Player player = clientEntityContainer().getPlayer();
+		final Player player = clientEntityContainer().getPlayer();
 
 		if (EntityId.INIT.equals(player.getEntityId())) {
 			return Optional.empty();
 		}
 
-		ExchangeEntityClientJson json = createJSON(player);
+		final ExchangeEntityClientJson json = createJSON(player);
 
 		if (EntityId.NONE.equals(player.getEntityId())) {
 			player.setEntityId(EntityId.INIT);
@@ -48,12 +48,12 @@ public class EntityClient extends TCPClient<ExchangeEntityClientJson> {
 	}
 
 	@Override
-	protected Object prepareWrite(ExchangeEntityClientJson value) {
+	protected Object prepareWrite(final ExchangeEntityClientJson value) {
 		return JSON.encode(value) + "\r\n";
 	}
 
-	private ExchangeEntityClientJson createJSON(Player player) {
-		ExchangeEntityClientJson json = new ExchangeEntityClientJson();
+	private ExchangeEntityClientJson createJSON(final Player player) {
+		final ExchangeEntityClientJson json = new ExchangeEntityClientJson();
 		// TODO 現在のマップ情報を取得する
 		json.m.mid = "M0001";
 		json.m.tx = 0;

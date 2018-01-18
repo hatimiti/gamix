@@ -1,5 +1,6 @@
 package com.github.hatimiti.gamix.app.game.field.type.collection;
 
+import java.util.Objects;
 import java.util.Optional;
 
 import org.newdawn.slick.Graphics;
@@ -26,12 +27,12 @@ public final class EntityList extends SyncListType<Entity> {
 
 	public void update(final EntityContainer entityContainer) {
 
-		removeNonExsitsEntites();
+		removeNonExistsEntities();
 
 		this.parallelStream()
 			.forEach(v -> v.update(entityContainer));
 
-		judgeCollision();
+		this.collisionHandler.detectCollision(this);
 	}
 
 	public Optional<Entity> findEntity(final EntityId entityId) {
@@ -46,12 +47,13 @@ public final class EntityList extends SyncListType<Entity> {
 		this.collisionHandler.clear();
 	}
 
-	private void removeNonExsitsEntites() {
+	private void removeNonExistsEntities() {
 		removeAllIf(v -> !v.existsInGame());
 	}
 
-	private void judgeCollision() {
-		this.collisionHandler.judgeCollision(this);
+	@Override
+	public boolean add(final Entity entity) {
+		Objects.requireNonNull(entity);
+		return super.add(entity);
 	}
-
 }

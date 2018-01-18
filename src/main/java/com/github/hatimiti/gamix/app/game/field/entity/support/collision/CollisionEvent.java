@@ -12,20 +12,20 @@ import com.github.hatimiti.gamix.app.game.field.entity.Entity;
 public class CollisionEvent {
 
 	/** 衝突(自) */
-	protected Entity self;
+	protected final Entity self;
 	/** 衝突(至) */
-	protected Entity target;
+	protected final Entity target;
 
 	/** Shape(自) */
-	protected Shape selfShape;
+	protected final Shape selfShape;
 	/** Shape(至) */
-	protected Shape targetShape;
+	protected final Shape targetShape;
 
 	/** 衝突ポイント */
-	protected Point point;
+	protected final Point point;
 
 	/** 衝突ベクトル */
-	protected CollisionVector vector;
+	protected final CollisionVector vector;
 
 	public CollisionEvent(
 			final Entity self,
@@ -40,6 +40,7 @@ public class CollisionEvent {
 		this.targetShape = targetShape;
 		this.point = point;
 
+		this.vector = null;
 //		FacingDirection entity1Fd = entity1.getDirection();
 //		FacingDirection entity2Fd = entity2.getDirection();
 //

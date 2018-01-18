@@ -13,8 +13,8 @@ abstract class ListType<O>
 
 	protected final List<O> list = createNewList();
 	
-	abstract List<O> createNewList();
-	abstract List<O> createList(List<O> orig);
+	protected abstract List<O> createNewList();
+	protected abstract List<O> createList(List<O> orig);
 
 	@Override
 	public List<O> getVal() {

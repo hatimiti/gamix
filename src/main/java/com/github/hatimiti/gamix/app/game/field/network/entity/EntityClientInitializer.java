@@ -19,7 +19,7 @@ class EntityClientInitializer extends ChannelInitializer<SocketChannel> {
 
 	@Override
 	public void initChannel(SocketChannel ch) throws Exception {
-		ChannelPipeline pipeline = ch.pipeline();
+		final ChannelPipeline pipeline = ch.pipeline();
 
 		// On top of the SSL handler, add the text line codec.
 		pipeline.addLast(new DelimiterBasedFrameDecoder(8192, Delimiters.lineDelimiter()));

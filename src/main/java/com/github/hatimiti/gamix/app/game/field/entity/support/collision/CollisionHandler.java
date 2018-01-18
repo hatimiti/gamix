@@ -2,6 +2,7 @@ package com.github.hatimiti.gamix.app.game.field.entity.support.collision;
 
 import java.util.HashSet;
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -23,68 +24,66 @@ public class CollisionHandler {
 		this.preCollisionEntities.clear();
 	}
 
-	public void judgeCollision(final EntityList entities) {
+	public void detectCollision(final EntityList entities) {
 
-		Set<CollisionEvent> collision = new HashSet<>();
+		final Set<CollisionEvent> collision = new HashSet<>();
 
-		for (Entity origin : entities) {
-			for (Entity target : entities) {
-				if (origin.equals(target)) {
-					continue;
-				}
-				CollisionJudge judge = isCollisioning(origin, target);
-				if (judge.result) {
-					collision.add(new CollisionEvent(
-							origin,
-							target,
-							judge.origin,
-							judge.target,
-							judge.point));
-				}
+		entities.forEach(origin -> entities.forEach(target -> {
+			if (origin.equals(target)) {
+				return;/*continue*/
 			}
-		}
+			final CollisionJudge result = detectCollision(origin, target);
+			if (result.hasCollided) {
+				collision.add(new CollisionEvent(
+						origin,
+						target,
+						result.origin,
+						result.target,
+						result.point));
+			}
+		}));
 
-		Set<Entity> nowCollisionEntities = new HashSet<>();
-
-		for (CollisionEvent event : collision) {
+		final Set<Entity> currentCollisionEntities = new HashSet<>();
+		collision.forEach(event -> {
 			event.getSelf().onCollision(event);
 			event.getTarget().onCollision(event.reverse());
-			nowCollisionEntities.add(event.getSelf());
-			nowCollisionEntities.add(event.getTarget());
-		}
+			currentCollisionEntities.add(event.getSelf());
+			currentCollisionEntities.add(event.getTarget());
+		});
 
-		List<Entity> freeEntities = this.preCollisionEntities.parallelStream()
-			.filter(p -> _Util.contains(nowCollisionEntities, p))
+		final List<Entity> freedEntities = this.preCollisionEntities.parallelStream()
+			.filter(p -> _Util.contains(currentCollisionEntities, p))
 			.collect(Collectors.toList());
 		
-		freeEntities.parallelStream()
+		freedEntities.parallelStream()
 			.forEach(e -> e.onCollisionFree());
 		
-		this.preCollisionEntities = nowCollisionEntities;
+		this.preCollisionEntities = currentCollisionEntities;
 	}
 	
-	protected CollisionJudge isCollisioning(final Entity a, final Entity b) {
-		for (Shape as : a.getCollisionShapes()) {
-			for (Shape bs : b.getCollisionShapes()) {
+	protected CollisionJudge detectCollision(final Entity a, final Entity b) {
+		for (final Shape as : a.getCollisionShapes()) {
+			for (final Shape bs : b.getCollisionShapes()) {
 				if (as.intersects(bs)) {
-					return new CollisionJudge(true, as, bs);
+					return CollisionJudge.ofCollided(as, bs);
 				}
 			}
 		}
-		return new CollisionJudge(false, null, null);
+		return CollisionJudge.ofNotCollided();
 	}
 
 
 	protected static class CollisionJudge {
 
-		private boolean result;
+		private boolean hasCollided;
 		private Shape origin;
 		private Shape target;
 		private Point point;
 
-		public CollisionJudge(
-				final boolean result, final Shape origin, final Shape target) {
-			this.result = result;
+		private CollisionJudge(
+				final boolean hasCollided, final Shape origin, final Shape target) {
+
+			this.hasCollided = hasCollided;
 			this.origin = origin;
 			this.target = target;
 
@@ -92,13 +91,23 @@ public class CollisionHandler {
 				return;
 			}
 
-			Line line = new Line(
+			final Line line = new Line(
 					origin.getCenterX(),
 					origin.getCenterY(),
 					target.getCenterX(),
 					target.getCenterY());
 
 			this.point = Point.at(line.getCenterX(), line.getCenterY());
+		}
+
+		public static CollisionJudge ofCollided(final Shape origin, final Shape target) {
+			Objects.requireNonNull(origin);
+			Objects.requireNonNull(target);
+			return new CollisionJudge(true, origin, target);
+		}
+
+		public static CollisionJudge ofNotCollided() {
+			return new CollisionJudge(false, null, null);
 		}
 
 	}

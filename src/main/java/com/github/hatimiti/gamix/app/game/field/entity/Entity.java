@@ -20,11 +20,11 @@ public abstract class Entity
 
 	private static final long serialVersionUID = 1L;
 	protected EntityId entityId = new EntityId(RandomStringUtils.randomAlphanumeric(10));//EntityId.NONE;
-	protected Shape shape;
+	protected final Shape shape;
 	protected FacingDirection direction;
-	protected List<Shape> collisionShapes;
+	protected final List<Shape> collisionShapes;
 
-	protected DamageListenerList damageListeners;
+	protected final DamageListenerList damageListeners;
 
 	/*
 	 * constructor
@@ -108,6 +108,7 @@ public abstract class Entity
 	protected float getY() {
 		return getPoint().getY();
 	}
+
 	/*
 	 * abstract
 	 */

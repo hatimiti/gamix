@@ -34,12 +34,12 @@ public class EntityClientHandler
 
 		LOG.debug("json = {}", json);
 
-		MapTile tile = new MapTile(
+		final MapTile tile = new MapTile(
 				MapId.getBy(json.m.mid),
 				new MapTilePoint(json.m.tx, json.m.ty),
 				null);
 
-		ClientEntityContainer ec = clientEntityContainer();
+		final ClientEntityContainer ec = clientEntityContainer();
 		ec.getPlayer().setEntityId(new EntityId(json.p.eid));
 
 		json.ops.forEach(op -> ec.update(tile, op));
