@@ -16,24 +16,24 @@ repositories {
 }
 
 dependencies {
-    compile group: 'org.slick2d', name: 'slick2d-core', version: '1.0.1'
-    compile group: 'org.projectlombok', name: 'lombok', version: '1.16.0'
+    implementation group: 'org.slick2d', name: 'slick2d-core', version: '1.0.1'
+    implementation group: 'org.projectlombok', name: 'lombok', version: '1.16.0'
+
+    implementation 'xpp3:xpp3:1.1.4c'
     
-    compile 'xpp3:xpp3:1.1.4c'
-    
-    testCompile group: 'junit', name: 'junit', version: '4.+'
+    testImplementation group: 'junit', name: 'junit', version: '4.+'
 }
 
 test {
     systemProperties 'property': 'value'
 }
-
-uploadArchives {
-    repositories {
-       flatDir {
-           dirs 'repos'
-       }
-    }
-}
+//
+//uploadArchives {
+//    repositories {
+//       flatDir {
+//           dirs 'repos'
+//       }
+//    }
+//}
 
 
